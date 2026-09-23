@@ -1,0 +1,158 @@
+/* =========================================================
+   Contact Page
+   Layout only. Form control styling is shared and lives in
+   App.css so the Dealers form matches exactly.
+========================================================= */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: start;
+  gap: clamp(28px, 4vw, 52px);
+}
+
+/* =========================================================
+   FORM COLUMN
+========================================================= */
+
+.contact-form-wrap {
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-heading {
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+}
+
+.contact-subtext {
+  margin-top: 10px;
+  margin-bottom: 26px;
+  font-size: 0.9rem;
+}
+
+.contact-required {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================================
+   CONTACT DETAILS COLUMN
+========================================================= */
+
+.contact-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-card {
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.contact-card h3 {
+  font-size: 1.2rem;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 15px;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: 1.05rem;
+}
+
+.contact-list strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.contact-list p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.contact-list a {
+  color: var(--green-800);
+  transition: color var(--transition);
+}
+
+.contact-list a:hover {
+  color: var(--green-600);
+  text-decoration: underline;
+}
+
+.contact-map-cta {
+  margin-top: 28px;
+}
+
+/* =========================================================
+   SIDE NOTE
+========================================================= */
+
+.contact-note {
+  padding: 22px 24px;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--gold-500);
+  background: var(--gold-100);
+}
+
+.contact-note strong {
+  display: block;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.contact-note p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-form-wrap,
+  .contact-card {
+    padding: 22px 18px;
+  }
+
+  .contact-list {
+    gap: 18px;
+  }
+}

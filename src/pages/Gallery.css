@@ -1,0 +1,148 @@
+/* =========================================================
+   Gallery Page
+========================================================= */
+
+.gallery-filter {
+  padding-block: 20px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.gallery-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery-body {
+  padding-bottom: clamp(48px, 7vw, 84px);
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 2.4vw, 26px);
+}
+
+.gallery-item:first-child {
+  grid-column: span 2;
+}
+
+.gallery-figure {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition), box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.gallery-item:hover .gallery-figure {
+  transform: translateY(-6px);
+  border-color: var(--green-200);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.gallery-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--green-100), var(--green-50));
+}
+
+.gallery-item:first-child .gallery-media {
+  aspect-ratio: 16 / 9;
+}
+
+.gallery-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s var(--ease);
+}
+
+.gallery-item:hover .gallery-media img {
+  transform: scale(1.06);
+}
+
+.gallery-fallback {
+  padding-inline: 18px;
+  color: var(--green-800);
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0.72;
+}
+
+/* =========================================================
+   CAPTION
+========================================================= */
+
+.gallery-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.gallery-caption strong {
+  color: var(--ink);
+  font-size: 0.96rem;
+}
+
+.gallery-caption span {
+  flex-shrink: 0;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--green-100);
+  color: var(--green-800);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.gallery-empty {
+  padding: 60px 20px;
+  border: 1px dashed var(--green-200);
+  border-radius: var(--radius-lg);
+  background: var(--green-50);
+  text-align: center;
+  font-size: 0.96rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 720px) {
+  .gallery-item:first-child {
+    grid-column: span 1;
+  }
+
+  .gallery-item:first-child .gallery-media {
+    aspect-ratio: 4 / 3;
+  }
+}

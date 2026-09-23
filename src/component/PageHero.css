@@ -1,0 +1,103 @@
+/* =========================================================
+   PageHero
+   Inner page banner shared by About, Products, Services,
+   Gallery, Dealers and Contact.
+========================================================= */
+
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(52px, 7vw, 88px);
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(58, 163, 92, 0.28),
+      transparent 46%
+    ),
+    linear-gradient(140deg, var(--green-900), var(--green-800));
+  text-align: center;
+}
+
+.page-hero-glow {
+  position: absolute;
+  bottom: -140px;
+  left: -120px;
+  z-index: -1;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(217, 165, 59, 0.22),
+    transparent 68%
+  );
+}
+
+.page-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-hero h1 {
+  max-width: 880px;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+.page-hero-sub {
+  max-width: 660px;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-size: 1.04rem;
+}
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.page-hero-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 26px;
+  font-size: 0.86rem;
+}
+
+.page-hero-crumbs a {
+  color: var(--green-200);
+  transition: color var(--transition);
+}
+
+.page-hero-crumbs a:hover {
+  color: #ffffff;
+}
+
+.page-hero-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.page-hero-crumb svg {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 560px) {
+  .page-hero-sub {
+    font-size: 0.95rem;
+  }
+
+  .page-hero-crumbs {
+    margin-top: 20px;
+  }
+}

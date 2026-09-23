@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" role="img" aria-label="Nandi Seeds">
+  <defs>
+    <linearGradient id="nandiMark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a8f4a" />
+      <stop offset="100%" stop-color="#14562b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="56" height="56" x="4" y="8" rx="14" fill="url(#nandiMark)" />
+  <path d="M32 52V30" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <path d="M32 36c0-8 5.5-13 13.5-13 0 8-5.5 13-13.5 13z" fill="#a8e6b8" />
+  <path d="M32 43c0-7-5-11.5-12-11.5 0 7 5 11.5 12 11.5z" fill="#d9a53b" />
+
+  <text x="76" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" fill="#0d1a12">Nandi</text>
+  <text x="76" y="60" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="4" fill="#1f7a3d">SEEDS</text>
+</svg>

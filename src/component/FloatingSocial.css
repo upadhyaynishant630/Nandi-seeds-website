@@ -1,0 +1,123 @@
+/* =========================================================
+   FloatingSocial
+   Sticky quick-action rail on the right edge.
+========================================================= */
+
+.floating-rail {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity var(--transition), visibility var(--transition),
+    transform var(--transition);
+}
+
+.rail-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.floating-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.35rem;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition),
+    background-color var(--transition);
+}
+
+.floating-button:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: var(--shadow-lg);
+}
+
+.floating-whatsapp {
+  background: #25d366;
+}
+
+.floating-call {
+  background: var(--green-700);
+}
+
+.floating-enquiry {
+  background: var(--gold-500);
+  color: var(--green-900);
+}
+
+.floating-top {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.floating-top:hover {
+  background: var(--surface-soft);
+}
+
+/* =========================================================
+   TOOLTIP
+========================================================= */
+
+.floating-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  padding: 7px 12px;
+  border-radius: var(--radius-xs);
+  background: var(--green-900);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(6px, -50%);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.floating-button:hover .floating-tooltip,
+.floating-button:focus-visible .floating-tooltip {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 760px) {
+  .floating-rail {
+    right: 12px;
+    bottom: 14px;
+    gap: 10px;
+  }
+
+  .floating-button {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+  }
+
+  /* Tooltips are not usable on touch devices */
+  .floating-tooltip {
+    display: none;
+  }
+}

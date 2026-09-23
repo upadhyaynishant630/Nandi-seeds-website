@@ -1,0 +1,231 @@
+/* =========================================================
+   Product Detail Page
+========================================================= */
+
+.product-overview {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: start;
+  gap: clamp(28px, 5vw, 60px);
+}
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.product-media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-frame {
+  position: relative;
+  min-height: 400px;
+}
+
+.product-frame img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.product-placeholder {
+  min-height: 400px;
+}
+
+.product-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+}
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.product-crop {
+  display: inline-block;
+  color: var(--green-600);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product-name {
+  margin-top: 12px;
+}
+
+.product-description {
+  margin-top: 18px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.product-subheading {
+  margin-top: 30px;
+  font-size: 1.08rem;
+}
+
+.product-highlights {
+  margin-top: 18px;
+}
+
+.product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+/* =========================================================
+   SPECIFICATION TABLE
+========================================================= */
+
+.product-spec-table {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  margin-top: clamp(28px, 4vw, 44px);
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.product-spec-caption {
+  padding: 18px 22px;
+  background: var(--green-800);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.product-spec-table th,
+.product-spec-table td {
+  padding: 15px 22px;
+  font-size: 0.93rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.product-spec-table th {
+  width: 40%;
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--green-50);
+  border-bottom: 1px solid var(--line);
+}
+
+.product-spec-table td {
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.product-spec-table tr:last-child th,
+.product-spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================================
+   RELATED VARIETIES
+========================================================= */
+
+.product-related {
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+.product-related-card a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 26px 24px;
+}
+
+.product-related-crop {
+  color: var(--green-600);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-related-card h3 {
+  margin-top: 8px;
+  font-size: 1.15rem;
+}
+
+.product-related-card p {
+  margin-top: 10px;
+  font-size: 0.92rem;
+}
+
+.product-related-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--green-700);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.product-back {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* =========================================================
+   MISSING VARIETY
+========================================================= */
+
+.product-missing {
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .product-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .product-frame,
+  .product-placeholder {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .product-spec-table th,
+  .product-spec-table td {
+    padding: 13px 16px;
+    font-size: 0.88rem;
+  }
+
+  .product-spec-table th {
+    width: 45%;
+  }
+}

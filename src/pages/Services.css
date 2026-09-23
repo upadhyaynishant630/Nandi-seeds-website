@@ -1,0 +1,136 @@
+/* =========================================================
+   Services Page
+========================================================= */
+
+.services-grid {
+  margin-top: clamp(32px, 5vw, 50px);
+}
+
+.services-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px;
+}
+
+.services-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: 1.35rem;
+}
+
+.services-card h3 {
+  font-size: 1.14rem;
+}
+
+.services-card p {
+  margin-top: 10px;
+  font-size: 0.93rem;
+}
+
+.services-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+  color: var(--green-700);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.services-link svg {
+  transition: transform var(--transition);
+}
+
+.services-card:hover .services-link svg {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   DELIVERY PROCESS
+========================================================= */
+
+.services-process {
+  margin-top: clamp(32px, 5vw, 50px);
+}
+
+.services-process-step {
+  padding: 26px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold-500);
+  background: var(--surface);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.services-process-step:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.services-process-number {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--green-200);
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.services-process-step h3 {
+  font-size: 1.1rem;
+}
+
+.services-process-step p {
+  margin-top: 10px;
+  font-size: 0.91rem;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.services-faq {
+  max-width: 880px;
+  margin-inline: auto;
+  margin-top: clamp(32px, 5vw, 50px);
+}
+
+.services-faq-item {
+  padding: 24px 26px;
+}
+
+.services-faq-item + .services-faq-item {
+  margin-top: 14px;
+}
+
+.services-faq-item h3 {
+  font-size: 1.06rem;
+}
+
+.services-faq-item p {
+  margin-top: 10px;
+  font-size: 0.94rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px) {
+  .services-card {
+    padding: 24px 20px;
+  }
+
+  .services-faq-item {
+    padding: 20px 18px;
+  }
+}
