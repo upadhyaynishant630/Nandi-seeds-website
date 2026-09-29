@@ -90,9 +90,7 @@ function About() {
               />
             </div>
 
-            <div className="media-placeholder about-placeholder">
-              Add /images/about/seed-facility.jpg
-            </div>
+            
           </div>
         </div>
       </section>
