@@ -1,5 +1,14 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiCheck, FiPhone, FiShield } from "react-icons/fi";
+
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiCheck,
+  FiPhone,
+  FiPlay,
+  FiShield,
+} from "react-icons/fi";
 
 import {
   SITE,
@@ -14,16 +23,83 @@ import { resolveIcon } from "../data/icons";
 
 import "./Home.css";
 
+const HERO_SLIDES = [
+  {
+    src: "/images/hero/hero-field.jpg",
+    alt: "Healthy crop standing in a Nandi Seeds trial field",
+  },
+  {
+    src: "/images/gallery/field-demo.jpg",
+    alt: "Nandi Seeds field demonstration",
+  },
+  {
+    src: "/images/gallery/harvest-visit.jpg",
+    alt: "Nandi Seeds harvest field visit",
+  },
+  {
+    src: "/images/gallery/grower-meet.jpg",
+    alt: "Nandi Seeds meeting with growers",
+  },
+];
+
 /* =========================================================
    Home
-   Landing page: hero, trust stats, featured seeds, why
-   choose us, how we work, services preview, testimonials
-   and a closing call to action.
 ========================================================= */
 
 function Home() {
   const featuredProducts = PRODUCTS.slice(0, 4);
   const previewServices = SERVICES.slice(0, 3);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [carouselHovered, setCarouselHovered] = useState(false);
+  const [carouselFocused, setCarouselFocused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const pointerStart = useRef(null);
+  const carouselPaused = carouselHovered || carouselFocused;
+  const videoRef = useRef(null);
+
+  const showSlide = useCallback(
+    (index) => {
+      setActiveSlide((index + HERO_SLIDES.length) % HERO_SLIDES.length);
+    },
+    [],
+  );
+
+  useEffect(() => {
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    const updateMotionPreference = () => {
+      setReducedMotion(motionPreference.matches);
+    };
+
+    updateMotionPreference();
+    motionPreference.addEventListener("change", updateMotionPreference);
+
+    return () => {
+      motionPreference.removeEventListener("change", updateMotionPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (carouselPaused || reducedMotion || HERO_SLIDES.length < 2) {
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      if (!document.hidden) {
+        setActiveSlide((current) => (current + 1) % HERO_SLIDES.length);
+      }
+    }, 5500);
+
+    return () => window.clearInterval(interval);
+  }, [carouselPaused, reducedMotion]);
+
+  useEffect(() => {
+    const nextSlide = HERO_SLIDES[(activeSlide + 1) % HERO_SLIDES.length];
+    const image = new Image();
+    image.src = nextSlide.src;
+  }, [activeSlide]);
 
   return (
     <div className="home-page">
@@ -70,10 +146,12 @@ function Home() {
                 <FiCheck aria-hidden="true" />
                 85%+ guaranteed germination on certified lots
               </li>
+
               <li>
                 <FiCheck aria-hidden="true" />
                 Batch-wise purity and moisture test reports
               </li>
+
               <li>
                 <FiCheck aria-hidden="true" />
                 Free field advisory for every purchase
@@ -82,19 +160,113 @@ function Home() {
           </div>
 
           {/* HERO VISUAL */}
-          <div className="home-hero-visual rise-in">
-            <div className="media-frame hero-frame">
-              <img
-                src="/images/hero/hero-field.jpg"
-                alt="Healthy crop standing in a Nandi Seeds trial field"
-                loading="eager"
-                onError={(event) => {
-                  event.currentTarget.style.display = "none";
-                }}
-              />
+          <div
+            className="home-hero-visual rise-in"
+            onMouseEnter={() => setCarouselHovered(true)}
+            onMouseLeave={() => setCarouselHovered(false)}
+            onFocusCapture={() => setCarouselFocused(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setCarouselFocused(false);
+              }
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                showSlide(activeSlide - 1);
+              } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                showSlide(activeSlide + 1);
+              }
+            }}
+            onPointerDown={(event) => {
+              pointerStart.current = event.clientX;
+            }}
+            onPointerUp={(event) => {
+              if (pointerStart.current === null) {
+                return;
+              }
+
+              const swipeDistance =
+                event.clientX - pointerStart.current;
+
+              pointerStart.current = null;
+
+              if (Math.abs(swipeDistance) > 45) {
+                showSlide(
+                  activeSlide + (swipeDistance < 0 ? 1 : -1),
+                );
+              }
+            }}
+            onPointerCancel={() => {
+              pointerStart.current = null;
+            }}
+            role="region"
+            aria-label="Hero image carousel"
+            tabIndex={0}
+          >
+            <div className="media-frame hero-frame" aria-live="off">
+              {HERO_SLIDES.map((slide, index) => (
+                <div
+                  className={`hero-slide ${
+                    index === activeSlide ? "hero-slide-active" : ""
+                  }`}
+                  key={slide.src}
+                  aria-hidden={index !== activeSlide}
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    decoding="async"
+                    onError={(event) => {
+                      event.currentTarget.style.display = "none";
+                    }}
+                  />
+                </div>
+              ))}
 
               <div className="media-placeholder hero-placeholder">
                 Add /images/hero/hero-field.jpg
+              </div>
+
+              <button
+                className="hero-slide-control hero-slide-previous"
+                type="button"
+                aria-label="Previous hero image"
+                onClick={() => showSlide(activeSlide - 1)}
+              >
+                <FiArrowLeft aria-hidden="true" />
+              </button>
+
+              <button
+                className="hero-slide-control hero-slide-next"
+                type="button"
+                aria-label="Next hero image"
+                onClick={() => showSlide(activeSlide + 1)}
+              >
+                <FiArrowRight aria-hidden="true" />
+              </button>
+
+              <div
+                className="hero-slide-indicators"
+                aria-label="Hero images"
+              >
+                {HERO_SLIDES.map((slide, index) => (
+                  <button
+                    key={slide.src}
+                    type="button"
+                    aria-label={`Show hero image ${index + 1}`}
+                    aria-pressed={index === activeSlide}
+                    className={
+                      index === activeSlide
+                        ? "hero-indicator-active"
+                        : ""
+                    }
+                    onClick={() => showSlide(index)}
+                  />
+                ))}
               </div>
             </div>
 
@@ -146,7 +318,10 @@ function Home() {
 
           <ul className="grid grid-4 home-product-grid">
             {featuredProducts.map((product) => (
-              <li key={product.slug} className="card card-hover home-product">
+              <li
+                key={product.slug}
+                className="card card-hover home-product"
+              >
                 <Link to={`/products/${product.slug}`}>
                   <div className="home-product-media">
                     <img
@@ -157,7 +332,11 @@ function Home() {
                         event.currentTarget.style.display = "none";
                       }}
                     />
-                    <span className="home-product-fallback" aria-hidden="true">
+
+                    <span
+                      className="home-product-fallback"
+                      aria-hidden="true"
+                    >
                       {product.crop}
                     </span>
 
@@ -169,7 +348,10 @@ function Home() {
                   </div>
 
                   <div className="home-product-body">
-                    <span className="home-product-crop">{product.category}</span>
+                    <span className="home-product-crop">
+                      {product.category}
+                    </span>
+
                     <h3>{product.name}</h3>
                     <p>{product.short}</p>
 
@@ -201,9 +383,11 @@ function Home() {
           <div className="split">
             <div className="home-why-copy">
               <span className="eyebrow">Why Nandi Seeds</span>
+
               <h2 className="home-why-title">
                 Quality you can measure, not just promise
               </h2>
+
               <p className="home-why-text">
                 Seed is the smallest input on a farm and the biggest driver
                 of yield. We treat it that way, from the first breeder plot
@@ -215,17 +399,47 @@ function Home() {
                   <FiCheck aria-hidden="true" />
                   Independent lab testing on every released lot
                 </li>
+
                 <li>
                   <FiCheck aria-hidden="true" />
                   Traceable batch codes printed on every pack
                 </li>
+
                 <li>
                   <FiCheck aria-hidden="true" />
                   Replacement guarantee on germination shortfalls
                 </li>
+
+                <li>
+                  <FiCheck aria-hidden="true" />
+                  Carefully selected and quality-checked seed varieties
+                </li>
+
+                <li>
+                  <FiCheck aria-hidden="true" />
+                  Consistent quality standards across every batch
+                </li>
+
+                <li>
+                  <FiCheck aria-hidden="true" />
+                  Clear product information for easy variety selection
+                </li>
+
+                <li>
+                  <FiCheck aria-hidden="true" />
+                  Reliable packaging designed to protect seed quality
+                </li>
+
+                <li>
+                  <FiCheck aria-hidden="true" />
+                  Customer-focused support for product and usage queries
+                </li>
               </ul>
 
-              <Link className="btn btn-primary home-why-cta" to="/about">
+              <Link
+                className="btn btn-primary home-why-cta"
+                to="/about"
+              >
                 About Nandi Seeds
                 <FiArrowRight aria-hidden="true" />
               </Link>
@@ -236,10 +450,14 @@ function Home() {
                 const Icon = resolveIcon(value.icon);
 
                 return (
-                  <li key={value.title} className="card card-hover home-value">
+                  <li
+                    key={value.title}
+                    className="card card-hover home-value"
+                  >
                     <span className="home-value-icon">
                       <Icon aria-hidden="true" />
                     </span>
+
                     <h3>{value.title}</h3>
                     <p>{value.text}</p>
                   </li>
@@ -267,8 +485,14 @@ function Home() {
 
           <ol className="grid grid-4 home-process-grid">
             {PROCESS_STEPS.map((step) => (
-              <li key={step.step} className="home-process-step">
-                <span className="home-process-number">{step.step}</span>
+              <li
+                key={step.step}
+                className="home-process-step"
+              >
+                <span className="home-process-number">
+                  {step.step}
+                </span>
+
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </li>
@@ -287,7 +511,9 @@ function Home() {
             <span className="eyebrow eyebrow-on-dark">
               Support Beyond the Bag
             </span>
+
             <h2>Services that protect your investment</h2>
+
             <p>
               Buying good seed is step one. We stay involved with trials,
               testing and field advisory so the crop actually performs.
@@ -299,10 +525,22 @@ function Home() {
               const Icon = resolveIcon(service.icon);
 
               return (
-                <li key={service.slug} className="home-service">
+                <li
+                  key={service.slug}
+                  className="home-service"
+                >
+                  <img
+                    className="home-service-image"
+                    src={service.image}
+                    alt=""
+                    loading="lazy"
+                    aria-hidden="true"
+                  />
+
                   <span className="home-service-icon">
                     <Icon aria-hidden="true" />
                   </span>
+
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
                 </li>
@@ -311,7 +549,10 @@ function Home() {
           </ul>
 
           <div className="home-services-more">
-            <Link className="btn btn-ghost-light" to="/services">
+            <Link
+              className="btn btn-ghost-light"
+              to="/services"
+            >
               See all services
               <FiArrowRight aria-hidden="true" />
             </Link>
@@ -332,17 +573,46 @@ function Home() {
 
           <ul className="grid grid-3 home-testimonial-grid">
             {TESTIMONIALS.map((item) => (
-              <li key={item.name} className="card home-testimonial">
-                <p className="home-testimonial-quote">{item.quote}</p>
+              <li
+                key={item.name}
+                className="card home-testimonial"
+              >
+                <p className="home-testimonial-quote">
+                  {item.quote}
+                </p>
 
                 <div className="home-testimonial-person">
                   <strong>{item.name}</strong>
                   <span>{item.role}</span>
-                  <span className="home-testimonial-place">{item.place}</span>
+                  <span className="home-testimonial-place">
+                    {item.place}
+                  </span>
                 </div>
               </li>
             ))}
           </ul>
+
+          <div
+            className="home-video-placeholder"
+            aria-label="Nandi Seeds field demonstration video"
+          >
+            <video
+              ref={videoRef}
+              className="home-video"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              <source
+                src="/videos/nandi-farmer-field.mp4"
+                type="video/mp4"
+              />
+
+              Your browser does not support the video tag.
+            </video>
+
+            
+          </div>
         </div>
       </section>
 
@@ -354,6 +624,7 @@ function Home() {
         <div className="container cta-band-inner">
           <div>
             <h2>Not sure which variety suits your soil?</h2>
+
             <p>
               Send us your district, soil type and sowing window. Our
               agronomy team will suggest the right varieties and share the
@@ -367,7 +638,10 @@ function Home() {
               <FiArrowRight aria-hidden="true" />
             </Link>
 
-            <Link className="btn btn-ghost-light" to="/dealers">
+            <Link
+              className="btn btn-ghost-light"
+              to="/dealers"
+            >
               Find a Dealer
             </Link>
           </div>

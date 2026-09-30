@@ -219,11 +219,11 @@ p {
 }
 
 .section {
-  padding-block: clamp(56px, 8vw, 104px);
+  padding-block: clamp(44px, 5.5vw, 76px);
 }
 
 .section-tight {
-  padding-block: clamp(40px, 5vw, 64px);
+  padding-block: clamp(36px, 4.5vw, 56px);
 }
 
 .section-soft {
@@ -245,7 +245,7 @@ p {
 
 /* Consistent gap between stacked page blocks */
 .stack > * + * {
-  margin-top: clamp(24px, 4vw, 48px);
+  margin-top: clamp(20px, 3vw, 36px);
 }
 
 /* =========================================================
@@ -278,11 +278,11 @@ p {
 }
 
 .section-head h2 {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .section-head p {
-  margin-top: 14px;
+  margin-top: 10px;
   font-size: 1.02rem;
 }
 
@@ -444,7 +444,7 @@ p {
 
 .grid {
   display: grid;
-  gap: clamp(18px, 2.6vw, 28px);
+  gap: clamp(16px, 2vw, 24px);
 }
 
 .grid-2 {
@@ -518,4 +518,3 @@ p {
     font-size: 0.9rem;
   }
 }
-

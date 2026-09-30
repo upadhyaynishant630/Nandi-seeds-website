@@ -7,11 +7,11 @@
 ========================================================= */
 
 .dealers-benefits {
-  margin-top: clamp(32px, 5vw, 50px);
+  margin-top: clamp(24px, 3.5vw, 40px);
 }
 
 .dealers-benefit {
-  padding: 28px 24px;
+  padding: 22px 20px;
 }
 
 .dealers-benefit-icon {
@@ -20,7 +20,7 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   border-radius: var(--radius-sm);
   background: var(--green-100);
   color: var(--green-700);
@@ -95,7 +95,7 @@
 
 .dealers-subtext {
   margin-top: 10px;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
   font-size: 0.9rem;
 }
 
@@ -112,11 +112,11 @@
 .dealers-side {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .dealers-side-card {
-  padding: clamp(24px, 3vw, 30px);
+  padding: clamp(20px, 2.5vw, 26px);
 }
 
 .dealers-side-card h3 {
@@ -124,7 +124,7 @@
 }
 
 .dealers-side-list {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .dealers-side-list li {
@@ -135,7 +135,7 @@
 }
 
 .dealers-side-list li + li {
-  margin-top: 13px;
+  margin-top: 10px;
 }
 
 .dealers-side-list svg {

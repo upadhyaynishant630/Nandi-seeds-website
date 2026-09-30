@@ -3,20 +3,20 @@
 ========================================================= */
 
 .about-title {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .about-text {
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: 1.02rem;
 }
 
 .about-points {
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .about-cta {
-  margin-top: 30px;
+  margin-top: 22px;
 }
 
 /* =========================================================
@@ -87,11 +87,11 @@
 ========================================================= */
 
 .about-mission-grid {
-  margin-top: clamp(32px, 5vw, 50px);
+  margin-top: clamp(24px, 3.5vw, 40px);
 }
 
 .about-mission {
-  padding: 30px 28px;
+  padding: 24px 22px;
   border-left: 4px solid var(--green-600);
 }
 
@@ -100,7 +100,7 @@
 }
 
 .about-mission p {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 0.96rem;
 }
 
@@ -109,11 +109,11 @@
 ========================================================= */
 
 .about-value-grid {
-  margin-top: clamp(32px, 5vw, 50px);
+  margin-top: clamp(24px, 3.5vw, 40px);
 }
 
 .about-value {
-  padding: 26px 24px;
+  padding: 22px 20px;
 }
 
 .about-value-icon {
@@ -122,7 +122,7 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border-radius: var(--radius-sm);
   background: var(--green-100);
   color: var(--green-700);
@@ -147,13 +147,13 @@
 }
 
 .about-process-list {
-  margin-top: 28px;
+  margin-top: 20px;
 }
 
 .about-process-list li {
   display: flex;
-  gap: 18px;
-  padding: 20px 0;
+  gap: 16px;
+  padding: 16px 0;
   border-bottom: 1px dashed var(--line);
 }
 
@@ -186,7 +186,7 @@
 }
 
 .about-cert {
-  padding: 30px 28px;
+  padding: 24px 22px;
   border-top: 4px solid var(--gold-500);
 }
 
@@ -208,7 +208,7 @@
 }
 
 .about-cert-cta {
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 /* =========================================================

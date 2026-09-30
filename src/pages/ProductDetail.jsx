@@ -87,9 +87,7 @@ function ProductDetail() {
               />
             </div>
 
-            <div className="media-placeholder product-placeholder">
-              Add /images/products/{product.slug}.jpg
-            </div>
+            
 
             {product.badge ? (
               <span className="badge badge-gold product-badge">

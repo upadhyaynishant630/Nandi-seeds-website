@@ -5,8 +5,8 @@
 .notfound-page {
   display: flex;
   align-items: center;
-  min-height: 68vh;
-  padding-block: clamp(56px, 9vw, 110px);
+  min-height: 56vh;
+  padding-block: clamp(44px, 6vw, 76px);
   background:
     radial-gradient(
       circle at 50% 0%,

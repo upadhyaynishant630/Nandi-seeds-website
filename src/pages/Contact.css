@@ -29,7 +29,7 @@
 
 .contact-subtext {
   margin-top: 10px;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
   font-size: 0.9rem;
 }
 
@@ -51,11 +51,11 @@
 .contact-aside {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .contact-card {
-  padding: clamp(24px, 3vw, 32px);
+  padding: clamp(20px, 2.5vw, 28px);
 }
 
 .contact-card h3 {
@@ -65,8 +65,8 @@
 .contact-list {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  margin-top: 24px;
+  gap: 18px;
+  margin-top: 18px;
 }
 
 .contact-list li {
@@ -110,7 +110,7 @@
 }
 
 .contact-map-cta {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 
 /* =========================================================

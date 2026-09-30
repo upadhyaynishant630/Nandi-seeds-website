@@ -47,6 +47,13 @@ function Services() {
                   key={service.slug}
                   className="card card-hover services-card"
                 >
+                  <img
+                    className="services-image"
+                    src={service.image}
+                    alt=""
+                    loading="lazy"
+                    aria-hidden="true"
+                  />
                   <span className="services-icon">
                     <Icon aria-hidden="true" />
                   </span>
