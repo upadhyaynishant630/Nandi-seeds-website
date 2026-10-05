@@ -7,7 +7,6 @@
   grid-template-columns: 0.95fr 1.05fr;
   align-items: start;
   gap: clamp(28px, 5vw, 60px);
-  
 }
 
 /* =========================================================
@@ -19,8 +18,6 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 40px;
-  margin-right: 20px;
 }
 
 .product-frame {
@@ -39,7 +36,16 @@
 }
 
 .product-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 400px;
+  padding: 28px;
+  color: var(--green-800);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .product-badge {
@@ -231,4 +237,996 @@
   .product-spec-table th {
     width: 45%;
   }
+}
+
+
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.product-overview {
+--product-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--product-motion-fast: 220ms;
+--product-motion-normal: 450ms;
+--product-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. PRODUCT OVERVIEW ENTRANCE
+========================================================= */
+
+@keyframes productOverviewReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 16px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.product-overview {
+animation:
+productOverviewReveal
+0.55s
+var(--product-motion-ease)
+both;
+}
+
+/* =========================================================
+03. PRODUCT MEDIA ENTRANCE
+========================================================= */
+
+@keyframes productMediaReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(-32px, 0, 0)
+scale(0.965);
+filter:
+blur(6px)
+saturate(0.88);
+}
+
+55% {
+opacity: 0.9;
+filter:
+blur(2px)
+saturate(0.95);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0)
+scale(1);
+filter:
+blur(0)
+saturate(1);
+}
+}
+
+.product-media {
+animation:
+productMediaReveal
+0.95s
+var(--product-motion-ease)
+0.08s
+both;
+
+will-change:
+opacity,
+transform,
+filter;
+}
+
+/* =========================================================
+04. PRODUCT FRAME
+========================================================= */
+
+.product-frame {
+overflow: hidden;
+
+transition:
+transform 500ms var(--product-motion-ease),
+box-shadow 500ms ease,
+border-color 350ms ease;
+}
+
+.product-frame:hover {
+transform: translateY(-6px);
+
+box-shadow:
+0 28px 60px rgba(17, 51, 24, 0.14);
+}
+
+/* =========================================================
+05. PRODUCT IMAGE — PREMIUM ZOOM
+========================================================= */
+
+.product-frame img {
+transition:
+transform 850ms var(--product-motion-ease),
+filter 550ms ease;
+
+will-change:
+transform;
+}
+
+.product-frame:hover img {
+transform:
+scale(1.055);
+
+filter:
+saturate(1.06)
+contrast(1.02);
+}
+
+/* =========================================================
+06. PRODUCT IMAGE LIGHT SWEEP
+========================================================= */
+
+.product-frame::after {
+content: "";
+
+position: absolute;
+
+top: -120%;
+left: -140%;
+
+width: 45%;
+height: 340%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.16),
+transparent
+);
+
+transform:
+rotate(18deg);
+
+transition:
+left 900ms var(--product-motion-ease);
+}
+
+.product-frame:hover::after {
+left: 150%;
+}
+
+/* =========================================================
+07. PRODUCT BADGE
+========================================================= */
+
+@keyframes productBadgeReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(-10px, -10px, 0)
+scale(0.88);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0)
+scale(1);
+}
+}
+
+.product-badge {
+animation:
+productBadgeReveal
+0.6s
+var(--product-motion-ease)
+0.48s
+both;
+
+transition:
+transform 300ms var(--product-motion-ease),
+box-shadow 300ms ease;
+}
+
+.product-badge:hover {
+transform:
+translateY(-3px)
+scale(1.04);
+
+box-shadow:
+0 9px 22px rgba(17, 51, 24, 0.12);
+}
+
+/* =========================================================
+08. PRODUCT PLACEHOLDER
+========================================================= */
+
+.product-placeholder {
+transition:
+transform 400ms var(--product-motion-ease),
+color 300ms ease;
+}
+
+.product-frame:hover .product-placeholder {
+transform:
+scale(1.025);
+
+color:
+var(--green-700);
+}
+
+/* =========================================================
+09. PRODUCT INFO — CINEMATIC TEXT REVEAL
+========================================================= */
+
+@keyframes productInfoReveal {
+0% {
+opacity: 0;
+transform: translate3d(30px, 0, 0);
+filter: blur(6px);
+}
+
+55% {
+opacity: 0.88;
+filter: blur(2px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+.product-crop {
+animation:
+productInfoReveal
+0.6s
+var(--product-motion-ease)
+0.15s
+both;
+}
+
+.product-name {
+animation:
+productInfoReveal
+0.85s
+var(--product-motion-ease)
+0.23s
+both;
+
+will-change:
+opacity,
+transform,
+filter;
+}
+
+.product-description {
+animation:
+productInfoReveal
+0.75s
+var(--product-motion-ease)
+0.36s
+both;
+}
+
+.product-subheading {
+animation:
+productInfoReveal
+0.65s
+var(--product-motion-ease)
+0.48s
+both;
+}
+
+.product-actions {
+animation:
+productInfoReveal
+0.7s
+var(--product-motion-ease)
+0.68s
+both;
+}
+
+/* =========================================================
+10. PRODUCT CROP HOVER
+========================================================= */
+
+.product-crop {
+transition:
+color 280ms ease,
+letter-spacing 280ms ease,
+transform 280ms var(--product-motion-ease);
+}
+
+.product-crop:hover {
+color:
+var(--green-700);
+
+letter-spacing:
+0.16em;
+
+transform:
+translateX(3px);
+}
+
+/* =========================================================
+11. PRODUCT NAME HOVER
+========================================================= */
+
+.product-name {
+transition:
+color 300ms ease,
+transform 350ms var(--product-motion-ease),
+text-shadow 300ms ease;
+}
+
+.product-name:hover {
+color:
+var(--green-700);
+
+transform:
+translateX(4px);
+
+text-shadow:
+0 5px 18px rgba(31, 122, 61, 0.10);
+}
+
+/* =========================================================
+12. DESCRIPTION HOVER
+========================================================= */
+
+.product-description {
+transition:
+color 280ms ease,
+transform 300ms var(--product-motion-ease);
+}
+
+.product-description:hover {
+transform:
+translateX(2px);
+}
+
+/* =========================================================
+13. PRODUCT HIGHLIGHTS
+========================================================= */
+
+@keyframes productHighlightReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 18px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.product-highlights > * {
+animation:
+productHighlightReveal
+0.6s
+var(--product-motion-ease)
+both;
+}
+
+.product-highlights > *:nth-child(1) {
+animation-delay: 0.52s;
+}
+
+.product-highlights > *:nth-child(2) {
+animation-delay: 0.60s;
+}
+
+.product-highlights > *:nth-child(3) {
+animation-delay: 0.68s;
+}
+
+.product-highlights > *:nth-child(4) {
+animation-delay: 0.76s;
+}
+
+.product-highlights > *:nth-child(5) {
+animation-delay: 0.84s;
+}
+
+.product-highlights > *:nth-child(6) {
+animation-delay: 0.92s;
+}
+
+/* =========================================================
+14. PRODUCT HIGHLIGHT HOVER
+========================================================= */
+
+.product-highlights li {
+transition:
+transform 300ms var(--product-motion-ease),
+color 280ms ease;
+}
+
+.product-highlights li:hover {
+transform:
+translateX(5px);
+
+color:
+var(--green-700);
+}
+
+/* =========================================================
+15. PRODUCT ACTIONS
+========================================================= */
+
+.product-actions {
+transition:
+border-color 300ms ease;
+}
+
+.product-actions:hover {
+border-color:
+var(--green-200);
+}
+
+/* =========================================================
+16. PREMIUM BUTTON HOVER
+========================================================= */
+
+.product-actions .btn,
+.product-back .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--product-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+/* Shine */
+
+.product-actions .btn::after,
+.product-back .btn::after {
+content: "";
+
+position: absolute;
+
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.27),
+transparent
+);
+
+transform:
+skewX(-20deg);
+
+transition:
+left 650ms var(--product-motion-ease);
+}
+
+.product-actions .btn:hover,
+.product-back .btn:hover {
+transform:
+translateY(-3px);
+
+box-shadow:
+0 12px 28px rgba(17, 51, 24, 0.14);
+}
+
+.product-actions .btn:hover::after,
+.product-back .btn:hover::after {
+left: 140%;
+}
+
+.product-actions .btn:active,
+.product-back .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* =========================================================
+17. SPECIFICATION TABLE REVEAL
+========================================================= */
+
+@keyframes productSpecReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(0, 28px, 0)
+scale(0.985);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0)
+scale(1);
+}
+}
+
+.product-spec-table {
+animation:
+productSpecReveal
+0.8s
+var(--product-motion-ease)
+0.14s
+both;
+
+transition:
+transform 400ms var(--product-motion-ease),
+box-shadow 400ms ease,
+border-color 350ms ease;
+}
+
+.product-spec-table:hover {
+transform:
+translateY(-5px);
+
+box-shadow:
+0 20px 46px rgba(17, 51, 24, 0.10);
+}
+
+/* =========================================================
+18. SPEC TABLE CAPTION
+========================================================= */
+
+.product-spec-caption {
+transition:
+background-color 300ms ease,
+letter-spacing 300ms ease;
+}
+
+.product-spec-table:hover .product-spec-caption {
+background:
+var(--green-700);
+
+letter-spacing:
+0.008em;
+}
+
+/* =========================================================
+19. SPECIFICATION ROWS
+========================================================= */
+
+.product-spec-table tr {
+transition:
+background-color 280ms ease,
+transform 280ms var(--product-motion-ease);
+}
+
+.product-spec-table tbody tr:hover {
+background:
+var(--green-50);
+}
+
+.product-spec-table tbody th,
+.product-spec-table tbody td {
+transition:
+color 250ms ease;
+}
+
+.product-spec-table tbody tr:hover th {
+color:
+var(--green-700);
+}
+
+.product-spec-table tbody tr:hover td {
+color:
+var(--ink);
+}
+
+/* =========================================================
+20. RELATED SECTION TEXT
+========================================================= */
+
+@keyframes productRelatedHeadingReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(0, 28px, 0);
+filter:
+blur(5px);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0);
+filter:
+blur(0);
+}
+}
+
+.product-related {
+animation:
+productRelatedHeadingReveal
+0.75s
+var(--product-motion-ease)
+0.12s
+both;
+}
+
+/* =========================================================
+21. RELATED PRODUCT CARDS
+========================================================= */
+
+@keyframes productRelatedCardReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(0, 28px, 0)
+scale(0.97);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0)
+scale(1);
+}
+}
+
+.product-related-card {
+animation:
+productRelatedCardReveal
+0.7s
+var(--product-motion-ease)
+both;
+
+transition:
+transform 380ms var(--product-motion-ease),
+box-shadow 380ms ease,
+border-color 350ms ease;
+}
+
+.product-related-card:nth-child(1) {
+animation-delay: 0.12s;
+}
+
+.product-related-card:nth-child(2) {
+animation-delay: 0.21s;
+}
+
+.product-related-card:nth-child(3) {
+animation-delay: 0.30s;
+}
+
+.product-related-card:nth-child(4) {
+animation-delay: 0.39s;
+}
+
+.product-related-card:nth-child(5) {
+animation-delay: 0.48s;
+}
+
+.product-related-card:hover {
+transform:
+translateY(-8px);
+
+box-shadow:
+0 22px 46px rgba(17, 51, 24, 0.11);
+}
+
+/* =========================================================
+22. RELATED CARD CONTENT
+========================================================= */
+
+.product-related-crop {
+transition:
+color 280ms ease,
+letter-spacing 280ms ease,
+transform 280ms var(--product-motion-ease);
+}
+
+.product-related-card:hover .product-related-crop {
+color:
+var(--green-700);
+
+letter-spacing:
+0.135em;
+
+transform:
+translateX(2px);
+}
+
+.product-related-card h3 {
+transition:
+color 280ms ease,
+transform 300ms var(--product-motion-ease);
+}
+
+.product-related-card:hover h3 {
+color:
+var(--green-700);
+
+transform:
+translateX(3px);
+}
+
+.product-related-card p {
+transition:
+transform 300ms var(--product-motion-ease);
+}
+
+.product-related-card:hover p {
+transform:
+translateX(2px);
+}
+
+/* =========================================================
+23. RELATED LINK
+========================================================= */
+
+.product-related-link {
+transition:
+color 280ms ease,
+transform 300ms var(--product-motion-ease);
+}
+
+.product-related-card:hover .product-related-link {
+color:
+var(--green-800);
+
+transform:
+translateX(3px);
+}
+
+.product-related-link svg {
+transition:
+transform 320ms var(--product-motion-ease);
+}
+
+.product-related-card:hover .product-related-link svg {
+transform:
+translateX(7px);
+}
+
+/* =========================================================
+24. BACK BUTTON
+========================================================= */
+
+@keyframes productBackReveal {
+0% {
+opacity: 0;
+transform:
+translate3d(0, 18px, 0);
+}
+
+100% {
+opacity: 1;
+transform:
+translate3d(0, 0, 0);
+}
+}
+
+.product-back {
+animation:
+productBackReveal
+0.65s
+var(--product-motion-ease)
+0.35s
+both;
+}
+
+/* =========================================================
+25. MISSING VARIETY
+========================================================= */
+
+.product-missing {
+animation:
+productRelatedHeadingReveal
+0.7s
+var(--product-motion-ease)
+0.12s
+both;
+}
+
+/* =========================================================
+26. GENERAL LINKS
+========================================================= */
+
+.product-overview a {
+transition:
+color 250ms ease;
+}
+
+/* =========================================================
+27. IMAGE DEPTH / GPU OPTIMIZATION
+========================================================= */
+
+.product-frame img,
+.product-media,
+.product-related-card {
+backface-visibility:
+hidden;
+}
+
+/* =========================================================
+28. FOCUS ACCESSIBILITY
+========================================================= */
+
+.product-overview a:focus-visible,
+.product-overview button:focus-visible {
+outline-offset: 4px;
+}
+
+/* =========================================================
+29. TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+.product-media {
+animation-duration:
+0.8s;
+}
+
+.product-overview {
+animation-duration:
+0.5s;
+}
+
+.product-frame:hover {
+transform:
+translateY(-4px);
+}
+
+.product-related-card:hover {
+transform:
+translateY(-6px);
+}
+
+}
+
+/* =========================================================
+30. MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+.product-media {
+animation-duration:
+0.72s;
+}
+
+.product-name {
+animation-duration:
+0.7s;
+}
+
+.product-description {
+animation-duration:
+0.62s;
+}
+
+.product-spec-table {
+animation-duration:
+0.7s;
+}
+
+.product-related-card {
+animation-duration:
+0.62s;
+}
+
+.product-frame:hover {
+transform:
+translateY(-3px);
+}
+
+.product-frame:hover img {
+transform:
+scale(1.035);
+}
+
+.product-related-card:hover {
+transform:
+translateY(-4px);
+}
+
+.product-highlights li:hover {
+transform:
+translateX(3px);
+}
+
+.product-actions .btn:hover,
+.product-back .btn:hover {
+transform:
+translateY(-2px);
+}
+
+}
+
+/* =========================================================
+31. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+.product-frame:hover {
+transform:
+translateY(-2px);
+}
+
+.product-frame:hover img {
+transform:
+scale(1.025);
+}
+
+.product-related-card:hover {
+transform:
+translateY(-3px);
+}
+
+}
+
+/* =========================================================
+32. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.product-overview,
+.product-overview *,
+.product-overview *::before,
+.product-overview *::after {
+animation-duration:
+0.01ms !important;
+
+
+animation-iteration-count:
+  1 !important;
+
+transition-duration:
+  0.01ms !important;
+
+scroll-behavior:
+  auto !important;
+
+
+}
+
+.product-overview,
+.product-media,
+.product-crop,
+.product-name,
+.product-description,
+.product-subheading,
+.product-highlights > *,
+.product-actions,
+.product-spec-table,
+.product-related,
+.product-related-card,
+.product-back,
+.product-missing {
+opacity:
+1 !important;
+
+
+transform:
+  none !important;
+
+filter:
+  none !important;
+
+
+}
+
 }

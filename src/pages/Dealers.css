@@ -190,3 +190,724 @@
     font-size: 0.8rem;
   }
 }
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.dealers-page {
+--dealers-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--dealers-motion-fast: 220ms;
+--dealers-motion-normal: 450ms;
+--dealers-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. TEXT REVEAL
+========================================================= */
+
+@keyframes dealersTextReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 32px, 0);
+filter: blur(7px);
+}
+
+55% {
+opacity: 0.86;
+filter: blur(2px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+/* Eyebrow */
+
+.dealers-page .eyebrow {
+animation:
+dealersTextReveal 0.65s var(--dealers-motion-ease) 0.04s both;
+}
+
+/* Main headings */
+
+.dealers-page .section-head h2,
+.dealers-page .section-head h3 {
+animation:
+dealersTextReveal 0.85s var(--dealers-motion-ease) 0.14s both;
+}
+
+/* Supporting paragraphs */
+
+.dealers-page .section-head p {
+animation:
+dealersTextReveal 0.75s var(--dealers-motion-ease) 0.26s both;
+}
+
+/* =========================================================
+03. PARTNER BENEFITS — CARD REVEAL
+========================================================= */
+
+@keyframes dealersBenefitReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.dealers-benefit {
+animation:
+dealersBenefitReveal 0.72s var(--dealers-motion-ease) both;
+
+transition:
+transform 380ms var(--dealers-motion-ease),
+box-shadow 380ms ease,
+border-color 350ms ease,
+background-color 350ms ease;
+}
+
+.dealers-benefit:nth-child(1) {
+animation-delay: 0.06s;
+}
+
+.dealers-benefit:nth-child(2) {
+animation-delay: 0.14s;
+}
+
+.dealers-benefit:nth-child(3) {
+animation-delay: 0.22s;
+}
+
+.dealers-benefit:nth-child(4) {
+animation-delay: 0.30s;
+}
+
+.dealers-benefit:nth-child(5) {
+animation-delay: 0.38s;
+}
+
+.dealers-benefit:nth-child(6) {
+animation-delay: 0.46s;
+}
+
+/* =========================================================
+04. BENEFIT CARD HOVER
+========================================================= */
+
+.dealers-benefit {
+position: relative;
+overflow: hidden;
+}
+
+.dealers-benefit:hover {
+transform: translateY(-8px);
+
+box-shadow:
+0 22px 46px rgba(17, 51, 24, 0.11);
+}
+
+/* =========================================================
+05. BENEFIT ICON
+========================================================= */
+
+.dealers-benefit-icon {
+transition:
+transform 350ms var(--dealers-motion-ease),
+background-color 300ms ease,
+color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.dealers-benefit:hover .dealers-benefit-icon {
+transform:
+translateY(-5px)
+scale(1.08)
+rotate(-2deg);
+
+background:
+var(--green-700);
+
+color:
+#ffffff;
+
+box-shadow:
+0 10px 22px rgba(31, 122, 61, 0.16);
+}
+
+/* =========================================================
+06. BENEFIT TITLE
+========================================================= */
+
+.dealers-benefit h3 {
+transition:
+color 280ms ease,
+transform 300ms var(--dealers-motion-ease),
+letter-spacing 280ms ease;
+}
+
+.dealers-benefit:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+letter-spacing: 0.005em;
+}
+
+/* =========================================================
+07. BENEFIT TEXT
+========================================================= */
+
+.dealers-benefit p {
+transition:
+transform 300ms var(--dealers-motion-ease),
+color 280ms ease;
+}
+
+.dealers-benefit:hover p {
+transform: translateX(2px);
+}
+
+/* =========================================================
+08. BENEFIT CARD LIGHT SWEEP
+========================================================= */
+
+.dealers-benefit::after {
+content: "";
+
+position: absolute;
+top: -110%;
+left: -145%;
+
+width: 42%;
+height: 320%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.14),
+transparent
+);
+
+transform: rotate(18deg);
+
+transition:
+left 850ms var(--dealers-motion-ease);
+}
+
+.dealers-benefit:hover::after {
+left: 150%;
+}
+
+/* =========================================================
+09. NETWORK BAND — STAT REVEAL
+========================================================= */
+
+@keyframes dealersStatReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 28px, 0) scale(0.94);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.dealers-network-stat {
+animation:
+dealersStatReveal 0.72s var(--dealers-motion-ease) both;
+
+transition:
+transform 300ms var(--dealers-motion-ease);
+}
+
+.dealers-network-stat:nth-child(1) {
+animation-delay: 0.05s;
+}
+
+.dealers-network-stat:nth-child(2) {
+animation-delay: 0.14s;
+}
+
+.dealers-network-stat:nth-child(3) {
+animation-delay: 0.23s;
+}
+
+.dealers-network-stat:nth-child(4) {
+animation-delay: 0.32s;
+}
+
+.dealers-network-stat:nth-child(5) {
+animation-delay: 0.41s;
+}
+
+.dealers-network-stat:hover {
+transform: translateY(-5px);
+}
+
+.dealers-network-stat strong {
+display: inline-block;
+
+transition:
+transform 300ms var(--dealers-motion-ease),
+letter-spacing 300ms ease;
+}
+
+.dealers-network-stat:hover strong {
+transform:
+scale(1.045)
+translateY(-2px);
+
+letter-spacing: 0.015em;
+}
+
+/* =========================================================
+10. APPLICATION AREA
+========================================================= */
+
+@keyframes dealersApplyReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.dealers-apply {
+animation:
+dealersApplyReveal 0.8s var(--dealers-motion-ease) 0.10s both;
+}
+
+/* =========================================================
+11. FORM WRAPPER
+========================================================= */
+
+.dealers-form-wrap {
+transition:
+transform 400ms var(--dealers-motion-ease),
+box-shadow 400ms ease,
+border-color 350ms ease;
+}
+
+.dealers-form-wrap:hover {
+transform: translateY(-5px);
+
+border-color:
+var(--green-200);
+
+box-shadow:
+0 22px 50px rgba(17, 51, 24, 0.10);
+}
+
+/* Form heading */
+
+.dealers-form-wrap h2 {
+transition:
+color 280ms ease,
+transform 300ms var(--dealers-motion-ease);
+}
+
+.dealers-form-wrap:hover h2 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+12. FORM INPUT MICRO INTERACTION
+========================================================= */
+
+.dealers-form input,
+.dealers-form select,
+.dealers-form textarea {
+transition:
+border-color 280ms ease,
+box-shadow 280ms ease,
+transform 280ms var(--dealers-motion-ease),
+background-color 280ms ease;
+}
+
+.dealers-form input:hover,
+.dealers-form select:hover,
+.dealers-form textarea:hover {
+border-color:
+var(--green-300);
+
+box-shadow:
+0 7px 20px rgba(31, 122, 61, 0.05);
+}
+
+.dealers-form input:focus,
+.dealers-form select:focus,
+.dealers-form textarea:focus {
+transform: translateY(-1px);
+
+box-shadow:
+0 0 0 4px rgba(58, 163, 92, 0.11);
+}
+
+/* =========================================================
+13. SIDE CARDS REVEAL
+========================================================= */
+
+@keyframes dealersSideReveal {
+0% {
+opacity: 0;
+transform: translate3d(28px, 0, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.dealers-side-card {
+animation:
+dealersSideReveal 0.72s var(--dealers-motion-ease) both;
+
+transition:
+transform 380ms var(--dealers-motion-ease),
+box-shadow 380ms ease,
+border-color 350ms ease;
+}
+
+.dealers-side-card:nth-child(1) {
+animation-delay: 0.18s;
+}
+
+.dealers-side-card:nth-child(2) {
+animation-delay: 0.30s;
+}
+
+.dealers-side-card:nth-child(3) {
+animation-delay: 0.42s;
+}
+
+.dealers-side-card:hover {
+transform: translateY(-7px);
+
+box-shadow:
+0 20px 44px rgba(17, 51, 24, 0.10);
+}
+
+/* Side card heading */
+
+.dealers-side-card h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--dealers-motion-ease);
+}
+
+.dealers-side-card:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+14. REQUIREMENT LIST
+========================================================= */
+
+.dealers-side-list li {
+transition:
+transform 280ms var(--dealers-motion-ease),
+color 280ms ease;
+}
+
+.dealers-side-list li:hover {
+transform: translateX(5px);
+color: var(--green-700);
+}
+
+.dealers-side-list svg {
+transition:
+transform 280ms var(--dealers-motion-ease),
+color 250ms ease;
+}
+
+.dealers-side-list li:hover svg {
+transform:
+scale(1.08)
+translateX(1px);
+
+color:
+var(--green-700);
+}
+
+/* =========================================================
+15. CONTACT NOTE
+========================================================= */
+
+@keyframes dealersNoteReveal {
+0% {
+opacity: 0;
+transform: translate3d(24px, 0, 0) scale(0.98);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.dealers-contact-note {
+animation:
+dealersNoteReveal 0.75s var(--dealers-motion-ease) 0.35s both;
+
+transition:
+transform 350ms var(--dealers-motion-ease),
+box-shadow 350ms ease,
+border-color 300ms ease,
+background-color 300ms ease;
+}
+
+.dealers-contact-note:hover {
+transform: translateY(-5px);
+
+box-shadow:
+0 18px 38px rgba(116, 84, 17, 0.10);
+
+border-color:
+var(--gold-500);
+}
+
+/* Contact heading */
+
+.dealers-contact-note strong {
+transition:
+color 280ms ease,
+transform 280ms var(--dealers-motion-ease);
+}
+
+.dealers-contact-note:hover strong {
+color: var(--green-800);
+transform: translateX(3px);
+}
+
+/* Contact link */
+
+.dealers-contact-note a {
+transition:
+color 250ms ease,
+text-decoration-color 250ms ease;
+}
+
+.dealers-contact-note a:hover {
+color: var(--green-600);
+}
+
+/* =========================================================
+16. BUTTON PREMIUM SHINE
+========================================================= */
+
+.dealers-page .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--dealers-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+.dealers-page .btn::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.25),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--dealers-motion-ease);
+}
+
+.dealers-page .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 12px 27px rgba(17, 51, 24, 0.13);
+}
+
+.dealers-page .btn:hover::after {
+left: 140%;
+}
+
+.dealers-page .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* =========================================================
+17. SUBTLE PAGE ENTRANCE
+========================================================= */
+
+@keyframes dealersPageEntrance {
+0% {
+opacity: 0;
+transform: translate3d(0, 10px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.dealers-page {
+animation:
+dealersPageEntrance 0.45s var(--dealers-motion-ease) both;
+}
+
+/* =========================================================
+18. ACCESSIBILITY FOCUS
+========================================================= */
+
+.dealers-page a:focus-visible,
+.dealers-page button:focus-visible,
+.dealers-page input:focus-visible,
+.dealers-page select:focus-visible,
+.dealers-page textarea:focus-visible {
+outline-offset: 4px;
+}
+
+/* =========================================================
+19. TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+.dealers-benefit:hover,
+.dealers-side-card:hover {
+transform: translateY(-6px);
+}
+
+.dealers-form-wrap:hover {
+transform: translateY(-3px);
+}
+
+}
+
+/* =========================================================
+20. MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+.dealers-benefit {
+animation-duration: 0.65s;
+}
+
+.dealers-network-stat {
+animation-duration: 0.62s;
+}
+
+.dealers-side-card {
+animation-duration: 0.65s;
+}
+
+.dealers-benefit:hover {
+transform: translateY(-4px);
+}
+
+.dealers-side-card:hover {
+transform: translateY(-4px);
+}
+
+.dealers-form-wrap:hover {
+transform: translateY(-2px);
+}
+
+.dealers-page .btn:hover {
+transform: translateY(-2px);
+}
+
+}
+
+/* =========================================================
+21. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+.dealers-benefit:hover {
+transform: translateY(-3px);
+}
+
+.dealers-side-card:hover {
+transform: translateY(-3px);
+}
+
+.dealers-contact-note:hover {
+transform: translateY(-3px);
+}
+
+.dealers-side-list li:hover {
+transform: translateX(3px);
+}
+
+}
+
+/* =========================================================
+22. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.dealers-page,
+.dealers-page *,
+.dealers-page *::before,
+.dealers-page *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+
+.dealers-page,
+.dealers-page .eyebrow,
+.dealers-page .section-head h2,
+.dealers-page .section-head h3,
+.dealers-page .section-head p,
+.dealers-benefit,
+.dealers-network-stat,
+.dealers-apply,
+.dealers-side-card,
+.dealers-contact-note {
+opacity: 1 !important;
+transform: none !important;
+filter: none !important;
+clip-path: none !important;
+}
+
+}
+

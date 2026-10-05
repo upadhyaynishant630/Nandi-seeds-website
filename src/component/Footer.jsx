@@ -57,6 +57,7 @@ function Footer() {
             </Link>
 
             <p className="footer-tagline">{SITE.tagline}</p>
+            <p className="footer-subtagline">{SITE.subTagline}</p>
 
             <p className="footer-description">
               Breeding, producing and delivering high-germination seed to

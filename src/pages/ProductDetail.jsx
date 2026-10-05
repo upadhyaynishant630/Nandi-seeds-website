@@ -80,14 +80,19 @@ function ProductDetail() {
               <img
                 src={`/images/products/${product.slug}.jpg`}
                 alt={`${product.name} ${product.crop} seed pack`}
-                loading="lazy"
+                loading="eager"
+                fetchPriority="high"
                 onError={(event) => {
-                  event.currentTarget.style.display = "none";
+                  event.currentTarget.hidden = true;
+                  event.currentTarget.nextElementSibling?.removeAttribute(
+                    "hidden"
+                  );
                 }}
               />
+              <div className="product-placeholder" hidden>
+                {product.crop} seed variety
+              </div>
             </div>
-
-            
 
             {product.badge ? (
               <span className="badge badge-gold product-badge">

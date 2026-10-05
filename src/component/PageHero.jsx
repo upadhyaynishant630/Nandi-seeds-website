@@ -30,15 +30,35 @@ function PageHero({ eyebrow, title, subtitle, breadcrumb }) {
 
       <div className="container page-hero-inner">
         {eyebrow ? (
-          <span className="eyebrow eyebrow-on-dark">{eyebrow}</span>
+          <span
+            className="eyebrow eyebrow-on-dark"
+            data-motion="fade-up"
+          >
+            {eyebrow}
+          </span>
         ) : null}
 
-        <h1>{title}</h1>
+        <h1 data-motion="fade-up" style={{ "--motion-delay": "80ms" }}>
+          {title}
+        </h1>
 
-        {subtitle ? <p className="page-hero-sub">{subtitle}</p> : null}
+        {subtitle ? (
+          <p
+            className="page-hero-sub"
+            data-motion="fade-up"
+            style={{ "--motion-delay": "160ms" }}
+          >
+            {subtitle}
+          </p>
+        ) : null}
 
         {crumbs.length > 0 ? (
-          <nav className="page-hero-crumbs" aria-label="Breadcrumb">
+          <nav
+            className="page-hero-crumbs"
+            aria-label="Breadcrumb"
+            data-motion="fade-up"
+            style={{ "--motion-delay": "240ms" }}
+          >
             <Link to="/">Home</Link>
 
             {crumbs.map((crumb) => (

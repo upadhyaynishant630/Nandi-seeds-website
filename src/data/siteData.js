@@ -10,7 +10,8 @@
 
 export const SITE = {
   name: "Nandi Seeds",
-  tagline: "Quality Seeds, Trusted Yield",
+   tagline: "Quality Seeds",
+  subTagline: "Trusted Yield",
   established: "1994",
 
   phone: "+91 90000 00000",

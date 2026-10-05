@@ -235,3 +235,734 @@
     font-size: 0.9rem;
   }
 }
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.about-page {
+--about-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--about-motion-fast: 220ms;
+--about-motion-normal: 450ms;
+--about-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. MAIN ABOUT TEXT — CINEMATIC REVEAL
+========================================================= */
+
+@keyframes aboutTextReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 34px, 0);
+filter: blur(7px);
+}
+
+55% {
+opacity: 0.85;
+filter: blur(2px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+/* About main title */
+
+.about-title {
+animation:
+aboutTextReveal 0.9s var(--about-motion-ease) 0.12s both;
+will-change: opacity, transform, filter;
+}
+
+/* About paragraph */
+
+.about-text {
+animation:
+aboutTextReveal 0.75s var(--about-motion-ease) 0.28s both;
+will-change: opacity, transform, filter;
+}
+
+/* About points */
+
+.about-points {
+animation:
+aboutTextReveal 0.7s var(--about-motion-ease) 0.42s both;
+}
+
+/* About CTA */
+
+.about-cta {
+animation:
+aboutTextReveal 0.7s var(--about-motion-ease) 0.56s both;
+}
+
+/* =========================================================
+03. EYEBROW / SMALL LABEL
+========================================================= */
+
+@keyframes aboutEyebrowReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 14px, 0);
+letter-spacing: 0.16em;
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+letter-spacing: inherit;
+}
+}
+
+.about-page .eyebrow {
+animation:
+aboutEyebrowReveal 0.65s var(--about-motion-ease) 0.04s both;
+}
+
+/* =========================================================
+04. STORY MEDIA — PREMIUM ENTRANCE
+========================================================= */
+
+@keyframes aboutMediaReveal {
+0% {
+opacity: 0;
+transform: translate3d(34px, 0, 0) scale(0.965);
+filter: saturate(0.88);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+filter: saturate(1);
+}
+}
+
+.about-media {
+animation:
+aboutMediaReveal 0.95s var(--about-motion-ease) 0.2s both;
+will-change: opacity, transform, filter;
+}
+
+/* =========================================================
+05. STORY IMAGE HOVER
+========================================================= */
+
+.about-media .media-frame,
+.about-media .media-frame img {
+transition:
+transform 700ms var(--about-motion-ease),
+filter 500ms ease,
+box-shadow 450ms ease;
+}
+
+.about-media .media-frame {
+overflow: hidden;
+}
+
+.about-media .media-frame:hover {
+transform: translateY(-5px);
+box-shadow:
+0 24px 55px rgba(17, 51, 24, 0.14);
+}
+
+.about-media .media-frame:hover img {
+transform: scale(1.045);
+filter:
+saturate(1.06)
+contrast(1.02);
+}
+
+/* =========================================================
+06. ABOUT STATS BAND
+========================================================= */
+
+@keyframes aboutStatReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 28px, 0) scale(0.94);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.about-stat {
+animation:
+aboutStatReveal 0.72s var(--about-motion-ease) both;
+transition:
+transform 300ms var(--about-motion-ease);
+}
+
+.about-stat:nth-child(1) {
+animation-delay: 0.05s;
+}
+
+.about-stat:nth-child(2) {
+animation-delay: 0.14s;
+}
+
+.about-stat:nth-child(3) {
+animation-delay: 0.23s;
+}
+
+.about-stat:nth-child(4) {
+animation-delay: 0.32s;
+}
+
+.about-stat:hover {
+transform: translateY(-5px);
+}
+
+.about-stat strong {
+display: inline-block;
+transition:
+transform 300ms var(--about-motion-ease),
+letter-spacing 300ms ease;
+}
+
+.about-stat:hover strong {
+transform: scale(1.045);
+letter-spacing: 0.015em;
+}
+
+/* =========================================================
+07. SECTION HEADING REVEAL
+========================================================= */
+
+@keyframes aboutHeadingReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0);
+clip-path: inset(100% 0 0 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+clip-path: inset(0 0 0 0);
+}
+}
+
+.about-page .section-head h2 {
+animation:
+aboutHeadingReveal 0.85s var(--about-motion-ease) 0.12s both;
+}
+
+/* =========================================================
+08. MISSION & VISION CARDS
+========================================================= */
+
+@keyframes aboutMissionReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 26px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.about-mission {
+animation:
+aboutMissionReveal 0.72s var(--about-motion-ease) both;
+
+transition:
+transform 350ms var(--about-motion-ease),
+box-shadow 350ms ease,
+border-color 350ms ease,
+background-color 350ms ease;
+}
+
+.about-mission:nth-child(1) {
+animation-delay: 0.10s;
+}
+
+.about-mission:nth-child(2) {
+animation-delay: 0.20s;
+}
+
+.about-mission:hover {
+transform: translateY(-7px);
+box-shadow:
+0 18px 40px rgba(17, 51, 24, 0.10);
+}
+
+.about-mission h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--about-motion-ease);
+}
+
+.about-mission:hover h3 {
+color: var(--green-700);
+transform: translateX(4px);
+}
+
+/* =========================================================
+09. VALUES — STAGGER + PREMIUM HOVER
+========================================================= */
+
+@keyframes aboutValueReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.about-value {
+animation:
+aboutValueReveal 0.72s var(--about-motion-ease) both;
+
+transition:
+transform 360ms var(--about-motion-ease),
+box-shadow 360ms ease,
+border-color 360ms ease;
+}
+
+.about-value:nth-child(1) {
+animation-delay: 0.08s;
+}
+
+.about-value:nth-child(2) {
+animation-delay: 0.16s;
+}
+
+.about-value:nth-child(3) {
+animation-delay: 0.24s;
+}
+
+.about-value:nth-child(4) {
+animation-delay: 0.32s;
+}
+
+.about-value:nth-child(5) {
+animation-delay: 0.40s;
+}
+
+.about-value:nth-child(6) {
+animation-delay: 0.48s;
+}
+
+.about-value:hover {
+transform: translateY(-8px);
+box-shadow:
+0 20px 44px rgba(17, 51, 24, 0.11);
+}
+
+/* Value icon */
+
+.about-value-icon {
+transition:
+transform 350ms var(--about-motion-ease),
+background-color 300ms ease,
+color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.about-value:hover .about-value-icon {
+transform:
+translateY(-4px)
+scale(1.08)
+rotate(-2deg);
+
+background: var(--green-700);
+color: #ffffff;
+
+box-shadow:
+0 8px 18px rgba(31, 122, 61, 0.16);
+}
+
+/* Value heading */
+
+.about-value h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--about-motion-ease);
+}
+
+.about-value:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+10. PROCESS LIST
+========================================================= */
+
+@keyframes aboutProcessReveal {
+0% {
+opacity: 0;
+transform: translate3d(-24px, 0, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.about-process-list li {
+animation:
+aboutProcessReveal 0.68s var(--about-motion-ease) both;
+
+transition:
+padding-left 300ms var(--about-motion-ease),
+background-color 300ms ease;
+}
+
+.about-process-list li:nth-child(1) {
+animation-delay: 0.08s;
+}
+
+.about-process-list li:nth-child(2) {
+animation-delay: 0.16s;
+}
+
+.about-process-list li:nth-child(3) {
+animation-delay: 0.24s;
+}
+
+.about-process-list li:nth-child(4) {
+animation-delay: 0.32s;
+}
+
+.about-process-list li:nth-child(5) {
+animation-delay: 0.40s;
+}
+
+.about-process-list li:hover {
+padding-left: 7px;
+}
+
+/* Process number */
+
+.about-process-step {
+transition:
+transform 350ms var(--about-motion-ease),
+background-color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.about-process-list li:hover .about-process-step {
+transform:
+translateY(-3px)
+scale(1.08);
+
+background: var(--green-600);
+
+box-shadow:
+0 8px 20px rgba(31, 122, 61, 0.18);
+}
+
+/* Process title */
+
+.about-process-list h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--about-motion-ease);
+}
+
+.about-process-list li:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+11. CERTIFICATION CARD
+========================================================= */
+
+@keyframes aboutCertReveal {
+0% {
+opacity: 0;
+transform: translate3d(28px, 0, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.about-cert {
+animation:
+aboutCertReveal 0.8s var(--about-motion-ease) 0.18s both;
+
+transition:
+transform 380ms var(--about-motion-ease),
+box-shadow 380ms ease,
+border-color 300ms ease;
+}
+
+.about-cert:hover {
+transform: translateY(-7px);
+
+box-shadow:
+0 22px 50px rgba(17, 51, 24, 0.12);
+}
+
+/* Certification heading */
+
+.about-cert h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--about-motion-ease);
+}
+
+.about-cert:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+12. CERTIFICATION LIST
+========================================================= */
+
+@keyframes aboutCertItemReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 12px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.about-cert-list li {
+animation:
+aboutCertItemReveal 0.55s var(--about-motion-ease) both;
+}
+
+.about-cert-list li:nth-child(1) {
+animation-delay: 0.30s;
+}
+
+.about-cert-list li:nth-child(2) {
+animation-delay: 0.38s;
+}
+
+.about-cert-list li:nth-child(3) {
+animation-delay: 0.46s;
+}
+
+.about-cert-list li:nth-child(4) {
+animation-delay: 0.54s;
+}
+
+.about-cert-list li:nth-child(5) {
+animation-delay: 0.62s;
+}
+
+/* =========================================================
+13. ABOUT CTA — PREMIUM BUTTON HOVER
+========================================================= */
+
+.about-cta .btn,
+.about-cert-cta .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--about-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+/* Shine effect */
+
+.about-cta .btn::after,
+.about-cert-cta .btn::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.26),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--about-motion-ease);
+}
+
+.about-cta .btn:hover,
+.about-cert-cta .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 12px 26px rgba(17, 51, 24, 0.14);
+}
+
+.about-cta .btn:hover::after,
+.about-cert-cta .btn:hover::after {
+left: 140%;
+}
+
+.about-cta .btn:active,
+.about-cert-cta .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* =========================================================
+14. ABOUT POINTS HOVER
+========================================================= */
+
+.about-points li {
+transition:
+transform 280ms var(--about-motion-ease),
+color 280ms ease;
+}
+
+.about-points li:hover {
+transform: translateX(5px);
+color: var(--green-700);
+}
+
+/* =========================================================
+15. SUBTLE SECTION IMAGE DEPTH
+========================================================= */
+
+.about-media img {
+backface-visibility: hidden;
+}
+
+/* =========================================================
+16. PAGE LOAD CHOREOGRAPHY
+========================================================= */
+
+@keyframes aboutPageEntrance {
+0% {
+opacity: 0;
+transform: translate3d(0, 10px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.about-page {
+animation:
+aboutPageEntrance 0.45s var(--about-motion-ease) both;
+}
+
+/* =========================================================
+17. RESPONSIVE ANIMATION
+========================================================= */
+
+@media (max-width: 720px) {
+
+.about-title {
+animation-duration: 0.75s;
+}
+
+.about-text {
+animation-duration: 0.65s;
+}
+
+.about-media {
+animation-duration: 0.75s;
+}
+
+.about-value:hover,
+.about-mission:hover,
+.about-cert:hover {
+transform: translateY(-4px);
+}
+
+.about-media .media-frame:hover {
+transform: translateY(-3px);
+}
+
+.about-process-list li:hover {
+padding-left: 3px;
+}
+
+}
+
+/* =========================================================
+18. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+.about-stat:hover {
+transform: translateY(-3px);
+}
+
+.about-value:hover {
+transform: translateY(-3px);
+}
+
+.about-mission:hover,
+.about-cert:hover {
+transform: translateY(-3px);
+}
+
+}
+
+/* =========================================================
+19. REDUCED MOTION — ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.about-page,
+.about-page *,
+.about-page *::before,
+.about-page *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+
+.about-page,
+.about-title,
+.about-text,
+.about-points,
+.about-cta,
+.about-media,
+.about-stat,
+.about-mission,
+.about-value,
+.about-process-list li,
+.about-cert,
+.about-cert-list li,
+.about-page .section-head h2 {
+opacity: 1 !important;
+transform: none !important;
+filter: none !important;
+clip-path: none !important;
+}
+}

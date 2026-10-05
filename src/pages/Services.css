@@ -142,3 +142,763 @@
     padding: 20px 18px;
   }
 }
+
+
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.services-page {
+--services-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--services-motion-fast: 220ms;
+--services-motion-normal: 450ms;
+--services-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. PAGE HERO / SECTION TEXT REVEAL
+========================================================= */
+
+@keyframes servicesTextReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 32px, 0);
+filter: blur(7px);
+}
+
+55% {
+opacity: 0.86;
+filter: blur(2px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+.services-page .eyebrow {
+animation:
+servicesTextReveal 0.65s var(--services-motion-ease) 0.04s both;
+}
+
+.services-page .section-head h2 {
+animation:
+servicesTextReveal 0.85s var(--services-motion-ease) 0.14s both;
+}
+
+.services-page .section-head p {
+animation:
+servicesTextReveal 0.75s var(--services-motion-ease) 0.26s both;
+}
+
+/* =========================================================
+03. SERVICES GRID ENTRANCE
+========================================================= */
+
+@keyframes servicesCardReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 32px, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.services-card {
+animation:
+servicesCardReveal 0.75s var(--services-motion-ease) both;
+
+will-change: opacity, transform;
+
+transition:
+transform 380ms var(--services-motion-ease),
+box-shadow 380ms ease,
+border-color 350ms ease;
+}
+
+.services-card:nth-child(1) {
+animation-delay: 0.05s;
+}
+
+.services-card:nth-child(2) {
+animation-delay: 0.13s;
+}
+
+.services-card:nth-child(3) {
+animation-delay: 0.21s;
+}
+
+.services-card:nth-child(4) {
+animation-delay: 0.29s;
+}
+
+.services-card:nth-child(5) {
+animation-delay: 0.37s;
+}
+
+.services-card:nth-child(6) {
+animation-delay: 0.45s;
+}
+
+.services-card:nth-child(7) {
+animation-delay: 0.53s;
+}
+
+.services-card:nth-child(8) {
+animation-delay: 0.61s;
+}
+
+/* =========================================================
+04. SERVICE CARD HOVER
+========================================================= */
+
+.services-card {
+position: relative;
+overflow: hidden;
+}
+
+.services-card:hover {
+transform: translateY(-9px);
+
+box-shadow:
+0 24px 50px rgba(17, 51, 24, 0.12);
+}
+
+/* =========================================================
+05. SERVICE IMAGE
+========================================================= */
+
+.services-image {
+overflow: hidden;
+
+transition:
+transform 700ms var(--services-motion-ease),
+filter 450ms ease,
+box-shadow 400ms ease;
+}
+
+.services-card:hover .services-image {
+transform: scale(1.018);
+
+box-shadow:
+0 12px 28px rgba(17, 51, 24, 0.08);
+}
+
+.services-image {
+position: relative;
+}
+
+/* Image shine */
+
+.services-image::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -130%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.18),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 700ms var(--services-motion-ease);
+}
+
+.services-card:hover .services-image::after {
+left: 140%;
+}
+
+/* =========================================================
+06. SERVICE ICON ANIMATION
+========================================================= */
+
+.services-icon {
+transition:
+transform 350ms var(--services-motion-ease),
+background-color 300ms ease,
+color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.services-card:hover .services-icon {
+transform:
+translateY(-5px)
+scale(1.08)
+rotate(-2deg);
+
+background:
+var(--green-700);
+
+color:
+#ffffff;
+
+box-shadow:
+0 10px 22px rgba(31, 122, 61, 0.16);
+}
+
+/* =========================================================
+07. SERVICE TITLE
+========================================================= */
+
+.services-card h3 {
+transition:
+color 280ms ease,
+transform 300ms var(--services-motion-ease),
+letter-spacing 280ms ease;
+}
+
+.services-card:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+letter-spacing: 0.005em;
+}
+
+/* =========================================================
+08. SERVICE DESCRIPTION
+========================================================= */
+
+.services-card p {
+transition:
+color 280ms ease,
+transform 300ms var(--services-motion-ease);
+}
+
+.services-card:hover p {
+transform: translateX(2px);
+}
+
+/* =========================================================
+09. SERVICE LINK
+========================================================= */
+
+.services-link {
+transition:
+color 280ms ease,
+transform 300ms var(--services-motion-ease);
+}
+
+.services-card:hover .services-link {
+color: var(--green-800);
+transform: translateX(3px);
+}
+
+.services-link svg {
+transition:
+transform 320ms var(--services-motion-ease);
+}
+
+.services-card:hover .services-link svg {
+transform: translateX(7px);
+}
+
+/* =========================================================
+10. SERVICE CARD LIGHT SWEEP
+========================================================= */
+
+.services-card::after {
+content: "";
+
+position: absolute;
+
+top: -110%;
+left: -145%;
+
+width: 42%;
+height: 320%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.12),
+transparent
+);
+
+transform: rotate(18deg);
+
+transition:
+left 900ms var(--services-motion-ease);
+}
+
+.services-card:hover::after {
+left: 150%;
+}
+
+/* =========================================================
+11. DELIVERY PROCESS REVEAL
+========================================================= */
+
+@keyframes servicesProcessReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.services-process-step {
+animation:
+servicesProcessReveal 0.7s var(--services-motion-ease) both;
+
+transition:
+transform 380ms var(--services-motion-ease),
+box-shadow 350ms ease,
+border-color 300ms ease;
+}
+
+.services-process-step:nth-child(1) {
+animation-delay: 0.06s;
+}
+
+.services-process-step:nth-child(2) {
+animation-delay: 0.15s;
+}
+
+.services-process-step:nth-child(3) {
+animation-delay: 0.24s;
+}
+
+.services-process-step:nth-child(4) {
+animation-delay: 0.33s;
+}
+
+.services-process-step:nth-child(5) {
+animation-delay: 0.42s;
+}
+
+.services-process-step:nth-child(6) {
+animation-delay: 0.51s;
+}
+
+/* =========================================================
+12. PROCESS CARD HOVER
+========================================================= */
+
+.services-process-step {
+position: relative;
+overflow: hidden;
+}
+
+.services-process-step:hover {
+transform: translateY(-8px);
+
+box-shadow:
+0 22px 46px rgba(17, 51, 24, 0.11);
+}
+
+/* Process number */
+
+.services-process-number {
+display: inline-block;
+
+transition:
+transform 350ms var(--services-motion-ease),
+color 300ms ease,
+text-shadow 300ms ease;
+}
+
+.services-process-step:hover .services-process-number {
+transform:
+translateY(-5px)
+scale(1.07);
+
+color:
+var(--green-600);
+
+text-shadow:
+0 5px 18px rgba(31, 122, 61, 0.15);
+}
+
+/* Process title */
+
+.services-process-step h3 {
+transition:
+color 280ms ease,
+transform 280ms var(--services-motion-ease);
+}
+
+.services-process-step:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* Process paragraph */
+
+.services-process-step p {
+transition:
+transform 300ms var(--services-motion-ease);
+}
+
+.services-process-step:hover p {
+transform: translateX(2px);
+}
+
+/* =========================================================
+13. PROCESS GOLD LINE ANIMATION
+========================================================= */
+
+.services-process-step {
+border-top-width: 3px;
+transition:
+transform 380ms var(--services-motion-ease),
+box-shadow 350ms ease,
+border-color 350ms ease;
+}
+
+.services-process-step::after {
+content: "";
+
+position: absolute;
+
+top: -3px;
+left: 0;
+
+width: 0;
+height: 3px;
+
+background:
+var(--gold-500);
+
+transition:
+width 500ms var(--services-motion-ease);
+
+pointer-events: none;
+}
+
+.services-process-step:hover::after {
+width: 100%;
+}
+
+/* =========================================================
+14. FAQ REVEAL
+========================================================= */
+
+@keyframes servicesFaqReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 24px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.services-faq-item {
+animation:
+servicesFaqReveal 0.68s var(--services-motion-ease) both;
+
+transition:
+transform 350ms var(--services-motion-ease),
+box-shadow 350ms ease,
+border-color 300ms ease;
+}
+
+.services-faq-item:nth-child(1) {
+animation-delay: 0.05s;
+}
+
+.services-faq-item:nth-child(2) {
+animation-delay: 0.13s;
+}
+
+.services-faq-item:nth-child(3) {
+animation-delay: 0.21s;
+}
+
+.services-faq-item:nth-child(4) {
+animation-delay: 0.29s;
+}
+
+.services-faq-item:nth-child(5) {
+animation-delay: 0.37s;
+}
+
+.services-faq-item:nth-child(6) {
+animation-delay: 0.45s;
+}
+
+/* =========================================================
+15. FAQ HOVER
+========================================================= */
+
+.services-faq-item {
+position: relative;
+overflow: hidden;
+}
+
+.services-faq-item:hover {
+transform: translateY(-5px);
+
+box-shadow:
+0 16px 36px rgba(17, 51, 24, 0.08);
+
+border-color:
+var(--green-200);
+}
+
+.services-faq-item h3 {
+position: relative;
+
+transition:
+color 280ms ease,
+transform 300ms var(--services-motion-ease);
+}
+
+.services-faq-item:hover h3 {
+color: var(--green-700);
+transform: translateX(4px);
+}
+
+.services-faq-item p {
+transition:
+color 280ms ease,
+transform 300ms var(--services-motion-ease);
+}
+
+.services-faq-item:hover p {
+transform: translateX(3px);
+}
+
+/* =========================================================
+16. FAQ LEFT ACCENT
+========================================================= */
+
+.services-faq-item::before {
+content: "";
+
+position: absolute;
+
+top: 0;
+bottom: 0;
+left: 0;
+
+width: 3px;
+
+background:
+var(--green-600);
+
+transform:
+scaleY(0.25);
+
+transform-origin:
+center;
+
+opacity: 0.45;
+
+transition:
+transform 450ms var(--services-motion-ease),
+opacity 300ms ease;
+}
+
+.services-faq-item:hover::before {
+transform: scaleY(1);
+opacity: 1;
+}
+
+/* =========================================================
+17. BUTTON PREMIUM HOVER
+========================================================= */
+
+.services-page .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--services-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+.services-page .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 11px 25px rgba(17, 51, 24, 0.13);
+}
+
+.services-page .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+.services-page .btn::after {
+content: "";
+
+position: absolute;
+
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.25),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--services-motion-ease);
+}
+
+.services-page .btn:hover::after {
+left: 140%;
+}
+
+/* =========================================================
+18. PAGE LOAD
+========================================================= */
+
+@keyframes servicesPageEntrance {
+0% {
+opacity: 0;
+transform: translate3d(0, 10px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.services-page {
+animation:
+servicesPageEntrance 0.45s var(--services-motion-ease) both;
+}
+
+/* =========================================================
+19. RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+.services-card:hover,
+.services-process-step:hover {
+transform: translateY(-6px);
+}
+
+.services-faq-item:hover {
+transform: translateY(-4px);
+}
+
+}
+
+/* =========================================================
+20. RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+.services-card {
+animation-duration: 0.65s;
+}
+
+.services-process-step {
+animation-duration: 0.62s;
+}
+
+.services-faq-item {
+animation-duration: 0.60s;
+}
+
+.services-card:hover {
+transform: translateY(-4px);
+}
+
+.services-process-step:hover {
+transform: translateY(-4px);
+}
+
+.services-faq-item:hover {
+transform: translateY(-3px);
+}
+
+.services-card:hover .services-image {
+transform: scale(1.012);
+}
+
+}
+
+/* =========================================================
+21. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+.services-card:hover,
+.services-process-step:hover,
+.services-faq-item:hover {
+transform: translateY(-2px);
+}
+
+.services-page .btn:hover {
+transform: translateY(-2px);
+}
+
+}
+
+/* =========================================================
+22. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.services-page,
+.services-page *,
+.services-page *::before,
+.services-page *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+
+.services-page,
+.services-page .eyebrow,
+.services-page .section-head h2,
+.services-page .section-head p,
+.services-card,
+.services-process-step,
+.services-faq-item {
+opacity: 1 !important;
+transform: none !important;
+filter: none !important;
+clip-path: none !important;
+}
+
+}

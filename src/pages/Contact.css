@@ -156,3 +156,693 @@
     gap: 18px;
   }
 }
+
+
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.contact-layout {
+--contact-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--contact-motion-fast: 220ms;
+--contact-motion-normal: 450ms;
+--contact-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. TEXT REVEAL
+========================================================= */
+
+@keyframes contactTextReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 32px, 0);
+filter: blur(7px);
+}
+
+55% {
+opacity: 0.86;
+filter: blur(2px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+/* Contact heading */
+
+.contact-heading {
+animation:
+contactTextReveal 0.85s var(--contact-motion-ease) 0.12s both;
+
+will-change:
+opacity,
+transform,
+filter;
+
+transition:
+color 280ms ease,
+transform 300ms var(--contact-motion-ease);
+}
+
+/* Contact subtext */
+
+.contact-subtext {
+animation:
+contactTextReveal 0.72s var(--contact-motion-ease) 0.25s both;
+
+will-change:
+opacity,
+transform,
+filter;
+}
+
+/* Required marker */
+
+.contact-required {
+transition:
+color 250ms ease,
+transform 250ms var(--contact-motion-ease);
+}
+
+/* =========================================================
+03. CONTACT LAYOUT ENTRANCE
+========================================================= */
+
+@keyframes contactLayoutReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 14px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.contact-layout {
+animation:
+contactLayoutReveal 0.55s var(--contact-motion-ease) both;
+}
+
+/* =========================================================
+04. FORM WRAPPER — PREMIUM ENTRANCE
+========================================================= */
+
+@keyframes contactFormReveal {
+0% {
+opacity: 0;
+transform: translate3d(-28px, 0, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.contact-form-wrap {
+animation:
+contactFormReveal 0.85s var(--contact-motion-ease) 0.12s both;
+
+transition:
+transform 400ms var(--contact-motion-ease),
+box-shadow 400ms ease,
+border-color 350ms ease;
+}
+
+.contact-form-wrap:hover {
+transform: translateY(-5px);
+
+border-color:
+var(--green-200);
+
+box-shadow:
+0 22px 50px rgba(17, 51, 24, 0.10);
+}
+
+/* =========================================================
+05. FORM HEADING HOVER
+========================================================= */
+
+.contact-form-wrap:hover .contact-heading {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+06. FORM GROUP / CONTROL MICRO INTERACTION
+========================================================= */
+
+/*
+Keep the existing App.css form design.
+Only animate existing controls.
+*/
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+transition:
+border-color 280ms ease,
+box-shadow 280ms ease,
+transform 280ms var(--contact-motion-ease),
+background-color 280ms ease;
+}
+
+.contact-form input:hover,
+.contact-form select:hover,
+.contact-form textarea:hover {
+transform: translateY(-1px);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+transform: translateY(-1px);
+outline: none;
+}
+
+/* =========================================================
+07. FORM BUTTON
+========================================================= */
+
+.contact-form .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--contact-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+.contact-form .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 12px 28px rgba(17, 51, 24, 0.14);
+}
+
+.contact-form .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* Button shine */
+
+.contact-form .btn::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.26),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--contact-motion-ease);
+}
+
+.contact-form .btn:hover::after {
+left: 140%;
+}
+
+/* =========================================================
+08. ASIDE ENTRANCE
+========================================================= */
+
+@keyframes contactAsideReveal {
+0% {
+opacity: 0;
+transform: translate3d(30px, 0, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.contact-aside {
+animation:
+contactAsideReveal 0.85s var(--contact-motion-ease) 0.20s both;
+}
+
+/* =========================================================
+09. CONTACT CARD HOVER
+========================================================= */
+
+.contact-card {
+transition:
+transform 400ms var(--contact-motion-ease),
+box-shadow 400ms ease,
+border-color 350ms ease;
+}
+
+.contact-card:hover {
+transform: translateY(-7px);
+
+border-color:
+var(--green-200);
+
+box-shadow:
+0 22px 46px rgba(17, 51, 24, 0.11);
+}
+
+/* Contact card heading */
+
+.contact-card h3 {
+transition:
+color 280ms ease,
+transform 300ms var(--contact-motion-ease);
+}
+
+.contact-card:hover h3 {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* =========================================================
+10. CONTACT ICON — PREMIUM HOVER
+========================================================= */
+
+.contact-icon {
+transition:
+transform 350ms var(--contact-motion-ease),
+background-color 300ms ease,
+color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.contact-list li:hover .contact-icon {
+transform:
+translateY(-4px)
+scale(1.08)
+rotate(-2deg);
+
+background:
+var(--green-700);
+
+color:
+#ffffff;
+
+box-shadow:
+0 9px 20px rgba(31, 122, 61, 0.16);
+}
+
+/* =========================================================
+11. CONTACT LIST — STAGGERED ENTRANCE
+========================================================= */
+
+@keyframes contactListReveal {
+0% {
+opacity: 0;
+transform: translate3d(16px, 0, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.contact-list li {
+animation:
+contactListReveal 0.62s var(--contact-motion-ease) both;
+
+transition:
+transform 300ms var(--contact-motion-ease),
+background-color 280ms ease;
+}
+
+.contact-list li:nth-child(1) {
+animation-delay: 0.32s;
+}
+
+.contact-list li:nth-child(2) {
+animation-delay: 0.40s;
+}
+
+.contact-list li:nth-child(3) {
+animation-delay: 0.48s;
+}
+
+.contact-list li:nth-child(4) {
+animation-delay: 0.56s;
+}
+
+.contact-list li:nth-child(5) {
+animation-delay: 0.64s;
+}
+
+.contact-list li:hover {
+transform: translateX(5px);
+}
+
+/* =========================================================
+12. CONTACT LABEL
+========================================================= */
+
+.contact-list strong {
+transition:
+color 280ms ease,
+transform 280ms var(--contact-motion-ease);
+}
+
+.contact-list li:hover strong {
+color: var(--green-700);
+transform: translateX(2px);
+}
+
+/* =========================================================
+13. CONTACT TEXT
+========================================================= */
+
+.contact-list p {
+transition:
+color 280ms ease,
+transform 280ms var(--contact-motion-ease);
+}
+
+.contact-list li:hover p {
+transform: translateX(2px);
+}
+
+/* =========================================================
+14. CONTACT LINKS
+========================================================= */
+
+.contact-list a {
+transition:
+color 250ms ease,
+text-decoration-color 250ms ease,
+transform 250ms var(--contact-motion-ease);
+}
+
+.contact-list a:hover {
+color: var(--green-600);
+text-decoration-thickness: 2px;
+}
+
+/* =========================================================
+15. MAP CTA
+========================================================= */
+
+@keyframes contactMapCtaReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 15px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.contact-map-cta {
+animation:
+contactMapCtaReveal 0.65s var(--contact-motion-ease) 0.72s both;
+}
+
+/* Map button */
+
+.contact-map-cta .btn {
+transition:
+transform 280ms var(--contact-motion-ease),
+box-shadow 280ms ease;
+}
+
+.contact-map-cta .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 11px 25px rgba(17, 51, 24, 0.13);
+}
+
+.contact-map-cta .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* =========================================================
+16. CONTACT NOTE — PREMIUM REVEAL
+========================================================= */
+
+@keyframes contactNoteReveal {
+0% {
+opacity: 0;
+transform: translate3d(24px, 0, 0) scale(0.975);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.contact-note {
+animation:
+contactNoteReveal 0.75s var(--contact-motion-ease) 0.38s both;
+
+transition:
+transform 380ms var(--contact-motion-ease),
+box-shadow 380ms ease,
+border-color 300ms ease,
+background-color 300ms ease;
+}
+
+.contact-note:hover {
+transform: translateY(-6px);
+
+box-shadow:
+0 18px 40px rgba(116, 84, 17, 0.10);
+
+border-color:
+var(--gold-500);
+}
+
+/* =========================================================
+17. CONTACT NOTE HEADING
+========================================================= */
+
+.contact-note strong {
+transition:
+color 280ms ease,
+transform 300ms var(--contact-motion-ease);
+}
+
+.contact-note:hover strong {
+color: var(--green-800);
+transform: translateX(3px);
+}
+
+/* =========================================================
+18. CONTACT NOTE TEXT
+========================================================= */
+
+.contact-note p {
+transition:
+transform 300ms var(--contact-motion-ease),
+color 280ms ease;
+}
+
+.contact-note:hover p {
+transform: translateX(2px);
+}
+
+/* =========================================================
+19. GLOBAL CONTACT BUTTONS
+========================================================= */
+
+.contact-layout .btn {
+transition:
+transform 280ms var(--contact-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease;
+}
+
+.contact-layout .btn:hover {
+transform: translateY(-3px);
+}
+
+.contact-layout .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+/* =========================================================
+20. SUBTLE PAGE ENTRANCE
+========================================================= */
+
+@keyframes contactPageEntrance {
+0% {
+opacity: 0;
+transform: translate3d(0, 10px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.contact-layout {
+animation:
+contactPageEntrance 0.45s var(--contact-motion-ease) both;
+}
+
+/* =========================================================
+21. FOCUS ACCESSIBILITY
+========================================================= */
+
+.contact-layout a:focus-visible,
+.contact-layout button:focus-visible,
+.contact-layout input:focus-visible,
+.contact-layout select:focus-visible,
+.contact-layout textarea:focus-visible {
+outline-offset: 4px;
+}
+
+/* =========================================================
+22. TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+.contact-form-wrap:hover {
+transform: translateY(-3px);
+}
+
+.contact-card:hover {
+transform: translateY(-5px);
+}
+
+.contact-note:hover {
+transform: translateY(-4px);
+}
+
+}
+
+/* =========================================================
+23. MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+.contact-heading {
+animation-duration: 0.72s;
+}
+
+.contact-subtext {
+animation-duration: 0.64s;
+}
+
+.contact-form-wrap,
+.contact-aside {
+animation-duration: 0.72s;
+}
+
+.contact-list li {
+animation-duration: 0.56s;
+}
+
+.contact-form-wrap:hover {
+transform: translateY(-2px);
+}
+
+.contact-card:hover {
+transform: translateY(-4px);
+}
+
+.contact-note:hover {
+transform: translateY(-3px);
+}
+
+.contact-list li:hover {
+transform: translateX(3px);
+}
+
+.contact-layout .btn:hover {
+transform: translateY(-2px);
+}
+
+}
+
+/* =========================================================
+24. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+.contact-card:hover {
+transform: translateY(-3px);
+}
+
+.contact-note:hover {
+transform: translateY(-2px);
+}
+
+.contact-form-wrap:hover {
+transform: none;
+}
+
+.contact-list li:hover {
+transform: translateX(2px);
+}
+
+}
+
+/* =========================================================
+25. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.contact-layout,
+.contact-layout *,
+.contact-layout *::before,
+.contact-layout *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+
+.contact-layout,
+.contact-heading,
+.contact-subtext,
+.contact-form-wrap,
+.contact-aside,
+.contact-list li,
+.contact-map-cta,
+.contact-note {
+opacity: 1 !important;
+transform: none !important;
+filter: none !important;
+}
+
+}

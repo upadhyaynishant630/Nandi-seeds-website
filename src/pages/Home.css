@@ -1305,3 +1305,956 @@ animation: none;
     font-size: 0.68rem;
   }
 }
+
+/* =========================================================
+   NANDI SEEDS — PREMIUM TEXT + HOVER ANIMATION SYSTEM
+   Add this at the END of your existing Home CSS
+   ========================================================= */
+
+/* =========================================================
+   01. GLOBAL MOTION VARIABLES
+   ========================================================= */
+
+.home-page {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-fast: 220ms;
+  --motion-normal: 500ms;
+  --motion-slow: 800ms;
+}
+
+
+/* =========================================================
+   02. HERO EYEBROW — PREMIUM REVEAL
+   ========================================================= */
+
+@keyframes nandiHeroEyebrow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    letter-spacing: 0.18em;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: inherit;
+  }
+}
+
+.home-hero .eyebrow {
+  animation:
+    nandiHeroEyebrow 0.7s var(--motion-ease) 0.05s both;
+}
+
+
+/* =========================================================
+   03. HERO H1 — CINEMATIC REVEAL
+   ========================================================= */
+
+@keyframes nandiHeroHeading {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 42px, 0);
+    filter: blur(8px);
+  }
+
+  55% {
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+.home-hero h1 {
+  animation:
+    nandiHeroHeading 1s var(--motion-ease) 0.14s both;
+  will-change: opacity, transform, filter;
+}
+
+
+/* =========================================================
+   04. HERO ACCENT — SLIDE + GLOW REVEAL
+   ========================================================= */
+
+@keyframes nandiAccentIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) scale(0.96);
+    filter: blur(5px);
+  }
+
+  70% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.home-hero-accent {
+  animation:
+    nandiAccentIn 0.85s var(--motion-ease) 0.32s both;
+  transition:
+    color 300ms ease,
+    text-shadow 300ms ease,
+    transform 300ms var(--motion-ease);
+}
+
+
+/* Accent hover */
+
+.home-hero-accent:hover {
+  color: var(--green-600);
+  text-shadow:
+    0 0 18px rgba(31, 122, 61, 0.15);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   05. HERO PARAGRAPH
+   ========================================================= */
+
+@keyframes nandiHeroParagraph {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.home-hero-text {
+  animation:
+    nandiHeroParagraph 0.8s var(--motion-ease) 0.46s both;
+}
+
+
+/* =========================================================
+   06. HERO BUTTONS — STAGGER
+   ========================================================= */
+
+@keyframes nandiButtonReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.home-hero-actions .btn {
+  animation:
+    nandiButtonReveal 0.7s var(--motion-ease) both;
+}
+
+.home-hero-actions .btn:nth-child(1) {
+  animation-delay: 0.58s;
+}
+
+.home-hero-actions .btn:nth-child(2) {
+  animation-delay: 0.68s;
+}
+
+
+/* =========================================================
+   07. BUTTON PREMIUM HOVER
+   ========================================================= */
+
+.home-hero-actions .btn,
+.home-page .btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 280ms var(--motion-ease),
+    box-shadow 280ms ease,
+    background-color 280ms ease,
+    border-color 280ms ease;
+}
+
+.home-hero-actions .btn::after,
+.home-page .btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 650ms var(--motion-ease);
+}
+
+.home-hero-actions .btn:hover,
+.home-page .btn:hover {
+  transform: translateY(-3px);
+}
+
+.home-hero-actions .btn:hover::after,
+.home-page .btn:hover::after {
+  left: 140%;
+}
+
+.home-hero-actions .btn:active,
+.home-page .btn:active {
+  transform: translateY(-1px) scale(0.985);
+}
+
+
+/* =========================================================
+   08. HERO POINTS — CASCADING TEXT
+   ========================================================= */
+
+@keyframes nandiPointReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.home-hero-points > * {
+  animation:
+    nandiPointReveal 0.65s var(--motion-ease) both;
+}
+
+.home-hero-points > *:nth-child(1) {
+  animation-delay: 0.74s;
+}
+
+.home-hero-points > *:nth-child(2) {
+  animation-delay: 0.82s;
+}
+
+.home-hero-points > *:nth-child(3) {
+  animation-delay: 0.90s;
+}
+
+.home-hero-points > *:nth-child(4) {
+  animation-delay: 0.98s;
+}
+
+
+/* =========================================================
+   09. HERO VISUAL — PREMIUM IMAGE ENTRANCE
+   ========================================================= */
+
+@keyframes nandiVisualReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(34px, 0, 0) scale(0.97);
+    filter: saturate(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: saturate(1);
+  }
+}
+
+.home-hero-visual {
+  animation:
+    nandiVisualReveal 1s var(--motion-ease) 0.24s both;
+}
+
+
+/* =========================================================
+   10. HERO IMAGE — SUBTLE KEN BURNS
+   ========================================================= */
+
+.hero-slide-active img {
+  animation:
+    nandiHeroImageZoom 6s ease-out forwards;
+}
+
+@keyframes nandiHeroImageZoom {
+  0% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   11. HERO FLOAT CARDS — ENTRANCE
+   ========================================================= */
+
+@keyframes nandiFloatCardReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.94);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero-float-a {
+  animation:
+    nandiFloatCardReveal 0.7s var(--motion-ease) 0.65s both,
+    nandiFloatA 5.5s ease-in-out 1.35s infinite;
+}
+
+.hero-float-b {
+  animation:
+    nandiFloatCardReveal 0.7s var(--motion-ease) 0.8s both,
+    nandiFloatB 6s ease-in-out 1.5s infinite;
+}
+
+
+/* Floating movement */
+
+@keyframes nandiFloatA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+@keyframes nandiFloatB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+
+/* Floating card hover */
+
+.hero-float {
+  transition:
+    transform 320ms var(--motion-ease),
+    box-shadow 320ms ease;
+}
+
+.hero-float:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-float strong {
+  transition:
+    color 250ms ease,
+    letter-spacing 250ms ease;
+}
+
+.hero-float:hover strong {
+  color: var(--green-600);
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   12. SECTION EYEBROW HOVER
+   ========================================================= */
+
+.home-page .section-head .eyebrow {
+  transition:
+    transform 280ms var(--motion-ease),
+    box-shadow 280ms ease;
+}
+
+.home-page .section-head .eyebrow:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 30px rgba(25, 72, 35, 0.10);
+}
+
+
+/* =========================================================
+   13. SECTION HEADING REVEAL
+   ========================================================= */
+
+@keyframes nandiSectionHeading {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    clip-path: inset(100% 0 0 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.home-page .section-head h2 {
+  animation:
+    nandiSectionHeading 0.85s var(--motion-ease) both;
+}
+
+
+/* =========================================================
+   14. PRODUCT CARD — PROFESSIONAL REVEAL
+   ========================================================= */
+
+@keyframes nandiCardReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.home-product {
+  animation:
+    nandiCardReveal 0.75s var(--motion-ease) both;
+}
+
+.home-product:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.home-product:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.home-product:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.home-product:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.home-product:nth-child(5) {
+  animation-delay: 0.40s;
+}
+
+
+/* Product card hover */
+
+.home-product {
+  transition:
+    transform 350ms var(--motion-ease),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.home-product:hover {
+  transform: translateY(-8px);
+}
+
+.home-product-media {
+  transition:
+    background 400ms ease;
+}
+
+.home-product:hover .home-product-media {
+  background:
+    linear-gradient(
+      150deg,
+      var(--green-200),
+      var(--green-50)
+    );
+}
+
+.home-product-body h3 {
+  transition:
+    color 280ms ease,
+    transform 280ms var(--motion-ease);
+}
+
+.home-product:hover .home-product-body h3 {
+  color: var(--green-700);
+  transform: translateX(3px);
+}
+
+.home-product-link {
+  transition:
+    color 280ms ease,
+    transform 280ms var(--motion-ease);
+}
+
+.home-product:hover .home-product-link {
+  color: var(--green-800);
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   15. VALUE CARDS — HOVER ICON ANIMATION
+   ========================================================= */
+
+.home-value {
+  transition:
+    transform 350ms var(--motion-ease),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.home-value:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-value-icon {
+  transition:
+    transform 350ms var(--motion-ease),
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+.home-value:hover .home-value-icon {
+  transform: translateY(-4px) scale(1.06) rotate(-2deg);
+  background: var(--green-700);
+  color: #ffffff;
+}
+
+.home-value h3 {
+  transition:
+    color 280ms ease,
+    transform 280ms var(--motion-ease);
+}
+
+.home-value:hover h3 {
+  color: var(--green-700);
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   16. PROCESS CARDS — NUMBER ANIMATION
+   ========================================================= */
+
+.home-process-step {
+  overflow: hidden;
+  transition:
+    transform 350ms var(--motion-ease),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.home-process-step::after {
+  content: "";
+  position: absolute;
+  right: -35px;
+  bottom: -35px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(58, 163, 92, 0.06);
+  transform: scale(0);
+  transition:
+    transform 500ms var(--motion-ease);
+  pointer-events: none;
+}
+
+.home-process-step:hover::after {
+  transform: scale(2.2);
+}
+
+.home-process-number {
+  transition:
+    transform 350ms var(--motion-ease),
+    color 300ms ease;
+}
+
+.home-process-step:hover .home-process-number {
+  transform: translateY(-4px) scale(1.04);
+  color: var(--green-600);
+}
+
+
+/* =========================================================
+   17. SERVICE CARDS — DARK BAND HOVER
+   ========================================================= */
+
+.home-service {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 350ms var(--motion-ease),
+    background-color 350ms ease,
+    border-color 350ms ease,
+    box-shadow 350ms ease;
+}
+
+.home-service::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 80%
+    );
+  transform: translateX(-120%);
+  transition:
+    transform 750ms var(--motion-ease);
+  pointer-events: none;
+}
+
+.home-service:hover::after {
+  transform: translateX(120%);
+}
+
+.home-service-image {
+  transition:
+    transform 600ms var(--motion-ease),
+    filter 500ms ease;
+}
+
+.home-service:hover .home-service-image {
+  transform: scale(1.045);
+  filter: saturate(1.08);
+}
+
+.home-service-icon {
+  transition:
+    transform 350ms var(--motion-ease),
+    background-color 300ms ease;
+}
+
+.home-service:hover .home-service-icon {
+  transform: translateY(-4px) scale(1.06);
+  background: var(--green-600);
+}
+
+.home-service h3 {
+  transition:
+    transform 280ms var(--motion-ease);
+}
+
+.home-service:hover h3 {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   18. TESTIMONIAL CARD — LUXURY HOVER
+   ========================================================= */
+
+.home-testimonial {
+  transition:
+    transform 400ms var(--motion-ease),
+    box-shadow 400ms ease,
+    border-color 400ms ease;
+}
+
+.home-testimonial:hover {
+  transform: translateY(-9px);
+}
+
+.home-testimonial::before {
+  transform: scaleX(0.45);
+  transform-origin: left;
+  transition:
+    transform 500ms var(--motion-ease);
+}
+
+.home-testimonial:hover::before {
+  transform: scaleX(1);
+}
+
+.home-testimonial-quote::before {
+  transition:
+    transform 350ms var(--motion-ease),
+    opacity 350ms ease;
+}
+
+.home-testimonial:hover .home-testimonial-quote::before {
+  transform: translateY(-3px) scale(1.05);
+  opacity: 1;
+}
+
+.home-testimonial-person::before {
+  width: 38px;
+  transition:
+    width 400ms var(--motion-ease);
+}
+
+.home-testimonial:hover .home-testimonial-person::before {
+  width: 60px;
+}
+
+
+/* =========================================================
+   19. VIDEO SECTION — PREMIUM HOVER
+   ========================================================= */
+
+.home-video-placeholder {
+  transition:
+    transform 450ms var(--motion-ease),
+    box-shadow 450ms ease;
+}
+
+.home-video-placeholder:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 30px 65px rgba(17, 51, 24, 0.18),
+    0 12px 26px rgba(17, 51, 24, 0.10);
+}
+
+.home-video-placeholder > img {
+  transition:
+    transform 900ms var(--motion-ease),
+    filter 500ms ease;
+}
+
+.home-video-placeholder:hover > img {
+  transform: scale(1.055);
+}
+
+.home-video-play {
+  transition:
+    transform 350ms var(--motion-ease),
+    box-shadow 350ms ease,
+    background 300ms ease;
+}
+
+.home-video-placeholder:hover .home-video-play {
+  transform:
+    translate(-50%, -50%)
+    scale(1.08);
+}
+
+
+/* =========================================================
+   20. VIDEO PLAY ICON HOVER
+   ========================================================= */
+
+.home-video-play svg {
+  transition:
+    transform 300ms var(--motion-ease);
+}
+
+.home-video-play:hover svg {
+  transform: translateX(2px) scale(1.05);
+}
+
+
+/* =========================================================
+   21. STAT NUMBERS — PREMIUM ENTRY
+   ========================================================= */
+
+@keyframes nandiStatReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.94);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.home-stat {
+  animation:
+    nandiStatReveal 0.75s var(--motion-ease) both;
+}
+
+.home-stat:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.home-stat:nth-child(2) {
+  animation-delay: 0.14s;
+}
+
+.home-stat:nth-child(3) {
+  animation-delay: 0.23s;
+}
+
+.home-stat:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.home-stat strong {
+  transition:
+    transform 300ms var(--motion-ease),
+    letter-spacing 300ms ease;
+}
+
+.home-stat:hover strong {
+  transform: translateY(-3px) scale(1.03);
+  letter-spacing: 0.015em;
+}
+
+
+/* =========================================================
+   22. LINK ARROW HOVER
+   ========================================================= */
+
+.home-product-link svg {
+  transition:
+    transform 300ms var(--motion-ease);
+}
+
+.home-product-link:hover svg {
+  transform: translateX(7px);
+}
+
+
+/* =========================================================
+   23. TEXT SELECTION FEEL
+   ========================================================= */
+
+.home-hero h1,
+.home-page .section-head h2 {
+  transition:
+    text-shadow 300ms ease;
+}
+
+
+/* =========================================================
+   24. HERO GLOW — SLOW PROFESSIONAL MOTION
+   ========================================================= */
+
+@keyframes nandiHeroGlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translate3d(-18px, 12px, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+.home-hero-glow {
+  animation:
+    nandiHeroGlow 10s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   25. GENERAL FOCUS ACCESSIBILITY
+   ========================================================= */
+
+.home-page a:focus-visible,
+.home-page button:focus-visible {
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   26. REDUCED MOTION — ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .home-page *,
+  .home-page *::before,
+  .home-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .home-hero h1,
+  .home-hero-text,
+  .home-hero-actions .btn,
+  .home-hero-points > *,
+  .home-hero-visual,
+  .home-page .section-head h2,
+  .home-stat,
+  .home-product {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+
+  .home-hero-glow,
+  .hero-float-a,
+  .hero-float-b,
+  .home-video-play::before,
+  .home-video-play::after {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   27. SMALL MOBILE — KEEP EVERYTHING FAST
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .home-hero h1 {
+    animation-duration: 0.75s;
+  }
+
+  .home-hero-text {
+    animation-duration: 0.65s;
+  }
+
+  .home-product:hover,
+  .home-value:hover,
+  .home-process-step:hover,
+  .home-service:hover,
+  .home-testimonial:hover,
+  .home-video-placeholder:hover {
+    transform: translateY(-4px);
+  }
+
+  .home-hero-glow {
+    animation-duration: 14s;
+  }
+}
+
+
+/* =========================================================
+   28. VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .home-hero-actions .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero-float:hover {
+    transform: translateY(-5px) scale(1.015);
+  }
+}

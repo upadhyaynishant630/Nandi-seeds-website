@@ -6,7 +6,6 @@ import {
   FiArrowRight,
   FiCheck,
   FiPhone,
-  FiPlay,
   FiShield,
 } from "react-icons/fi";
 

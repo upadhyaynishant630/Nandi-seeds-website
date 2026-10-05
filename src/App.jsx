@@ -5,6 +5,7 @@ import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import FloatingSocial from "./component/FloatingSocial";
 import ScrollToTop from "./component/ScrollToTop";
+import ScrollAnimator from "./component/ScrollAnimator";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -40,6 +41,7 @@ function App() {
       ================================================= */}
 
       <ScrollToTop />
+      <ScrollAnimator />
 
       {/* =================================================
           HEADER

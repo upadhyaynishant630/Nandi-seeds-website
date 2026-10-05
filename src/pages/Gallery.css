@@ -146,3 +146,640 @@
     aspect-ratio: 4 / 3;
   }
 }
+
+/* =========================================================
+01. MOTION VARIABLES
+========================================================= */
+
+.gallery-page {
+--gallery-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+--gallery-motion-fast: 220ms;
+--gallery-motion-normal: 450ms;
+--gallery-motion-slow: 800ms;
+}
+
+/* =========================================================
+02. GALLERY FILTER ENTRANCE
+========================================================= */
+
+@keyframes galleryFilterReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, -14px, 0);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+}
+}
+
+.gallery-filter {
+animation:
+galleryFilterReveal 0.65s var(--gallery-motion-ease) 0.08s both;
+}
+
+/* =========================================================
+03. GALLERY CHIP ANIMATION
+========================================================= */
+
+.gallery-chips {
+animation:
+galleryFilterReveal 0.7s var(--gallery-motion-ease) 0.18s both;
+}
+
+.gallery-chips button {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--gallery-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease,
+border-color 280ms ease,
+color 280ms ease;
+}
+
+/* Premium shine */
+
+.gallery-chips button::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.28),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--gallery-motion-ease);
+}
+
+.gallery-chips button:hover {
+transform: translateY(-2px);
+
+box-shadow:
+0 8px 20px rgba(31, 122, 61, 0.09);
+}
+
+.gallery-chips button:hover::after {
+left: 140%;
+}
+
+.gallery-chips button:active {
+transform: scale(0.98);
+}
+
+/* =========================================================
+04. GALLERY BODY / TEXT REVEAL
+========================================================= */
+
+@keyframes galleryTextReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 30px, 0);
+filter: blur(6px);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0);
+filter: blur(0);
+}
+}
+
+.gallery-page .section-head .eyebrow {
+animation:
+galleryTextReveal 0.65s var(--gallery-motion-ease) 0.04s both;
+}
+
+.gallery-page .section-head h2 {
+animation:
+galleryTextReveal 0.85s var(--gallery-motion-ease) 0.14s both;
+}
+
+.gallery-page .section-head p {
+animation:
+galleryTextReveal 0.75s var(--gallery-motion-ease) 0.26s both;
+}
+
+/* =========================================================
+05. GALLERY GRID ENTRANCE
+========================================================= */
+
+@keyframes galleryItemReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 34px, 0) scale(0.965);
+}
+
+70% {
+opacity: 1;
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.gallery-item {
+animation:
+galleryItemReveal 0.78s var(--gallery-motion-ease) both;
+
+will-change:
+opacity,
+transform;
+}
+
+/* Stagger */
+
+.gallery-item:nth-child(1) {
+animation-delay: 0.05s;
+}
+
+.gallery-item:nth-child(2) {
+animation-delay: 0.13s;
+}
+
+.gallery-item:nth-child(3) {
+animation-delay: 0.21s;
+}
+
+.gallery-item:nth-child(4) {
+animation-delay: 0.29s;
+}
+
+.gallery-item:nth-child(5) {
+animation-delay: 0.37s;
+}
+
+.gallery-item:nth-child(6) {
+animation-delay: 0.45s;
+}
+
+.gallery-item:nth-child(7) {
+animation-delay: 0.53s;
+}
+
+.gallery-item:nth-child(8) {
+animation-delay: 0.61s;
+}
+
+.gallery-item:nth-child(9) {
+animation-delay: 0.69s;
+}
+
+.gallery-item:nth-child(10) {
+animation-delay: 0.77s;
+}
+
+.gallery-item:nth-child(11) {
+animation-delay: 0.85s;
+}
+
+.gallery-item:nth-child(12) {
+animation-delay: 0.93s;
+}
+
+/* =========================================================
+06. GALLERY FIGURE — PREMIUM HOVER
+========================================================= */
+
+.gallery-figure {
+position: relative;
+overflow: hidden;
+
+transform: translateZ(0);
+
+transition:
+transform 400ms var(--gallery-motion-ease),
+box-shadow 400ms ease,
+border-color 350ms ease;
+}
+
+.gallery-item:hover .gallery-figure {
+transform: translateY(-8px);
+
+border-color:
+var(--green-200);
+
+box-shadow:
+0 24px 52px rgba(17, 51, 24, 0.13);
+}
+
+/* =========================================================
+07. GALLERY IMAGE — SMOOTH ZOOM
+========================================================= */
+
+.gallery-media {
+overflow: hidden;
+}
+
+.gallery-media img {
+transform: scale(1.001);
+
+transition:
+transform 850ms var(--gallery-motion-ease),
+filter 500ms ease;
+
+will-change:
+transform;
+}
+
+.gallery-item:hover .gallery-media img {
+transform: scale(1.075);
+
+filter:
+saturate(1.07)
+contrast(1.02);
+}
+
+/* =========================================================
+08. IMAGE LIGHT SWEEP
+========================================================= */
+
+.gallery-media::after {
+content: "";
+
+position: absolute;
+top: 0;
+left: -130%;
+
+width: 55%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.18),
+transparent
+);
+
+transform: skewX(-18deg);
+
+transition:
+left 850ms var(--gallery-motion-ease);
+}
+
+.gallery-item:hover .gallery-media::after {
+left: 135%;
+}
+
+/* =========================================================
+09. IMAGE OVERLAY
+========================================================= */
+
+.gallery-media::before {
+content: "";
+
+position: absolute;
+inset: 0;
+
+z-index: 1;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+180deg,
+rgba(8, 31, 15, 0),
+rgba(8, 31, 15, 0.10)
+);
+
+opacity: 0;
+
+transition:
+opacity 450ms ease;
+}
+
+.gallery-item:hover .gallery-media::before {
+opacity: 1;
+}
+
+/* =========================================================
+10. GALLERY CAPTION
+========================================================= */
+
+.gallery-caption {
+position: relative;
+
+transition:
+background-color 300ms ease,
+transform 350ms var(--gallery-motion-ease);
+}
+
+.gallery-item:hover .gallery-caption {
+background:
+rgba(248, 252, 247, 0.96);
+}
+
+/* Caption title */
+
+.gallery-caption strong {
+display: inline-block;
+
+transition:
+color 280ms ease,
+transform 300ms var(--gallery-motion-ease);
+}
+
+.gallery-item:hover .gallery-caption strong {
+color: var(--green-700);
+transform: translateX(3px);
+}
+
+/* Caption category */
+
+.gallery-caption span {
+transition:
+transform 300ms var(--gallery-motion-ease),
+background-color 300ms ease,
+color 300ms ease,
+box-shadow 300ms ease;
+}
+
+.gallery-item:hover .gallery-caption span {
+transform:
+translateY(-2px)
+scale(1.04);
+
+background:
+var(--green-700);
+
+color:
+#ffffff;
+
+box-shadow:
+0 6px 16px rgba(31, 122, 61, 0.14);
+}
+
+/* =========================================================
+11. FIRST / FEATURED GALLERY ITEM
+========================================================= */
+
+.gallery-item:first-child .gallery-figure {
+transition:
+transform 450ms var(--gallery-motion-ease),
+box-shadow 450ms ease,
+border-color 350ms ease;
+}
+
+.gallery-item:first-child:hover .gallery-figure {
+transform:
+translateY(-10px)
+scale(1.005);
+
+box-shadow:
+0 28px 60px rgba(17, 51, 24, 0.15);
+}
+
+/* Featured image */
+
+.gallery-item:first-child .gallery-media img {
+transition:
+transform 1000ms var(--gallery-motion-ease),
+filter 600ms ease;
+}
+
+.gallery-item:first-child:hover .gallery-media img {
+transform: scale(1.065);
+}
+
+/* =========================================================
+12. GALLERY FALLBACK ANIMATION
+========================================================= */
+
+.gallery-fallback {
+transition:
+transform 350ms var(--gallery-motion-ease),
+opacity 300ms ease,
+color 300ms ease;
+}
+
+.gallery-item:hover .gallery-fallback {
+transform: scale(1.035);
+color: var(--green-700);
+}
+
+/* =========================================================
+13. EMPTY STATE
+========================================================= */
+
+@keyframes galleryEmptyReveal {
+0% {
+opacity: 0;
+transform: translate3d(0, 28px, 0) scale(0.97);
+}
+
+100% {
+opacity: 1;
+transform: translate3d(0, 0, 0) scale(1);
+}
+}
+
+.gallery-empty {
+animation:
+galleryEmptyReveal 0.75s var(--gallery-motion-ease) both;
+
+transition:
+transform 350ms var(--gallery-motion-ease),
+box-shadow 350ms ease,
+border-color 300ms ease;
+}
+
+.gallery-empty:hover {
+transform: translateY(-5px);
+
+border-color:
+var(--green-300);
+
+box-shadow:
+0 18px 42px rgba(17, 51, 24, 0.08);
+}
+
+/* =========================================================
+14. GALLERY PAGE BUTTONS
+========================================================= */
+
+.gallery-page .btn {
+position: relative;
+overflow: hidden;
+
+transition:
+transform 280ms var(--gallery-motion-ease),
+box-shadow 280ms ease,
+background-color 280ms ease;
+}
+
+.gallery-page .btn:hover {
+transform: translateY(-3px);
+
+box-shadow:
+0 11px 25px rgba(17, 51, 24, 0.13);
+}
+
+.gallery-page .btn:active {
+transform:
+translateY(-1px)
+scale(0.985);
+}
+
+.gallery-page .btn::after {
+content: "";
+
+position: absolute;
+
+top: 0;
+left: -125%;
+
+width: 65%;
+height: 100%;
+
+pointer-events: none;
+
+background:
+linear-gradient(
+105deg,
+transparent,
+rgba(255, 255, 255, 0.24),
+transparent
+);
+
+transform: skewX(-20deg);
+
+transition:
+left 650ms var(--gallery-motion-ease);
+}
+
+.gallery-page .btn:hover::after {
+left: 140%;
+}
+
+/* =========================================================
+15. SUBTLE IMAGE DEPTH
+========================================================= */
+
+.gallery-media img {
+backface-visibility: hidden;
+}
+
+/* =========================================================
+16. FOCUS ACCESSIBILITY
+========================================================= */
+
+.gallery-page a:focus-visible,
+.gallery-page button:focus-visible {
+outline-offset: 4px;
+}
+
+/* =========================================================
+17. TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+.gallery-item:hover .gallery-figure {
+transform: translateY(-6px);
+}
+
+.gallery-item:hover .gallery-media img {
+transform: scale(1.055);
+}
+
+}
+
+/* =========================================================
+18. MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+
+.gallery-item {
+animation-duration: 0.65s;
+}
+
+.gallery-item:hover .gallery-figure {
+transform: translateY(-4px);
+}
+
+.gallery-item:hover .gallery-media img {
+transform: scale(1.04);
+}
+
+.gallery-chips button:hover {
+transform: translateY(-1px);
+}
+
+.gallery-caption {
+padding: 13px 14px;
+}
+
+}
+
+/* =========================================================
+19. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+.gallery-item:hover .gallery-figure {
+transform: translateY(-3px);
+}
+
+.gallery-item:hover .gallery-media img {
+transform: scale(1.03);
+}
+
+.gallery-page .btn:hover {
+transform: translateY(-2px);
+}
+
+}
+
+/* =========================================================
+20. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+.gallery-page,
+.gallery-page *,
+.gallery-page *::before,
+.gallery-page *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+
+.gallery-page,
+.gallery-filter,
+.gallery-chips,
+.gallery-page .section-head .eyebrow,
+.gallery-page .section-head h2,
+.gallery-page .section-head p,
+.gallery-item,
+.gallery-empty {
+opacity: 1 !important;
+transform: none !important;
+filter: none !important;
+clip-path: none !important;
+}
+}
