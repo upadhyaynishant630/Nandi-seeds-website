@@ -1,7 +1,11 @@
 
 /* =========================================================
-   NANDI SEEDS - PROFESSIONAL RESPONSIVE NAVBAR
+   NANDI SEEDS + BIOSTADT
+   PROFESSIONAL RESPONSIVE NAVBAR
+   Desktop | Tablet | Mobile
 ========================================================= */
+
+/* ---------------- GLOBAL NAVBAR ---------------- */
 
 .navbar,
 .navbar *,
@@ -14,11 +18,19 @@
   position: sticky;
   top: 0;
   z-index: 1200;
+
   width: 100%;
   max-width: 100%;
-  background: var(--surface, #ffffff);
+
+  background: var(--surface, #fff);
   isolation: isolate;
 }
+
+.navbar img {
+  display: block;
+  max-width: 100%;
+}
+
 
 /* =========================================================
    UTILITY BAR
@@ -27,9 +39,10 @@
 .navbar-utility {
   width: 100%;
   background: var(--green-900, #16452d);
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
+
   font-size: 0.78rem;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .navbar-utility-inner {
@@ -69,13 +82,14 @@
 }
 
 .utility-item:hover {
-  color: #ffffff;
+  color: #fff;
 }
 
 .utility-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   gap: 20px;
   min-width: 0;
 }
@@ -84,6 +98,7 @@
   white-space: nowrap;
 }
 
+
 /* =========================================================
    MAIN NAVBAR CONTAINER
 ========================================================= */
@@ -91,8 +106,8 @@
 .navbar-container {
   position: relative;
   width: 100%;
-  background: var(--surface, #ffffff);
 
+  background: var(--surface, #fff);
   border-bottom: 1px solid transparent;
 
   transition:
@@ -102,8 +117,10 @@
 
 .navbar-scrolled .navbar-container {
   border-bottom-color: var(--line, #e7eae7);
-  box-shadow: var(--shadow-sm, 0 4px 18px rgba(0, 0, 0, 0.06));
+  box-shadow:
+    var(--shadow-sm, 0 4px 18px rgba(0, 0, 0, 0.06));
 }
+
 
 /* =========================================================
    NAVBAR INNER
@@ -118,10 +135,11 @@
 
   width: 100%;
   min-width: 0;
-  min-height: 78px;
+  min-height: 80px;
 
   padding-inline: clamp(14px, 3vw, 42px);
 }
+
 
 /* =========================================================
    NANDI SEEDS LOGO
@@ -132,17 +150,18 @@
   align-items: center;
   justify-content: flex-start;
 
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   min-width: 0;
   max-width: 100%;
 
   text-decoration: none;
+  line-height: 0;
 }
 
 .navbar-logo img {
   display: block;
 
-  width: clamp(105px, 10vw, 140px);
+  width: clamp(100px, 10vw, 140px);
   max-width: 100%;
   max-height: 58px;
 
@@ -151,6 +170,7 @@
   object-fit: contain;
   object-position: left center;
 }
+
 
 /* =========================================================
    DESKTOP NAVIGATION
@@ -164,7 +184,12 @@
   flex: 1 1 auto;
   min-width: 0;
 
-  gap: clamp(1px, 0.3vw, 6px);
+  gap: clamp(2px, 0.35vw, 7px);
+}
+
+.navbar-menu-head,
+.navbar-menu-foot {
+  display: none;
 }
 
 .nav-link {
@@ -174,16 +199,16 @@
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 auto;
-
+  flex: 0 1 auto;
   min-width: 0;
-  padding: 10px clamp(8px, 0.85vw, 13px);
+
+  padding: 11px clamp(7px, 0.8vw, 13px);
 
   border-radius: var(--radius-pill, 50px);
 
   color: var(--ink-soft, #536052);
 
-  font-size: clamp(0.82rem, 0.85vw, 0.94rem);
+  font-size: clamp(0.78rem, 0.85vw, 0.94rem);
   font-weight: 600;
   line-height: 1.3;
 
@@ -224,6 +249,7 @@
   transform: scaleX(1);
 }
 
+
 /* =========================================================
    RIGHT SIDE ACTIONS
 ========================================================= */
@@ -240,43 +266,64 @@
   margin-left: 5px;
 }
 
+
 /* =========================================================
-   ORIGINAL BIOSTADT IMAGE LOGO
+   BIOSTADT LOGO
+   ORIGINAL IMAGE - NO DISTORTION
 ========================================================= */
 
 .navbar-biostand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 auto;
+  flex: 0 1 auto;
 
-  width: clamp(118px, 11vw, 158px);
+  width: clamp(118px, 11.5vw, 160px);
+  min-width: 0;
   max-width: 100%;
-  margin-top: -25px;
 
+  height: auto;
+  min-height: 0;
+
+  margin: 0;
+  padding: 0;
 
   overflow: hidden;
 
+  background: transparent;
+
   line-height: 0;
   text-decoration: none;
+
+  transition: transform 0.25s ease;
 }
 
 .navbar-biostand img {
   display: block;
 
   width: 100%;
-  height: auto;
+  max-width: 100%;
 
+  height: auto;
   max-height: 48px;
- 
-  
+
+  margin: 0;
+  padding: 0;
 
   object-fit: contain;
   object-position: center;
 
   border: 0;
+  border-radius: 0;
+
+  background: transparent;
 }
+
+.navbar-biostand:hover {
+  transform: translateY(-1px);
+}
+
 
 /* =========================================================
    CONTACT BUTTON
@@ -294,10 +341,11 @@
   margin-left: clamp(4px, 0.7vw, 12px);
   padding: 11px clamp(14px, 1.3vw, 22px);
 
+  border: 0;
   border-radius: var(--radius-pill, 50px);
 
   background: var(--green-700, #21834e);
-  color: #ffffff;
+  color: #fff;
 
   font-size: 0.88rem;
   font-weight: 700;
@@ -307,7 +355,8 @@
   text-align: center;
   text-decoration: none;
 
-  box-shadow: var(--shadow-xs, 0 3px 8px rgba(0, 0, 0, 0.08));
+  box-shadow:
+    var(--shadow-xs, 0 3px 8px rgba(0, 0, 0, 0.08));
 
   transition:
     background-color 0.25s ease,
@@ -318,12 +367,15 @@
 .nav-contact:hover {
   background: var(--green-800, #17643d);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm, 0 5px 14px rgba(0, 0, 0, 0.1));
+
+  box-shadow:
+    var(--shadow-sm, 0 5px 14px rgba(0, 0, 0, 0.1));
 }
 
 .nav-contact-active {
   background: var(--green-900, #16452d);
 }
+
 
 /* =========================================================
    MOBILE MENU BUTTON
@@ -344,7 +396,7 @@
   border: 1px solid var(--line, #e4e9e4);
   border-radius: 10px;
 
-  background: var(--surface, #ffffff);
+  background: var(--surface, #fff);
   color: var(--green-800, #17643d);
 
   font-size: 1.3rem;
@@ -371,17 +423,9 @@
 .menu-button-active {
   border-color: var(--green-700, #21834e);
   background: var(--green-700, #21834e);
-  color: #ffffff;
+  color: #fff;
 }
 
-/* =========================================================
-   MOBILE DRAWER DEFAULT
-========================================================= */
-
-.navbar-menu-head,
-.navbar-menu-foot {
-  display: none;
-}
 
 /* =========================================================
    MOBILE OVERLAY
@@ -423,6 +467,7 @@
   pointer-events: auto;
 }
 
+
 /* =========================================================
    TABLET + MOBILE DRAWER
    1100px AND BELOW
@@ -430,19 +475,17 @@
 
 @media (max-width: 1100px) {
 
-  /* MAIN BAR */
-
   .navbar-inner {
     min-height: 72px;
   }
 
-  /* HAMBURGER */
+  /* Hamburger */
 
   .mobile-menu-button {
     display: inline-flex;
   }
 
-  /* UTILITY BAR */
+  /* Utility bar */
 
   .navbar-utility-inner > .utility-address {
     display: none;
@@ -454,7 +497,7 @@
     gap: clamp(12px, 3vw, 24px);
   }
 
-  /* MOBILE DRAWER */
+  /* Mobile drawer */
 
   .navbar-menu {
     position: fixed;
@@ -487,12 +530,14 @@
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
 
-    background: var(--surface, #ffffff);
+    background: var(--surface, #fff);
 
-    box-shadow: var(--shadow-lg, -8px 0 35px rgba(0, 0, 0, 0.12));
+    box-shadow:
+      var(--shadow-lg, -8px 0 35px rgba(0, 0, 0, 0.12));
 
     transform: translate3d(105%, 0, 0);
     visibility: hidden;
+    pointer-events: none;
 
     transition:
       transform 0.35s ease,
@@ -502,13 +547,14 @@
   .navbar-menu.menu-open {
     transform: translate3d(0, 0, 0);
     visibility: visible;
+    pointer-events: auto;
 
     transition:
       transform 0.35s ease,
       visibility 0s;
   }
 
-  /* DRAWER HEADER */
+  /* Drawer header */
 
   .navbar-menu-head {
     display: flex;
@@ -518,7 +564,6 @@
     flex: 0 0 auto;
 
     gap: 12px;
-
     min-width: 0;
 
     padding-bottom: 17px;
@@ -534,14 +579,13 @@
 
     font-size: 0.8rem;
     font-weight: 800;
-
     line-height: 1.4;
     letter-spacing: 0.08em;
 
     text-transform: uppercase;
   }
 
-  /* DRAWER CLOSE BUTTON */
+  /* Drawer close button */
 
   .menu-close {
     display: inline-flex;
@@ -575,7 +619,7 @@
     color: var(--green-800, #17643d);
   }
 
-  /* DRAWER LINKS */
+  /* Drawer links */
 
   .navbar-menu .nav-link {
     display: flex;
@@ -613,7 +657,7 @@
     color: var(--green-800, #17643d);
   }
 
-  /* DRAWER CONTACT */
+  /* Drawer contact */
 
   .navbar-menu .nav-contact {
     display: flex;
@@ -628,7 +672,7 @@
     text-align: center;
   }
 
-  /* DRAWER FOOTER */
+  /* Drawer footer */
 
   .navbar-menu-foot {
     display: flex;
@@ -658,7 +702,6 @@
     line-height: 1.5;
 
     text-decoration: none;
-
     overflow-wrap: anywhere;
   }
 
@@ -666,6 +709,7 @@
     flex: 0 0 auto;
   }
 }
+
 
 /* =========================================================
    TABLET
@@ -683,7 +727,7 @@
   }
 
   .navbar-biostand img {
-    max-height: 44px;
+    max-height: 46px;
   }
 
   .navbar-actions {
@@ -694,6 +738,7 @@
     width: min(390px, 75vw);
   }
 }
+
 
 /* =========================================================
    MOBILE
@@ -743,12 +788,20 @@
     margin-left: auto;
   }
 
+  /* BIOSTADT LOGO */
+
   .navbar-biostand {
-    width: 112px;
+    width: clamp(100px, 15vw, 120px);
+    margin: 0;
   }
 
   .navbar-biostand img {
-    max-height: 37px;
+    width: 100%;
+    max-height: 38px;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
   }
 
   .mobile-menu-button {
@@ -767,6 +820,7 @@
     padding: 12px 13px;
   }
 }
+
 
 /* =========================================================
    SMALL MOBILE
@@ -800,12 +854,17 @@
     gap: 6px;
   }
 
+  /* BIOSTADT LOGO */
+
   .navbar-biostand {
-    width: 100px;
+    width: 105px;
+    margin: 0;
   }
 
   .navbar-biostand img {
-    max-height: 34px;
+    max-height: 35px;
+    width: 100%;
+    height: auto;
   }
 
   .mobile-menu-button {
@@ -841,9 +900,10 @@
   }
 }
 
+
 /* =========================================================
    VERY SMALL MOBILE
-   380px AND BELOW
+   360px AND BELOW
 ========================================================= */
 
 @media (max-width: 380px) {
@@ -863,12 +923,17 @@
     gap: 5px;
   }
 
+  /* BIOSTADT LOGO */
+
   .navbar-biostand {
-    width: 88px;
+    width: 90px;
+    margin: 0;
   }
 
   .navbar-biostand img {
-    max-height: 30px;
+    max-height: 32px;
+    width: 100%;
+    height: auto;
   }
 
   .mobile-menu-button {
@@ -890,6 +955,7 @@
   }
 }
 
+
 /* =========================================================
    EXTRA SMALL MOBILE
    320px AND BELOW
@@ -909,11 +975,14 @@
   }
 
   .navbar-biostand {
-    width: 76px;
+    width: 78px;
+    margin: 0;
   }
 
   .navbar-biostand img {
-    max-height: 26px;
+    max-height: 28px;
+    width: 100%;
+    height: auto;
   }
 
   .navbar-actions {
@@ -932,6 +1001,7 @@
     padding-inline: 12px;
   }
 }
+
 
 /* =========================================================
    LANDSCAPE MOBILE
@@ -966,6 +1036,7 @@
   }
 }
 
+
 /* =========================================================
    TOUCH DEVICES
 ========================================================= */
@@ -980,8 +1051,12 @@
     transform: none;
   }
 
+  .navbar-biostand:hover {
+    transform: none;
+  }
+
   .mobile-menu-button:hover {
-    background: var(--surface, #ffffff);
+    background: var(--surface, #fff);
   }
 
   .menu-close:hover {
@@ -989,8 +1064,9 @@
   }
 }
 
+
 /* =========================================================
-   ACCESSIBILITY - KEYBOARD FOCUS
+   ACCESSIBILITY — KEYBOARD FOCUS
 ========================================================= */
 
 .navbar a:focus-visible,
@@ -999,6 +1075,7 @@
   outline-offset: 3px;
 }
 
+
 /* =========================================================
    BODY SCROLL LOCK
 ========================================================= */
@@ -1006,6 +1083,7 @@
 body.menu-is-open {
   overflow: hidden;
 }
+
 
 /* =========================================================
    REDUCED MOTION
@@ -1023,6 +1101,7 @@ body.menu-is-open {
   }
 }
 
+
 /* =========================================================
    HORIZONTAL OVERFLOW PROTECTION
 ========================================================= */
@@ -1036,6 +1115,7 @@ body.menu-is-open {
 .navbar-actions {
   max-width: 100%;
 }
+
 
 /* =========================================================
    SAFE AREA SUPPORT
