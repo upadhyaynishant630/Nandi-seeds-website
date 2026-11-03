@@ -1,6 +1,6 @@
+
 /* =========================================================
-   NAVBAR
-   
+   NANDI SEEDS - PROFESSIONAL RESPONSIVE NAVBAR
 ========================================================= */
 
 .navbar,
@@ -16,21 +16,20 @@
   z-index: 1200;
   width: 100%;
   max-width: 100%;
-  background: var(--surface);
+  background: var(--surface, #ffffff);
   isolation: isolate;
 }
 
 /* =========================================================
-   UTILITY STRIP
+   UTILITY BAR
 ========================================================= */
 
 .navbar-utility {
   width: 100%;
-  background: var(--green-900);
-  color: rgba(255, 255, 255, 0.86);
+  background: var(--green-900, #16452d);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.78rem;
-  line-height: 1;
-  overflow: hidden;
+  line-height: 1.2;
 }
 
 .navbar-utility-inner {
@@ -38,50 +37,51 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+
   width: 100%;
   min-width: 0;
-  min-height: 38px;
-  padding-inline: clamp(16px, 3vw, 42px);
+  min-height: 37px;
+
+  padding-inline: clamp(14px, 3vw, 42px);
 }
 
 .utility-item {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+
   min-width: 0;
   max-width: 100%;
+
   color: inherit;
   text-decoration: none;
-  transition:
-    color var(--transition),
-    opacity var(--transition);
+
+  transition: color 0.25s ease;
 }
 
 .utility-item svg {
   flex: 0 0 auto;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
 }
 
 .utility-item span {
   min-width: 0;
 }
 
+.utility-item:hover {
+  color: #ffffff;
+}
+
 .utility-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 18px;
+  gap: 20px;
   min-width: 0;
-  max-width: 100%;
 }
 
 .utility-right .utility-item {
-  min-width: 0;
   white-space: nowrap;
-}
-
-.utility-item:hover {
-  color: #ffffff;
 }
 
 /* =========================================================
@@ -91,17 +91,18 @@
 .navbar-container {
   position: relative;
   width: 100%;
-  min-width: 0;
-  background: var(--surface);
+  background: var(--surface, #ffffff);
+
   border-bottom: 1px solid transparent;
+
   transition:
-    box-shadow var(--transition),
-    border-color var(--transition);
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .navbar-scrolled .navbar-container {
-  border-bottom-color: var(--line);
-  box-shadow: var(--shadow-sm);
+  border-bottom-color: var(--line, #e7eae7);
+  box-shadow: var(--shadow-sm, 0 4px 18px rgba(0, 0, 0, 0.06));
 }
 
 /* =========================================================
@@ -112,87 +113,110 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(16px, 2vw, 32px);
+
+  gap: clamp(12px, 1.5vw, 24px);
+
   width: 100%;
   min-width: 0;
-  min-height: var(--navbar-height);
-  padding-inline: clamp(16px, 3vw, 42px);
+  min-height: 78px;
+
+  padding-inline: clamp(14px, 3vw, 42px);
 }
 
 /* =========================================================
-   LOGO
+   NANDI SEEDS LOGO
 ========================================================= */
 
 .navbar-logo {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+
   flex: 0 0 auto;
   min-width: 0;
   max-width: 100%;
+
   text-decoration: none;
 }
 
 .navbar-logo img {
   display: block;
-  width: clamp(105px, 8vw, 132px);
+
+  width: clamp(105px, 10vw, 140px);
   max-width: 100%;
-  height: auto;
   max-height: 58px;
+
+  height: auto;
+
   object-fit: contain;
   object-position: left center;
 }
 
 /* =========================================================
-   DESKTOP MENU
+   DESKTOP NAVIGATION
 ========================================================= */
 
 .navbar-menu {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   flex: 1 1 auto;
   min-width: 0;
-  gap: clamp(2px, 0.35vw, 6px);
+
+  gap: clamp(1px, 0.3vw, 6px);
 }
 
 .nav-link {
   position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   flex: 0 0 auto;
+
   min-width: 0;
-  padding: 10px clamp(9px, 1vw, 14px);
-  border-radius: var(--radius-pill);
-  color: var(--ink-soft);
-  font-size: clamp(0.86rem, 0.85vw, 0.94rem);
+  padding: 10px clamp(8px, 0.85vw, 13px);
+
+  border-radius: var(--radius-pill, 50px);
+
+  color: var(--ink-soft, #536052);
+
+  font-size: clamp(0.82rem, 0.85vw, 0.94rem);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.3;
+
   white-space: nowrap;
   text-decoration: none;
+
   transition:
-    color var(--transition),
-    background-color var(--transition);
+    color 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .nav-link::after {
   content: "";
+
   position: absolute;
   left: 12px;
   right: 12px;
-  bottom: 4px;
-  width: auto;
+  bottom: 3px;
+
   height: 2px;
-  border-radius: 2px;
-  background: var(--green-600);
+
+  border-radius: 4px;
+  background: var(--green-600, #27975c);
+
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--transition);
+
+  transition: transform 0.25s ease;
 }
 
-.nav-link:hover {
-  color: var(--green-800);
+.nav-link:hover,
+.nav-link-active {
+  color: var(--green-800, #17643d);
 }
 
 .nav-link:hover::after,
@@ -200,8 +224,58 @@
   transform: scaleX(1);
 }
 
-.nav-link-active {
-  color: var(--green-800);
+/* =========================================================
+   RIGHT SIDE ACTIONS
+========================================================= */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex: 0 0 auto;
+  min-width: 0;
+
+  gap: clamp(8px, 1vw, 14px);
+  margin-left: 5px;
+}
+
+/* =========================================================
+   ORIGINAL BIOSTADT IMAGE LOGO
+========================================================= */
+
+.navbar-biostand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: clamp(118px, 11vw, 158px);
+  max-width: 100%;
+  margin-top: -25px;
+
+
+  overflow: hidden;
+
+  line-height: 0;
+  text-decoration: none;
+}
+
+.navbar-biostand img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-height: 48px;
+ 
+  
+
+  object-fit: contain;
+  object-position: center;
+
+  border: 0;
 }
 
 /* =========================================================
@@ -212,34 +286,43 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   flex: 0 0 auto;
+
   min-width: max-content;
-  margin-left: clamp(6px, 1vw, 14px);
-  padding: 11px clamp(16px, 1.4vw, 24px);
-  border-radius: var(--radius-pill);
-  background: var(--green-700);
+
+  margin-left: clamp(4px, 0.7vw, 12px);
+  padding: 11px clamp(14px, 1.3vw, 22px);
+
+  border-radius: var(--radius-pill, 50px);
+
+  background: var(--green-700, #21834e);
   color: #ffffff;
+
   font-size: 0.88rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
+  font-weight: 700;
+  line-height: 1.3;
+
   white-space: nowrap;
+  text-align: center;
   text-decoration: none;
-  box-shadow: var(--shadow-xs);
+
+  box-shadow: var(--shadow-xs, 0 3px 8px rgba(0, 0, 0, 0.08));
+
   transition:
-    background-color var(--transition),
-    transform var(--transition),
-    box-shadow var(--transition);
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .nav-contact:hover {
-  background: var(--green-800);
+  background: var(--green-800, #17643d);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm, 0 5px 14px rgba(0, 0, 0, 0.1));
 }
 
 .nav-contact-active {
-  background: var(--green-900);
+  background: var(--green-900, #16452d);
 }
 
 /* =========================================================
@@ -250,28 +333,35 @@
   display: none;
   align-items: center;
   justify-content: center;
+
   flex: 0 0 44px;
+
   width: 44px;
   height: 44px;
-  margin-left: auto;
+
   padding: 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  color: var(--green-800);
+
+  border: 1px solid var(--line, #e4e9e4);
+  border-radius: 10px;
+
+  background: var(--surface, #ffffff);
+  color: var(--green-800, #17643d);
+
   font-size: 1.3rem;
   line-height: 1;
+
   cursor: pointer;
+
   transition:
-    background-color var(--transition),
-    border-color var(--transition),
-    color var(--transition),
-    transform var(--transition);
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .mobile-menu-button:hover {
-  border-color: var(--green-500);
-  background: var(--green-50);
+  border-color: var(--green-500, #43a66d);
+  background: var(--green-50, #eef8f0);
 }
 
 .mobile-menu-button:active {
@@ -279,13 +369,13 @@
 }
 
 .menu-button-active {
-  border-color: var(--green-700);
-  background: var(--green-700);
+  border-color: var(--green-700, #21834e);
+  background: var(--green-700, #21834e);
   color: #ffffff;
 }
 
 /* =========================================================
-   DRAWER PARTS - DESKTOP DEFAULT
+   MOBILE DRAWER DEFAULT
 ========================================================= */
 
 .navbar-menu-head,
@@ -294,25 +384,37 @@
 }
 
 /* =========================================================
-   OVERLAY
+   MOBILE OVERLAY
 ========================================================= */
 
 .navbar-overlay {
   position: fixed;
   inset: 0;
+
   z-index: 1100;
+
+  display: block;
+
   width: 100%;
   height: 100%;
-  background: rgba(11, 47, 25, 0.48);
+  padding: 0;
+
+  border: 0;
+
+  background: rgba(11, 47, 25, 0.5);
+
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+
   cursor: pointer;
+
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
 }
 
 .overlay-visible {
@@ -322,92 +424,27 @@
 }
 
 /* =========================================================
-   LARGE DESKTOP
-   1200px+
+   TABLET + MOBILE DRAWER
+   1100px AND BELOW
 ========================================================= */
 
-@media (min-width: 1200px) {
-  .navbar-inner {
-    min-height: 76px;
-  }
+@media (max-width: 1100px) {
 
-  .navbar-logo img {
-    width: 132px;
-  }
+  /* MAIN BAR */
 
-  .navbar-menu {
-    gap: 4px;
-  }
-
-  .nav-link {
-    padding-inline: 13px;
-    font-size: 0.92rem;
-  }
-
-  .nav-contact {
-    padding-inline: 22px;
-  }
-}
-
-/* =========================================================
-   DESKTOP
-   1051px - 1199px
-
-   Keep desktop menu only when enough room exists.
-========================================================= */
-
-@media (min-width: 1051px) and (max-width: 1199px) {
   .navbar-inner {
     min-height: 72px;
-    gap: 18px;
-    padding-inline: 22px;
   }
 
-  .navbar-logo img {
-    width: 116px;
+  /* HAMBURGER */
+
+  .mobile-menu-button {
+    display: inline-flex;
   }
 
-  .navbar-menu {
-    gap: 1px;
-  }
+  /* UTILITY BAR */
 
-  .nav-link {
-    padding: 9px 9px;
-    font-size: 0.85rem;
-  }
-
-  .nav-contact {
-    margin-left: 7px;
-    padding: 10px 15px;
-    font-size: 0.84rem;
-  }
-
-  .navbar-utility-inner {
-    padding-inline: 22px;
-  }
-
-  .utility-right {
-    gap: 14px;
-  }
-}
-
-/* =========================================================
-   TABLET + MOBILE DRAWER
-   1050px and below
-========================================================= */
-
-@media (max-width: 1050px) {
-  .navbar-utility-inner {
-    min-height: 36px;
-    padding-inline: clamp(14px, 3vw, 28px);
-  }
-
-  /*
-    Keep the utility bar clean on smaller screens.
-    Left-side utility item is hidden and right-side
-    contact information remains centered.
-  */
-  .navbar-utility-inner > .utility-item {
+  .navbar-utility-inner > .utility-address {
     display: none;
   }
 
@@ -417,34 +454,14 @@
     gap: clamp(12px, 3vw, 24px);
   }
 
-  .navbar-inner {
-    min-height: 70px;
-    gap: 16px;
-    padding-inline: clamp(16px, 3vw, 28px);
-  }
-
-  .navbar-logo {
-    flex: 0 1 auto;
-    min-width: 0;
-  }
-
-  .navbar-logo img {
-    width: 108px;
-    max-width: min(108px, 34vw);
-  }
-
-  .mobile-menu-button {
-    display: inline-flex;
-  }
-
-  /* =======================================================
-     MOBILE / TABLET DRAWER
-  ======================================================= */
+  /* MOBILE DRAWER */
 
   .navbar-menu {
     position: fixed;
+
     top: 0;
     right: 0;
+
     z-index: 1300;
 
     display: flex;
@@ -454,28 +471,32 @@
 
     width: min(380px, 90vw);
     max-width: 100%;
+
     height: 100vh;
     height: 100dvh;
-    min-height: 100%;
 
-    gap: 4px;
+    min-height: 0;
+
+    gap: 5px;
+
     padding: 24px 22px 28px;
 
     overflow-x: hidden;
     overflow-y: auto;
+
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
 
-    background: var(--surface);
-    box-shadow: var(--shadow-lg);
+    background: var(--surface, #ffffff);
+
+    box-shadow: var(--shadow-lg, -8px 0 35px rgba(0, 0, 0, 0.12));
 
     transform: translate3d(105%, 0, 0);
     visibility: hidden;
 
     transition:
-      transform 0.34s var(--ease),
-      visibility 0s linear 0.34s;
+      transform 0.35s ease,
+      visibility 0s linear 0.35s;
   }
 
   .navbar-menu.menu-open {
@@ -483,77 +504,78 @@
     visibility: visible;
 
     transition:
-      transform 0.34s var(--ease),
-      visibility 0s linear 0s;
+      transform 0.35s ease,
+      visibility 0s;
   }
 
-  /* =======================================================
-     DRAWER HEADER
-  ======================================================= */
+  /* DRAWER HEADER */
 
   .navbar-menu-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
+
     flex: 0 0 auto;
 
+    gap: 12px;
+
     min-width: 0;
+
     padding-bottom: 17px;
     margin-bottom: 8px;
-    border-bottom: 1px solid var(--line);
+
+    border-bottom: 1px solid var(--line, #e5e9e5);
   }
 
   .navbar-menu-head span {
     min-width: 0;
-    color: var(--green-700);
+
+    color: var(--green-700, #21834e);
+
     font-size: 0.8rem;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: 0.1em;
+    font-weight: 800;
+
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+
     text-transform: uppercase;
   }
 
-  /* =======================================================
-     DRAWER CLOSE BUTTON
-  ======================================================= */
+  /* DRAWER CLOSE BUTTON */
 
   .menu-close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 38px;
 
-    width: 38px;
-    height: 38px;
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
     padding: 0;
 
     border: 0;
-    border-radius: var(--radius-xs);
-    background: var(--surface-soft);
-    color: var(--ink);
-    font-size: 1.2rem;
-    line-height: 1;
+    border-radius: 9px;
+
+    background: var(--surface-soft, #f3f6f3);
+    color: var(--ink, #1c281f);
+
+    font-size: 1.25rem;
+
     cursor: pointer;
 
     transition:
-      background-color var(--transition),
-      color var(--transition),
-      transform var(--transition);
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
 
   .menu-close:hover {
-    background: var(--green-50);
-    color: var(--green-800);
+    background: var(--green-50, #eef8f0);
+    color: var(--green-800, #17643d);
   }
 
-  .menu-close:active {
-    transform: scale(0.95);
-  }
-
-  /* =======================================================
-     DRAWER LINKS
-  ======================================================= */
+  /* DRAWER LINKS */
 
   .navbar-menu .nav-link {
     display: flex;
@@ -562,14 +584,17 @@
 
     width: 100%;
     min-height: 48px;
+
     padding: 13px 14px;
 
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-sm, 9px);
 
-    color: var(--ink-soft);
+    color: var(--ink-soft, #536052);
+
     font-size: 1rem;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.35;
+
     white-space: normal;
     text-align: left;
   }
@@ -579,80 +604,94 @@
   }
 
   .navbar-menu .nav-link:hover {
-    background: var(--green-50);
-    color: var(--green-800);
+    background: var(--green-50, #eef8f0);
+    color: var(--green-800, #17643d);
   }
 
   .navbar-menu .nav-link-active {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: var(--green-100, #dff1e3);
+    color: var(--green-800, #17643d);
   }
 
-  /* =======================================================
-     DRAWER CONTACT
-  ======================================================= */
+  /* DRAWER CONTACT */
 
   .navbar-menu .nav-contact {
+    display: flex;
+
     width: 100%;
+    min-width: 0;
     min-height: 50px;
-    margin: 14px 0 0;
-    padding: 13px 20px;
+
+    margin: 13px 0 0;
+    padding: 13px 18px;
+
     text-align: center;
   }
 
-  /* =======================================================
-     DRAWER FOOTER
-  ======================================================= */
+  /* DRAWER FOOTER */
 
   .navbar-menu-foot {
-    display: block;
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
     margin-top: auto;
     padding-top: 20px;
-    border-top: 1px solid var(--line);
+
+    border-top: 1px solid var(--line, #e5e9e5);
   }
 
   .navbar-menu-foot a {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 8px;
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
 
     width: 100%;
     max-width: 100%;
 
-    color: var(--green-800);
+    color: var(--green-800, #17643d);
+
     font-size: 0.9rem;
     font-weight: 600;
-    line-height: 1.45;
+    line-height: 1.5;
+
     text-decoration: none;
 
     overflow-wrap: anywhere;
-    word-break: break-word;
+  }
+
+  .navbar-menu-foot a svg {
+    flex: 0 0 auto;
   }
 }
 
 /* =========================================================
    TABLET
-   769px - 1050px
+   769px - 1100px
 ========================================================= */
 
-@media (min-width: 769px) and (max-width: 1050px) {
-  .navbar-inner {
-    min-height: 72px;
-  }
+@media (min-width: 769px) and (max-width: 1100px) {
 
   .navbar-logo img {
-    width: 108px;
-    max-width: 108px;
+    width: 125px;
   }
 
-  .mobile-menu-button {
-    width: 45px;
-    height: 45px;
-    flex-basis: 45px;
+  .navbar-biostand {
+    width: 145px;
+  }
+
+  .navbar-biostand img {
+    max-height: 44px;
+  }
+
+  .navbar-actions {
+    gap: 12px;
   }
 
   .navbar-menu {
-    width: min(390px, 72vw);
+    width: min(390px, 75vw);
   }
 }
 
@@ -662,8 +701,9 @@
 ========================================================= */
 
 @media (max-width: 768px) {
+
   .navbar-utility {
-    font-size: 0.73rem;
+    font-size: 0.72rem;
   }
 
   .navbar-utility-inner {
@@ -673,55 +713,58 @@
 
   .utility-right {
     gap: 12px;
-    justify-content: center;
     overflow: hidden;
   }
 
   .utility-right .utility-item {
+    flex: 0 1 auto;
+
     max-width: 48%;
     min-width: 0;
+
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .navbar-inner {
-    min-height: 66px;
-    gap: 12px;
+    min-height: 68px;
+    gap: 9px;
     padding-inline: 14px;
   }
 
-  /*
-    Consistent mobile logo size.
-    No more 70px -> 140px jumps.
-  */
   .navbar-logo img {
-    width: 98px;
-    max-width: 98px;
+    width: 100px;
     max-height: 50px;
   }
 
+  .navbar-actions {
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .navbar-biostand {
+    width: 112px;
+  }
+
+  .navbar-biostand img {
+    max-height: 37px;
+  }
+
   .mobile-menu-button {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-    font-size: 1.25rem;
+    width: 43px;
+    height: 43px;
+    flex-basis: 43px;
   }
 
   .navbar-menu {
-    width: min(360px, 88vw);
+    width: min(360px, 89vw);
     padding: 22px 19px 26px;
   }
 
   .navbar-menu .nav-link {
     min-height: 47px;
     padding: 12px 13px;
-    font-size: 0.98rem;
-  }
-
-  .navbar-menu .nav-contact {
-    min-height: 49px;
-    margin-top: 13px;
-    padding: 12px 18px;
   }
 }
 
@@ -731,43 +774,50 @@
 ========================================================= */
 
 @media (max-width: 560px) {
+
   .navbar-utility-inner {
     min-height: 32px;
-    padding-inline: 12px;
+    padding-inline: 10px;
   }
 
   .utility-right {
-    gap: 10px;
-    width: 100%;
-    font-size: 0.7rem;
+    gap: 9px;
+    font-size: 0.68rem;
   }
 
   .navbar-inner {
     min-height: 64px;
-    gap: 10px;
-    padding-inline: 12px;
-  }
-
-  .navbar-logo {
-    flex: 1 1 auto;
+    gap: 6px;
+    padding-inline: 11px;
   }
 
   .navbar-logo img {
-    width: 94px;
-    max-width: 94px;
-    max-height: 48px;
+    width: 91px;
+    max-height: 46px;
+  }
+
+  .navbar-actions {
+    gap: 6px;
+  }
+
+  .navbar-biostand {
+    width: 100px;
+  }
+
+  .navbar-biostand img {
+    max-height: 34px;
   }
 
   .mobile-menu-button {
-    width: 43px;
-    height: 43px;
-    flex-basis: 43px;
-    border-radius: 10px;
+    width: 41px;
+    height: 41px;
+    flex-basis: 41px;
+    font-size: 1.2rem;
   }
 
   .navbar-menu {
     width: min(350px, 91vw);
-    padding: 19px 16px 24px;
+    padding: 20px 17px 24px;
   }
 
   .navbar-menu-head {
@@ -782,8 +832,8 @@
   }
 
   .navbar-menu .nav-contact {
-    margin-top: 12px;
-    padding: 13px 16px;
+    min-height: 48px;
+    margin-top: 11px;
   }
 
   .navbar-menu-foot {
@@ -793,88 +843,88 @@
 
 /* =========================================================
    VERY SMALL MOBILE
-   400px and below
+   380px AND BELOW
 ========================================================= */
 
-@media (max-width: 400px) {
-  /*
-    Hide utility strip on extremely narrow screens
-    so it can never squeeze the main navbar.
-  */
-  .navbar-utility {
-    display: none;
-  }
+@media (max-width: 380px) {
 
   .navbar-inner {
-    min-height: 60px;
-    gap: 8px;
-    padding-inline: 10px;
-  }
-
-  /*
-    Stable small-phone logo size.
-  */
-  .navbar-logo img {
-    width: 88px;
-    max-width: 88px;
-    max-height: 44px;
-  }
-
-  .mobile-menu-button {
-    width: 41px;
-    height: 41px;
-    flex-basis: 41px;
-    font-size: 1.15rem;
-  }
-
-  .navbar-menu {
-    width: 94vw;
-    max-width: 360px;
-    padding: 18px 14px 22px;
-  }
-
-  .navbar-menu-head {
-    padding-bottom: 13px;
-    margin-bottom: 6px;
-  }
-
-  .navbar-menu-head span {
-    font-size: 0.76rem;
-  }
-
-  .navbar-menu .nav-link {
-    min-height: 44px;
-    padding: 11px;
-    font-size: 0.94rem;
-  }
-
-  .navbar-menu .nav-contact {
-    min-height: 46px;
-    padding: 12px 15px;
-    font-size: 0.9rem;
-  }
-}
-
-/* =========================================================
-   EXTRA SMALL DEVICES
-   340px and below
-========================================================= */
-
-@media (max-width: 340px) {
-  .navbar-inner {
-    min-height: 57px;
+    min-height: 61px;
+    gap: 5px;
     padding-inline: 9px;
   }
 
   .navbar-logo img {
-    width: 82px;
-    max-width: 82px;
+    width: 79px;
+    max-height: 43px;
+  }
+
+  .navbar-actions {
+    gap: 5px;
+  }
+
+  .navbar-biostand {
+    width: 88px;
+  }
+
+  .navbar-biostand img {
+    max-height: 30px;
   }
 
   .mobile-menu-button {
     width: 39px;
     height: 39px;
     flex-basis: 39px;
+    font-size: 1.1rem;
+  }
+
+  .navbar-menu {
+    width: 94vw;
+    max-width: 360px;
+    padding: 19px 15px 22px;
+  }
+
+  .navbar-menu .nav-link {
+    min-height: 44px;
+    font-size: 0.94rem;
+  }
+}
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   320px AND BELOW
+========================================================= */
+
+@media (max-width: 320px) {
+
+  .navbar-inner {
+    min-height: 57px;
+    padding-inline: 7px;
+    gap: 4px;
+  }
+
+  .navbar-logo img {
+    width: 68px;
+    max-height: 39px;
+  }
+
+  .navbar-biostand {
+    width: 76px;
+  }
+
+  .navbar-biostand img {
+    max-height: 26px;
+  }
+
+  .navbar-actions {
+    gap: 4px;
+  }
+
+  .mobile-menu-button {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    font-size: 1rem;
   }
 
   .navbar-menu {
@@ -887,10 +937,11 @@
    LANDSCAPE MOBILE
 ========================================================= */
 
-@media (max-width: 1050px) and (orientation: landscape) {
+@media (max-width: 1100px) and (orientation: landscape) {
+
   .navbar-menu {
-    padding-top: 15px;
-    padding-bottom: 18px;
+    padding-top: 14px;
+    padding-bottom: 17px;
   }
 
   .navbar-menu-head {
@@ -899,16 +950,15 @@
   }
 
   .navbar-menu .nav-link {
-    min-height: 40px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    min-height: 39px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .navbar-menu .nav-contact {
     min-height: 42px;
     margin-top: 8px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-block: 9px;
   }
 
   .navbar-menu-foot {
@@ -921,6 +971,7 @@
 ========================================================= */
 
 @media (hover: none) and (pointer: coarse) {
+
   .nav-link:hover {
     background: transparent;
   }
@@ -930,21 +981,30 @@
   }
 
   .mobile-menu-button:hover {
-    background: var(--surface);
+    background: var(--surface, #ffffff);
+  }
+
+  .menu-close:hover {
+    background: var(--surface-soft, #f3f6f3);
   }
 }
 
 /* =========================================================
-   FOCUS / ACCESSIBILITY
+   ACCESSIBILITY - KEYBOARD FOCUS
 ========================================================= */
 
-.nav-link:focus-visible,
-.nav-contact:focus-visible,
-.mobile-menu-button:focus-visible,
-.menu-close:focus-visible,
-.utility-item:focus-visible {
-  outline: 3px solid rgba(32, 44, 255, 0.25);
+.navbar a:focus-visible,
+.navbar button:focus-visible {
+  outline: 3px solid rgba(32, 100, 255, 0.3);
   outline-offset: 3px;
+}
+
+/* =========================================================
+   BODY SCROLL LOCK
+========================================================= */
+
+body.menu-is-open {
+  overflow: hidden;
 }
 
 /* =========================================================
@@ -952,6 +1012,7 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .navbar *,
   .navbar *::before,
   .navbar *::after {
@@ -963,7 +1024,7 @@
 }
 
 /* =========================================================
-   PREVENT HORIZONTAL OVERFLOW
+   HORIZONTAL OVERFLOW PROTECTION
 ========================================================= */
 
 .navbar,
@@ -972,59 +1033,23 @@
 .navbar-utility,
 .navbar-utility-inner,
 .navbar-logo,
-.navbar-menu {
+.navbar-actions {
   max-width: 100%;
 }
 
-.navbar,
-.navbar-container,
-.navbar-inner,
-.navbar-utility,
-.navbar-utility-inner {
-  overflow-x: clip;
-}
-
-.navbar-logo img {
-  overflow: hidden;
-}
-
-/* Fallback for browsers without overflow: clip */
-@supports not (overflow: clip) {
-  .navbar,
-  .navbar-container,
-  .navbar-inner,
-  .navbar-utility,
-  .navbar-utility-inner {
-    overflow-x: hidden;
-  }
-}
-
 /* =========================================================
-   SAFE AREA SUPPORT FOR PHONES
+   SAFE AREA SUPPORT
 ========================================================= */
 
 @supports (padding: env(safe-area-inset-left)) {
-  .navbar-inner {
-    padding-left: max(
-      clamp(12px, 3vw, 42px),
-      env(safe-area-inset-left)
-    );
 
-    padding-right: max(
-      clamp(12px, 3vw, 42px),
-      env(safe-area-inset-right)
-    );
+  .navbar-inner {
+    padding-left: max(9px, env(safe-area-inset-left));
+    padding-right: max(9px, env(safe-area-inset-right));
   }
 
   .navbar-menu {
-    padding-right: max(
-      19px,
-      env(safe-area-inset-right)
-    );
-
-    padding-left: max(
-      19px,
-      env(safe-area-inset-left)
-    );
+    padding-left: max(17px, env(safe-area-inset-left));
+    padding-right: max(17px, env(safe-area-inset-right));
   }
 }

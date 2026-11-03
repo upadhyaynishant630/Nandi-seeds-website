@@ -1,112 +1,124 @@
+
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FiMenu, FiX, FiPhone, FiMail, FiMapPin } from "react-icons/fi";
+
+import {
+  FiMenu,
+  FiX,
+  FiPhone,
+  FiMail,
+  FiMapPin,
+} from "react-icons/fi";
 
 import { NAV_LINKS, SITE } from "../data/siteData";
 
 import "./Navbar.css";
 
-/* =========================================================
-   Navbar
-   Sticky header with a utility strip, desktop menu and a
-   slide-in drawer for mobile. Link list comes from
-   src/data/siteData.js so navigation stays in one place.
-========================================================= */
-
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  /* =====================================================
-     SCROLL EFFECT
-  ===================================================== */
-
+  // SCROLL EFFECT
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  /* =====================================================
-     BODY SCROLL LOCK WHEN DRAWER IS OPEN
-  ===================================================== */
-
+  // BODY SCROLL LOCK
   useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add("menu-is-open");
-    } else {
-      document.body.classList.remove("menu-is-open");
-    }
+    document.body.classList.toggle("menu-is-open", menuOpen);
 
     return () => {
       document.body.classList.remove("menu-is-open");
     };
   }, [menuOpen]);
 
-  /* =====================================================
-     ESC KEY CLOSES THE DRAWER
-  ===================================================== */
-
+  // ESC KEY CLOSE
   useEffect(() => {
-    const handleKey = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
       }
     };
 
-    window.addEventListener("keydown", handleKey);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
+  // CLOSE MENU
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
+  // ACTIVE NAVIGATION LINK
   const navClass = ({ isActive }) =>
-    isActive ? "nav-link nav-link-active" : "nav-link";
+    isActive
+      ? "nav-link nav-link-active"
+      : "nav-link";
 
   return (
-    <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
-      {/* =================================================
-          UTILITY STRIP
-      ================================================= */}
+    <header
+      className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
+    >
+
+      {/* =========================================
+          TOP UTILITY BAR
+      ========================================= */}
 
       <div className="navbar-utility">
         <div className="container navbar-utility-inner">
-          <span className="utility-item">
+
+          <span className="utility-item utility-address">
             <FiMapPin aria-hidden="true" />
-            {SITE.addressLine3}
+            <span>{SITE.addressLine3}</span>
           </span>
 
           <div className="utility-right">
-            <a className="utility-item" href={`tel:${SITE.phone}`}>
+
+            <a
+              className="utility-item"
+              href={`tel:${SITE.phone}`}
+            >
               <FiPhone aria-hidden="true" />
-              {SITE.phone}
+              <span>{SITE.phone}</span>
             </a>
 
-            <a className="utility-item" href={`mailto:${SITE.email}`}>
+            <a
+              className="utility-item"
+              href={`mailto:${SITE.email}`}
+            >
               <FiMail aria-hidden="true" />
-              {SITE.email}
+              <span>{SITE.email}</span>
             </a>
+
           </div>
         </div>
       </div>
 
-      {/* =================================================
-          MAIN BAR
-      ================================================= */}
+      {/* =========================================
+          MAIN NAVIGATION BAR
+      ========================================= */}
 
       <div className="navbar-container">
+
         <div className="container navbar-inner">
-          {/* BRAND */}
+
+          {/* LEFT: NANDI SEEDS LOGO */}
+
           <Link
             to="/"
             className="navbar-logo"
@@ -121,23 +133,34 @@ function Navbar() {
             />
           </Link>
 
-          {/* DESKTOP / MOBILE NAVIGATION */}
+          {/* CENTER: DESKTOP NAVIGATION */}
+
           <nav
             id="main-navigation"
-            className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}
+            className={`navbar-menu ${
+              menuOpen ? "menu-open" : ""
+            }`}
             aria-label="Main navigation"
           >
+
+            {/* MOBILE DRAWER HEADER */}
+
             <div className="navbar-menu-head">
+
               <span>{SITE.tagline}</span>
+
               <button
                 type="button"
                 className="menu-close"
                 onClick={closeMenu}
                 aria-label="Close navigation menu"
               >
-                <FiX />
+                <FiX aria-hidden="true" />
               </button>
+
             </div>
+
+            {/* NAVIGATION LINKS */}
 
             {NAV_LINKS.map((link) => (
               <NavLink
@@ -150,50 +173,98 @@ function Navbar() {
               </NavLink>
             ))}
 
+            {/* CONTACT BUTTON */}
+
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                isActive ? "nav-contact nav-contact-active" : "nav-contact"
+                isActive
+                  ? "nav-contact nav-contact-active"
+                  : "nav-contact"
               }
               onClick={closeMenu}
             >
               <span>Get in Touch</span>
             </NavLink>
 
+            {/* MOBILE DRAWER FOOTER */}
+
             <div className="navbar-menu-foot">
+
               <a href={`tel:${SITE.phone}`}>
                 <FiPhone aria-hidden="true" />
-                {SITE.phone}
+                <span>{SITE.phone}</span>
               </a>
+
+              <a href={`mailto:${SITE.email}`}>
+                <FiMail aria-hidden="true" />
+                <span>{SITE.email}</span>
+              </a>
+
             </div>
+
           </nav>
 
-          {/* MOBILE MENU BUTTON */}
-          <button
-            type="button"
-            className={`mobile-menu-button ${
-              menuOpen ? "menu-button-active" : ""
-            }`}
-            onClick={() => setMenuOpen((previous) => !previous)}
-            aria-label={
-              menuOpen ? "Close navigation menu" : "Open navigation menu"
-            }
-            aria-expanded={menuOpen}
-            aria-controls="main-navigation"
-          >
-            {menuOpen ? <FiX /> : <FiMenu />}
-          </button>
+          {/* =====================================
+              RIGHT SIDE: BIOSTADT + MENU BUTTON
+          ===================================== */}
+
+          <div className="navbar-actions">
+
+            {/* ORIGINAL BIOSTADT LOGO */}
+
+            <div className="navbar-biostand">
+              <img
+                src="/images/logo/Biostand-logo.png"
+                alt="BIOSTADT"
+                width="384"
+                height="110"
+              />
+            </div>
+
+            {/* MOBILE MENU BUTTON */}
+
+            <button
+              type="button"
+              className={`mobile-menu-button ${
+                menuOpen ? "menu-button-active" : ""
+              }`}
+              onClick={() => setMenuOpen((previous) => !previous)}
+              aria-label={
+                menuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
+              aria-expanded={menuOpen}
+              aria-controls="main-navigation"
+            >
+              {menuOpen ? (
+                <FiX aria-hidden="true" />
+              ) : (
+                <FiMenu aria-hidden="true" />
+              )}
+            </button>
+
+          </div>
+
         </div>
       </div>
 
-      {/* MOBILE OVERLAY */}
+      {/* =========================================
+          MOBILE BACKGROUND OVERLAY
+      ========================================= */}
+
       <button
         type="button"
-        className={`navbar-overlay ${menuOpen ? "overlay-visible" : ""}`}
+        className={`navbar-overlay ${
+          menuOpen ? "overlay-visible" : ""
+        }`}
         onClick={closeMenu}
-        aria-hidden="true"
-        tabIndex={-1}
+        aria-label="Close navigation menu"
+        tabIndex={menuOpen ? 0 : -1}
+        aria-hidden={!menuOpen}
       />
+
     </header>
   );
 }

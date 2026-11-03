@@ -1,968 +1,814 @@
-/* =========================================================
-   About Page
-========================================================= */
-
-.about-title {
-  margin-top: 12px;
-}
-
-.about-text {
-  margin-top: 12px;
-  font-size: 1.02rem;
-}
-
-.about-points {
-  margin-top: 20px;
-}
-
-.about-cta {
-  margin-top: 22px;
-}
 
 /* =========================================================
-   STORY MEDIA
+   NANDI SEEDS — ABOUT SHOWCASE
+   Responsive | Interactive | Premium Agricultural Design
 ========================================================= */
 
-.about-media {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.about-showcase {
+  --about-green: #087a4d;
+  --about-dark: #12392a;
+  --about-light-green: #49a56d;
+  --about-muted: #688276;
+  --about-bg: #f3f5ef;
 
-.about-media .media-frame {
-  position: relative;
-  min-height: 360px;
-}
-
-.about-media .media-frame img {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
   width: 100%;
-  height: 100%;
-  min-height: 100%;
-  object-fit: cover;
+  min-height: calc(100svh - var(--navbar-total, 0px));
+  padding: clamp(18px, 2.8vw, 42px);
+  background: var(--about-bg);
+  color: var(--about-dark);
+  box-sizing: border-box;
 }
 
-.about-placeholder {
-  min-height: 360px;
+.about-showcase *,
+.about-showcase *::before,
+.about-showcase *::after {
+  box-sizing: border-box;
 }
 
 /* =========================================================
-   STATS BAND
+   MAIN LAYOUT
 ========================================================= */
 
-.about-stats {
-  padding-block: clamp(32px, 4vw, 48px);
-  background: var(--green-800);
+.about-showcase-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 245px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(18px, 2.2vw, 32px);
+
+  width: min(1380px, 100%);
+  margin-inline: auto;
 }
 
-.about-stats-grid {
+.about-showcase-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  min-width: 0;
   gap: 22px;
 }
 
-.about-stat {
-  text-align: center;
-}
-
-.about-stat strong {
-  display: block;
-  color: #ffffff;
-  font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  line-height: 1.1;
-}
-
-.about-stat span {
-  display: block;
-  margin-top: 6px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.86rem;
-}
-
 /* =========================================================
-   MISSION & VISION
+   SIDEBAR
 ========================================================= */
 
-.about-mission-grid {
-  margin-top: clamp(24px, 3.5vw, 40px);
+.about-showcase-tabs {
+  position: sticky;
+  top: calc(var(--navbar-total, 0px) + 18px);
+  align-self: start;
+
+  padding: 24px 14px;
+  border: 1px solid #e1e9df;
+  border-radius: 22px;
+
+  background: #e9eee5;
 }
 
-.about-mission {
-  padding: 24px 22px;
-  border-left: 4px solid var(--green-600);
+.about-tabs-label {
+  padding: 0 12px 15px;
+  color: #779084;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.about-mission h3 {
-  font-size: 1.2rem;
+.about-tabs-list {
+  display: grid;
+  gap: 9px;
 }
 
-.about-mission p {
-  margin-top: 8px;
-  font-size: 0.96rem;
-}
-
-/* =========================================================
-   VALUES
-========================================================= */
-
-.about-value-grid {
-  margin-top: clamp(24px, 3.5vw, 40px);
-}
-
-.about-value {
-  padding: 22px 20px;
-}
-
-.about-value-icon {
-  display: inline-flex;
+.about-tab {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 18px;
   align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 12px;
-  border-radius: var(--radius-sm);
-  background: var(--green-100);
-  color: var(--green-700);
+  gap: 8px;
+
+  width: 100%;
+  min-height: 64px;
+  padding: 13px 14px;
+
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+
+  color: #163f30;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 800;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-tab svg:first-child {
+  width: 21px;
+  height: 21px;
   font-size: 1.25rem;
 }
 
-.about-value h3 {
-  font-size: 1.08rem;
+.about-tab-arrow {
+  width: 17px;
+  height: 17px;
+  color: #6f8b7d;
+  transition: transform 0.25s ease;
 }
 
-.about-value p {
-  margin-top: 9px;
-  font-size: 0.92rem;
+.about-tab:hover:not(.about-tab-active) {
+  transform: translateX(3px);
+  background: #f7faf4;
 }
 
-/* =========================================================
-   PROCESS + CERTIFICATIONS
-========================================================= */
-
-.about-process-split {
-  align-items: start;
+.about-tab:hover .about-tab-arrow {
+  transform: translateX(3px);
 }
 
-.about-process-list {
-  margin-top: 20px;
+.about-tab-active {
+  background: var(--about-green);
+  color: #fff;
+  box-shadow: 0 10px 24px #087a4d2b;
 }
 
-.about-process-list li {
-  display: flex;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px dashed var(--line);
+.about-tab-active .about-tab-arrow {
+  color: #fff;
 }
 
-.about-process-list li:last-child {
-  border-bottom: none;
+.about-tab:focus-visible,
+.about-showcase a:focus-visible {
+  outline: 3px solid #49a56d;
+  outline-offset: 4px;
 }
 
-.about-process-step {
-  flex-shrink: 0;
+/* SIDEBAR BOTTOM */
+
+.about-sidebar-bottom {
+  margin: 30px 12px 4px;
+}
+
+.about-sidebar-line {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: var(--about-green);
+}
+
+.about-sidebar-bottom > p {
+  max-width: 170px;
+  color: var(--about-muted);
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.about-showcase-link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-sm);
-  background: var(--green-700);
-  color: #ffffff;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
+  gap: 6px;
+
+  margin-top: 18px;
+
+  color: var(--about-green);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+
+  transition: gap 0.25s ease;
 }
 
-.about-process-list h3 {
-  font-size: 1.05rem;
-}
-
-.about-process-list p {
-  margin-top: 6px;
-  font-size: 0.92rem;
-}
-
-.about-cert {
-  padding: 24px 22px;
-  border-top: 4px solid var(--gold-500);
-}
-
-.about-cert h3 {
-  font-size: 1.2rem;
-}
-
-.about-cert > p {
-  margin-top: 12px;
-  font-size: 0.94rem;
-}
-
-.about-cert-list {
-  margin-top: 22px;
-}
-
-.about-cert-list li {
-  font-size: 0.93rem;
-}
-
-.about-cert-cta {
-  margin-top: 20px;
+.about-showcase-link:hover {
+  gap: 11px;
 }
 
 /* =========================================================
-   RESPONSIVE
+   HERO SECTION
 ========================================================= */
 
-@media (max-width: 720px) {
-  .about-media .media-frame,
-  .about-placeholder {
-    min-height: 260px;
+.about-showcase-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  min-height: 235px;
+  padding: clamp(25px, 4vw, 48px);
+
+  border: 1px solid #e6e9df;
+  border-radius: 24px;
+
+  background: #fff;
+  box-shadow: 0 10px 28px #31593b0d;
+}
+
+.about-showcase-hero::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #fff 35%,
+    rgb(255 255 255 / 88%) 50%,
+    rgb(255 255 255 / 26%) 100%
+  );
+
+  content: "";
+  pointer-events: none;
+}
+
+.about-showcase-hero > img {
+  position: absolute;
+  inset: 0 0 0 auto;
+
+  width: 61%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 48%;
+
+  transition: transform 0.8s ease;
+}
+
+.about-showcase-hero:hover > img {
+  transform: scale(1.035);
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 70%;
+  max-width: 550px;
+}
+
+.about-kicker {
+  display: block;
+
+  color: var(--about-green);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.about-showcase-hero h1 {
+  margin: 10px 0 0;
+
+  color: #075d3e;
+  font-family: var(--font-sans, inherit);
+  font-size: clamp(2rem, 4.2vw, 3.65rem);
+  font-weight: 850;
+  line-height: 1.06;
+  letter-spacing: -0.065em;
+}
+
+.about-showcase-hero h1 em {
+  color: var(--about-light-green);
+  font-style: normal;
+}
+
+.about-showcase-hero .about-hero-content > p {
+  max-width: 370px;
+  margin-top: 12px;
+
+  color: #52685d;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+/* HERO BOTTOM LABELS */
+
+.about-hero-bottom {
+  position: absolute;
+  z-index: 2;
+  right: 25px;
+  bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 35%);
+}
+
+.about-hero-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7fdfac;
+}
+
+/* =========================================================
+   DYNAMIC CONTENT PANEL
+========================================================= */
+
+.about-showcase-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 42%);
+
+  min-height: 420px;
+  overflow: hidden;
+
+  border: 1px solid #e6e9df;
+  border-radius: 24px;
+
+  background: #fff;
+  box-shadow: 0 10px 28px #31593b0d;
+
+  animation: about-panel-in 0.4s ease both;
+}
+
+@keyframes about-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  .about-mission {
-    padding: 24px 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   CONTENT AREA
+========================================================= */
+
+.about-showcase-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  padding: clamp(24px, 3.4vw, 43px);
+}
+
+.about-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.about-panel-icon {
+  display: grid;
+  flex: 0 0 48px;
+
+  width: 48px;
+  height: 48px;
+  place-items: center;
+
+  border-radius: 14px;
+  background: #eaf5ed;
+
+  color: var(--about-green);
+}
+
+.about-panel-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.about-showcase-copy h2 {
+  max-width: 440px;
+  margin: 7px 0 0;
+
+  color: var(--about-dark);
+  font-family: var(--font-sans, inherit);
+  font-size: clamp(1.55rem, 2.8vw, 2.3rem);
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+}
+
+.about-panel-description {
+  max-width: 570px;
+  margin-top: 18px;
+
+  color: #52685d;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   HIGHLIGHTS
+========================================================= */
+
+.about-showcase-points {
+  display: grid;
+  gap: 12px;
+
+  width: 100%;
+  margin: 22px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.about-showcase-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  color: #456358;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.about-showcase-points li svg {
+  flex: 0 0 17px;
+
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+
+  color: #18a565;
+}
+
+/* =========================================================
+   ADDITIONAL SUBSECTION
+========================================================= */
+
+.about-showcase-extra {
+  width: 100%;
+  margin-top: 25px;
+  padding: 17px 19px;
+
+  border-left: 3px solid #18a565;
+  border-radius: 0 13px 13px 0;
+
+  background: #f2f7f0;
+}
+
+.about-extra-label {
+  display: block;
+
+  color: var(--about-green);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.about-showcase-extra h3 {
+  margin-top: 7px;
+
+  color: #164b35;
+  font-size: 1.08rem;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+}
+
+.about-showcase-extra p {
+  margin-top: 7px;
+
+  color: #61776c;
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   CTA LINK
+========================================================= */
+
+.about-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 24px;
+
+  color: var(--about-green);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+
+  transition: gap 0.25s ease;
+}
+
+.about-panel-link:hover {
+  gap: 12px;
+}
+
+.about-panel-link svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
+   IMAGE PANEL
+========================================================= */
+
+.about-showcase-image {
+  position: relative;
+  min-width: 0;
+  min-height: 420px;
+  overflow: hidden;
+
+  background: #e9f0e8;
+}
+
+.about-showcase-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.7s ease;
+}
+
+.about-showcase-panel:hover .about-showcase-image img {
+  transform: scale(1.035);
+}
+
+.about-image-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 15px;
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 10px;
+
+  background: rgb(7 49 31 / 76%);
+  color: #fff;
+  backdrop-filter: blur(9px);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .about-showcase {
+    padding: 22px;
   }
 
-  .about-process-list li {
-    gap: 14px;
+  .about-showcase-layout {
+    grid-template-columns: 195px minmax(0, 1fr);
+    gap: 18px;
   }
 
-  .about-process-step {
-    width: 40px;
-    height: 40px;
+  .about-showcase-tabs {
+    padding: 19px 10px;
+  }
+
+  .about-tab {
+    padding-inline: 10px;
+    font-size: 0.88rem;
+  }
+
+  .about-showcase-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 39%);
+  }
+
+  .about-showcase-copy {
+    padding: 25px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .about-showcase {
+    padding: 15px;
+  }
+
+  .about-showcase-layout {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .about-showcase-tabs {
+    position: static;
+    padding: 12px;
+    border-radius: 17px;
+  }
+
+  .about-tabs-label {
+    padding: 0 8px 10px;
+    font-size: 0.66rem;
+  }
+
+  .about-tabs-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .about-tab {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 5px;
+
+    min-height: 68px;
+    margin: 0;
+    padding: 9px 4px;
+
+    border-radius: 11px;
+
+    font-size: 0.74rem;
+    text-align: center;
+  }
+
+  .about-tab svg:first-child {
+    width: 20px;
+    height: 20px;
+  }
+
+  .about-tab-arrow {
+    display: none;
+  }
+
+  .about-sidebar-bottom {
+    display: none;
+  }
+
+  .about-showcase-content {
+    gap: 15px;
+  }
+
+  .about-showcase-hero {
+    min-height: 230px;
+    padding: 24px;
+    border-radius: 19px;
+  }
+
+  .about-showcase-hero > img {
+    width: 100%;
+    opacity: 0.48;
+  }
+
+  .about-showcase-hero::after {
+    background: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 97%) 0%,
+      rgb(255 255 255 / 88%) 58%,
+      rgb(255 255 255 / 36%) 100%
+    );
+  }
+
+  .about-hero-content {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .about-showcase-hero h1 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .about-showcase-hero .about-hero-content > p {
+    max-width: 300px;
+    font-size: 0.87rem;
+  }
+
+  .about-hero-bottom {
+    right: 16px;
+    bottom: 12px;
+    gap: 6px;
+    font-size: 0.55rem;
+  }
+
+  .about-showcase-panel {
+    grid-template-columns: 1fr;
+    border-radius: 19px;
+  }
+
+  .about-showcase-image {
+    order: -1;
+    height: 230px;
+    min-height: 230px;
+  }
+
+  .about-showcase-image img {
+    height: 230px;
+    min-height: 230px;
+  }
+
+  .about-showcase-copy {
+    padding: 25px 22px;
+  }
+
+  .about-showcase-copy h2 {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .about-showcase {
+    padding: 12px;
+  }
+
+  .about-tabs-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .about-tab {
+    grid-template-columns: 23px minmax(0, 1fr) 15px;
+    justify-items: start;
+    min-height: 53px;
+    padding: 9px 10px;
+    font-size: 0.78rem;
+    text-align: left;
+  }
+
+  .about-tab-arrow {
+    display: block;
+    width: 15px;
+    height: 15px;
+  }
+
+  .about-showcase-hero {
+    min-height: 215px;
+    padding: 19px;
+  }
+
+  .about-showcase-hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-hero-bottom {
+    font-size: 0.49rem;
+    gap: 5px;
+  }
+
+  .about-panel-heading {
+    align-items: flex-start;
+    gap: 11px;
+  }
+
+  .about-panel-icon {
+    flex-basis: 41px;
+    width: 41px;
+    height: 41px;
+    border-radius: 11px;
+  }
+
+  .about-panel-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .about-showcase-copy {
+    padding: 21px 17px;
+  }
+
+  .about-panel-description {
     font-size: 0.9rem;
   }
+
+  .about-showcase-extra {
+    padding: 15px;
+  }
+
+  .about-showcase-image {
+    height: 195px;
+    min-height: 195px;
+  }
+
+  .about-showcase-image img {
+    height: 195px;
+    min-height: 195px;
+  }
 }
 
 /* =========================================================
-01. MOTION VARIABLES
-========================================================= */
-
-.about-page {
---about-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
---about-motion-fast: 220ms;
---about-motion-normal: 450ms;
---about-motion-slow: 800ms;
-}
-
-/* =========================================================
-02. MAIN ABOUT TEXT — CINEMATIC REVEAL
-========================================================= */
-
-@keyframes aboutTextReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 34px, 0);
-filter: blur(7px);
-}
-
-55% {
-opacity: 0.85;
-filter: blur(2px);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-filter: blur(0);
-}
-}
-
-/* About main title */
-
-.about-title {
-animation:
-aboutTextReveal 0.9s var(--about-motion-ease) 0.12s both;
-will-change: opacity, transform, filter;
-}
-
-/* About paragraph */
-
-.about-text {
-animation:
-aboutTextReveal 0.75s var(--about-motion-ease) 0.28s both;
-will-change: opacity, transform, filter;
-}
-
-/* About points */
-
-.about-points {
-animation:
-aboutTextReveal 0.7s var(--about-motion-ease) 0.42s both;
-}
-
-/* About CTA */
-
-.about-cta {
-animation:
-aboutTextReveal 0.7s var(--about-motion-ease) 0.56s both;
-}
-
-/* =========================================================
-03. EYEBROW / SMALL LABEL
-========================================================= */
-
-@keyframes aboutEyebrowReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 14px, 0);
-letter-spacing: 0.16em;
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-letter-spacing: inherit;
-}
-}
-
-.about-page .eyebrow {
-animation:
-aboutEyebrowReveal 0.65s var(--about-motion-ease) 0.04s both;
-}
-
-/* =========================================================
-04. STORY MEDIA — PREMIUM ENTRANCE
-========================================================= */
-
-@keyframes aboutMediaReveal {
-0% {
-opacity: 0;
-transform: translate3d(34px, 0, 0) scale(0.965);
-filter: saturate(0.88);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0) scale(1);
-filter: saturate(1);
-}
-}
-
-.about-media {
-animation:
-aboutMediaReveal 0.95s var(--about-motion-ease) 0.2s both;
-will-change: opacity, transform, filter;
-}
-
-/* =========================================================
-05. STORY IMAGE HOVER
-========================================================= */
-
-.about-media .media-frame,
-.about-media .media-frame img {
-transition:
-transform 700ms var(--about-motion-ease),
-filter 500ms ease,
-box-shadow 450ms ease;
-}
-
-.about-media .media-frame {
-overflow: hidden;
-}
-
-.about-media .media-frame:hover {
-transform: translateY(-5px);
-box-shadow:
-0 24px 55px rgba(17, 51, 24, 0.14);
-}
-
-.about-media .media-frame:hover img {
-transform: scale(1.045);
-filter:
-saturate(1.06)
-contrast(1.02);
-}
-
-/* =========================================================
-06. ABOUT STATS BAND
-========================================================= */
-
-@keyframes aboutStatReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 28px, 0) scale(0.94);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0) scale(1);
-}
-}
-
-.about-stat {
-animation:
-aboutStatReveal 0.72s var(--about-motion-ease) both;
-transition:
-transform 300ms var(--about-motion-ease);
-}
-
-.about-stat:nth-child(1) {
-animation-delay: 0.05s;
-}
-
-.about-stat:nth-child(2) {
-animation-delay: 0.14s;
-}
-
-.about-stat:nth-child(3) {
-animation-delay: 0.23s;
-}
-
-.about-stat:nth-child(4) {
-animation-delay: 0.32s;
-}
-
-.about-stat:hover {
-transform: translateY(-5px);
-}
-
-.about-stat strong {
-display: inline-block;
-transition:
-transform 300ms var(--about-motion-ease),
-letter-spacing 300ms ease;
-}
-
-.about-stat:hover strong {
-transform: scale(1.045);
-letter-spacing: 0.015em;
-}
-
-/* =========================================================
-07. SECTION HEADING REVEAL
-========================================================= */
-
-@keyframes aboutHeadingReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 30px, 0);
-clip-path: inset(100% 0 0 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-clip-path: inset(0 0 0 0);
-}
-}
-
-.about-page .section-head h2 {
-animation:
-aboutHeadingReveal 0.85s var(--about-motion-ease) 0.12s both;
-}
-
-/* =========================================================
-08. MISSION & VISION CARDS
-========================================================= */
-
-@keyframes aboutMissionReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 26px, 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-}
-}
-
-.about-mission {
-animation:
-aboutMissionReveal 0.72s var(--about-motion-ease) both;
-
-transition:
-transform 350ms var(--about-motion-ease),
-box-shadow 350ms ease,
-border-color 350ms ease,
-background-color 350ms ease;
-}
-
-.about-mission:nth-child(1) {
-animation-delay: 0.10s;
-}
-
-.about-mission:nth-child(2) {
-animation-delay: 0.20s;
-}
-
-.about-mission:hover {
-transform: translateY(-7px);
-box-shadow:
-0 18px 40px rgba(17, 51, 24, 0.10);
-}
-
-.about-mission h3 {
-transition:
-color 280ms ease,
-transform 280ms var(--about-motion-ease);
-}
-
-.about-mission:hover h3 {
-color: var(--green-700);
-transform: translateX(4px);
-}
-
-/* =========================================================
-09. VALUES — STAGGER + PREMIUM HOVER
-========================================================= */
-
-@keyframes aboutValueReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 30px, 0) scale(0.975);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0) scale(1);
-}
-}
-
-.about-value {
-animation:
-aboutValueReveal 0.72s var(--about-motion-ease) both;
-
-transition:
-transform 360ms var(--about-motion-ease),
-box-shadow 360ms ease,
-border-color 360ms ease;
-}
-
-.about-value:nth-child(1) {
-animation-delay: 0.08s;
-}
-
-.about-value:nth-child(2) {
-animation-delay: 0.16s;
-}
-
-.about-value:nth-child(3) {
-animation-delay: 0.24s;
-}
-
-.about-value:nth-child(4) {
-animation-delay: 0.32s;
-}
-
-.about-value:nth-child(5) {
-animation-delay: 0.40s;
-}
-
-.about-value:nth-child(6) {
-animation-delay: 0.48s;
-}
-
-.about-value:hover {
-transform: translateY(-8px);
-box-shadow:
-0 20px 44px rgba(17, 51, 24, 0.11);
-}
-
-/* Value icon */
-
-.about-value-icon {
-transition:
-transform 350ms var(--about-motion-ease),
-background-color 300ms ease,
-color 300ms ease,
-box-shadow 300ms ease;
-}
-
-.about-value:hover .about-value-icon {
-transform:
-translateY(-4px)
-scale(1.08)
-rotate(-2deg);
-
-background: var(--green-700);
-color: #ffffff;
-
-box-shadow:
-0 8px 18px rgba(31, 122, 61, 0.16);
-}
-
-/* Value heading */
-
-.about-value h3 {
-transition:
-color 280ms ease,
-transform 280ms var(--about-motion-ease);
-}
-
-.about-value:hover h3 {
-color: var(--green-700);
-transform: translateX(3px);
-}
-
-/* =========================================================
-10. PROCESS LIST
-========================================================= */
-
-@keyframes aboutProcessReveal {
-0% {
-opacity: 0;
-transform: translate3d(-24px, 0, 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-}
-}
-
-.about-process-list li {
-animation:
-aboutProcessReveal 0.68s var(--about-motion-ease) both;
-
-transition:
-padding-left 300ms var(--about-motion-ease),
-background-color 300ms ease;
-}
-
-.about-process-list li:nth-child(1) {
-animation-delay: 0.08s;
-}
-
-.about-process-list li:nth-child(2) {
-animation-delay: 0.16s;
-}
-
-.about-process-list li:nth-child(3) {
-animation-delay: 0.24s;
-}
-
-.about-process-list li:nth-child(4) {
-animation-delay: 0.32s;
-}
-
-.about-process-list li:nth-child(5) {
-animation-delay: 0.40s;
-}
-
-.about-process-list li:hover {
-padding-left: 7px;
-}
-
-/* Process number */
-
-.about-process-step {
-transition:
-transform 350ms var(--about-motion-ease),
-background-color 300ms ease,
-box-shadow 300ms ease;
-}
-
-.about-process-list li:hover .about-process-step {
-transform:
-translateY(-3px)
-scale(1.08);
-
-background: var(--green-600);
-
-box-shadow:
-0 8px 20px rgba(31, 122, 61, 0.18);
-}
-
-/* Process title */
-
-.about-process-list h3 {
-transition:
-color 280ms ease,
-transform 280ms var(--about-motion-ease);
-}
-
-.about-process-list li:hover h3 {
-color: var(--green-700);
-transform: translateX(3px);
-}
-
-/* =========================================================
-11. CERTIFICATION CARD
-========================================================= */
-
-@keyframes aboutCertReveal {
-0% {
-opacity: 0;
-transform: translate3d(28px, 0, 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-}
-}
-
-.about-cert {
-animation:
-aboutCertReveal 0.8s var(--about-motion-ease) 0.18s both;
-
-transition:
-transform 380ms var(--about-motion-ease),
-box-shadow 380ms ease,
-border-color 300ms ease;
-}
-
-.about-cert:hover {
-transform: translateY(-7px);
-
-box-shadow:
-0 22px 50px rgba(17, 51, 24, 0.12);
-}
-
-/* Certification heading */
-
-.about-cert h3 {
-transition:
-color 280ms ease,
-transform 280ms var(--about-motion-ease);
-}
-
-.about-cert:hover h3 {
-color: var(--green-700);
-transform: translateX(3px);
-}
-
-/* =========================================================
-12. CERTIFICATION LIST
-========================================================= */
-
-@keyframes aboutCertItemReveal {
-0% {
-opacity: 0;
-transform: translate3d(0, 12px, 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-}
-}
-
-.about-cert-list li {
-animation:
-aboutCertItemReveal 0.55s var(--about-motion-ease) both;
-}
-
-.about-cert-list li:nth-child(1) {
-animation-delay: 0.30s;
-}
-
-.about-cert-list li:nth-child(2) {
-animation-delay: 0.38s;
-}
-
-.about-cert-list li:nth-child(3) {
-animation-delay: 0.46s;
-}
-
-.about-cert-list li:nth-child(4) {
-animation-delay: 0.54s;
-}
-
-.about-cert-list li:nth-child(5) {
-animation-delay: 0.62s;
-}
-
-/* =========================================================
-13. ABOUT CTA — PREMIUM BUTTON HOVER
-========================================================= */
-
-.about-cta .btn,
-.about-cert-cta .btn {
-position: relative;
-overflow: hidden;
-
-transition:
-transform 280ms var(--about-motion-ease),
-box-shadow 280ms ease,
-background-color 280ms ease,
-border-color 280ms ease;
-}
-
-/* Shine effect */
-
-.about-cta .btn::after,
-.about-cert-cta .btn::after {
-content: "";
-
-position: absolute;
-top: 0;
-left: -125%;
-
-width: 65%;
-height: 100%;
-
-pointer-events: none;
-
-background:
-linear-gradient(
-105deg,
-transparent,
-rgba(255, 255, 255, 0.26),
-transparent
-);
-
-transform: skewX(-20deg);
-
-transition:
-left 650ms var(--about-motion-ease);
-}
-
-.about-cta .btn:hover,
-.about-cert-cta .btn:hover {
-transform: translateY(-3px);
-
-box-shadow:
-0 12px 26px rgba(17, 51, 24, 0.14);
-}
-
-.about-cta .btn:hover::after,
-.about-cert-cta .btn:hover::after {
-left: 140%;
-}
-
-.about-cta .btn:active,
-.about-cert-cta .btn:active {
-transform:
-translateY(-1px)
-scale(0.985);
-}
-
-/* =========================================================
-14. ABOUT POINTS HOVER
-========================================================= */
-
-.about-points li {
-transition:
-transform 280ms var(--about-motion-ease),
-color 280ms ease;
-}
-
-.about-points li:hover {
-transform: translateX(5px);
-color: var(--green-700);
-}
-
-/* =========================================================
-15. SUBTLE SECTION IMAGE DEPTH
-========================================================= */
-
-.about-media img {
-backface-visibility: hidden;
-}
-
-/* =========================================================
-16. PAGE LOAD CHOREOGRAPHY
-========================================================= */
-
-@keyframes aboutPageEntrance {
-0% {
-opacity: 0;
-transform: translate3d(0, 10px, 0);
-}
-
-100% {
-opacity: 1;
-transform: translate3d(0, 0, 0);
-}
-}
-
-.about-page {
-animation:
-aboutPageEntrance 0.45s var(--about-motion-ease) both;
-}
-
-/* =========================================================
-17. RESPONSIVE ANIMATION
-========================================================= */
-
-@media (max-width: 720px) {
-
-.about-title {
-animation-duration: 0.75s;
-}
-
-.about-text {
-animation-duration: 0.65s;
-}
-
-.about-media {
-animation-duration: 0.75s;
-}
-
-.about-value:hover,
-.about-mission:hover,
-.about-cert:hover {
-transform: translateY(-4px);
-}
-
-.about-media .media-frame:hover {
-transform: translateY(-3px);
-}
-
-.about-process-list li:hover {
-padding-left: 3px;
-}
-
-}
-
-/* =========================================================
-18. SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-
-.about-stat:hover {
-transform: translateY(-3px);
-}
-
-.about-value:hover {
-transform: translateY(-3px);
-}
-
-.about-mission:hover,
-.about-cert:hover {
-transform: translateY(-3px);
-}
-
-}
-
-/* =========================================================
-19. REDUCED MOTION — ACCESSIBILITY
+   ACCESSIBILITY — REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
-.about-page,
-.about-page *,
-.about-page *::before,
-.about-page *::after {
-animation-duration: 0.01ms !important;
-animation-iteration-count: 1 !important;
-transition-duration: 0.01ms !important;
-scroll-behavior: auto !important;
-}
-
-.about-page,
-.about-title,
-.about-text,
-.about-points,
-.about-cta,
-.about-media,
-.about-stat,
-.about-mission,
-.about-value,
-.about-process-list li,
-.about-cert,
-.about-cert-list li,
-.about-page .section-head h2 {
-opacity: 1 !important;
-transform: none !important;
-filter: none !important;
-clip-path: none !important;
-}
+  .about-showcase *,
+  .about-showcase *::before,
+  .about-showcase *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
