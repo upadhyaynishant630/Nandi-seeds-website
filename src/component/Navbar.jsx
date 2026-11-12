@@ -155,9 +155,8 @@ function Navbar() {
 
             <nav
               id="main-navigation"
-              className={`navbar-menu ${
-                menuOpen ? "menu-open" : ""
-              }`}
+              className={`navbar-menu ${menuOpen ? "menu-open" : ""
+                }`}
               aria-label="Main navigation"
             >
 
@@ -165,7 +164,23 @@ function Navbar() {
 
               <div className="navbar-menu-head">
 
-                <span>{SITE.tagline}</span>
+                {/* LOGO - CLICK TO GO HOME */}
+
+                <Link
+                  to="/"
+                  className="navbar-menu-logo"
+                  onClick={closeMenu}
+                  aria-label="Go to Nandi Seeds Home"
+                >
+                  <img
+                    src="/images/logo/nandi-seeds-logo.png"
+                    alt={SITE.name}
+                    width="190"
+                    height="46"
+                  />
+                </Link>
+
+                {/* CLOSE BUTTON */}
 
                 <button
                   type="button"
@@ -177,6 +192,7 @@ function Navbar() {
                 </button>
 
               </div>
+
 
               {/* NAVIGATION LINKS */}
 
@@ -244,9 +260,8 @@ function Navbar() {
 
               <button
                 type="button"
-                className={`mobile-menu-button ${
-                  menuOpen ? "menu-button-active" : ""
-                }`}
+                className={`mobile-menu-button ${menuOpen ? "menu-button-active" : ""
+                  }`}
                 onClick={() =>
                   setMenuOpen((previous) => !previous)
                 }
@@ -276,9 +291,8 @@ function Navbar() {
 
         <button
           type="button"
-          className={`navbar-overlay ${
-            menuOpen ? "overlay-visible" : ""
-          }`}
+          className={`navbar-overlay ${menuOpen ? "overlay-visible" : ""
+            }`}
           onClick={closeMenu}
           aria-label="Close navigation menu"
           tabIndex={menuOpen ? 0 : -1}

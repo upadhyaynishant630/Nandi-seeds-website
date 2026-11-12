@@ -585,6 +585,18 @@
     text-transform: uppercase;
   }
 
+  .navbar-menu-head img {
+    display: block;
+
+    width: min(150px, 70%);
+    max-width: 100%;
+    height: auto;
+    max-height: 65px;
+
+    object-fit: contain;
+    object-position: left center;
+  }
+
   /* Drawer close button */
 
   .menu-close {
@@ -690,19 +702,19 @@
     display: flex;
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 
     width: 100%;
     max-width: 100%;
 
     color: var(--green-800, #17643d);
 
-    font-size: 0.9rem;
+    font-size: clamp(0.76rem, 3.2vw, 0.9rem);
     font-weight: 600;
     line-height: 1.5;
 
     text-decoration: none;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
   }
 
   .navbar-menu-foot a svg {
@@ -811,7 +823,7 @@
   }
 
   .navbar-menu {
-    width: min(360px, 89vw);
+    width: min(360px, 60vw);
     padding: 22px 19px 26px;
   }
 
@@ -875,7 +887,7 @@
   }
 
   .navbar-menu {
-    width: min(350px, 91vw);
+    width: min(350px, 60vw);
     padding: 20px 17px 24px;
   }
 
@@ -944,7 +956,7 @@
   }
 
   .navbar-menu {
-    width: 94vw;
+    width: 60vw;
     max-width: 360px;
     padding: 19px 15px 22px;
   }
@@ -997,7 +1009,7 @@
   }
 
   .navbar-menu {
-    width: 96vw;
+    width: 60vw;
     padding-inline: 12px;
   }
 }
