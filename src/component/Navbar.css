@@ -1133,3 +1133,58 @@ body.menu-is-open {
     padding-right: max(17px, env(safe-area-inset-right));
   }
 }
+
+
+/* ==========================================
+   ANNOUNCEMENT BAR - NON STICKY
+========================================== */
+
+.navbar-utility {
+  position: relative !important;
+  top: auto !important;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ==========================================
+   MAIN NAVBAR - STICKY
+========================================== */
+
+header.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1200;
+}
+
+/* Keep main navigation background intact */
+
+header.navbar .navbar-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ==========================================
+   SCROLLED NAVBAR
+========================================== */
+
+header.navbar.navbar-scrolled {
+  z-index: 1200;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+========================================== */
+
+@media (max-width: 768px) {
+  .navbar-utility {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  header.navbar {
+    position: sticky;
+    top: 0;
+  }
+}

@@ -31,13 +31,6 @@ const SOCIAL_ICONS = {
 function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <footer className="footer">
       <div className="footer-main">
@@ -180,19 +173,31 @@ function Footer() {
             &copy; {currentYear} {SITE.name}. All rights reserved.
           </p>
 
+
           <div className="footer-bottom-links">
             <Link to="/about">About</Link>
+
             <Link to="/dealers">Become a Dealer</Link>
 
-            <button
-              type="button"
-              className="footer-top-button"
-              onClick={scrollToTop}
+            <a
+              href="https://YOUR-VIRTUMEDIA-WEBSITE.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-credit-link"
+              aria-label="Developed by VirtuMedia"
             >
-              Back to top
-              <FiArrowUp aria-hidden="true" />
-            </button>
+              <img
+                src="/images/virtumedia-favicon.png"
+                alt=""
+                width="20"
+                height="20"
+              />
+              <span>
+                Developed By <strong>VirtuMedia</strong>
+              </span>
+            </a>
           </div>
+
         </div>
       </div>
     </footer>

@@ -249,11 +249,12 @@
 }
 
 .home-stat strong {
-  display: block;
+   display: block;
   color: #ffffff;
   font-family: var(--font-heading);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   line-height: 1.1;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-stat span {
@@ -666,20 +667,6 @@ box-shadow 280ms ease,
 border-color 280ms ease;
 }
 
-.home-testimonial::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 4px;
-background: linear-gradient(
-90deg,
-var(--green-700),
-var(--green-200)
-);
-opacity: 0.92;
-}
 
 .home-testimonial::after {
 content: "“";
@@ -838,47 +825,20 @@ line-height: 1.72;
 letter-spacing: -0.008em;
 }
 
-.home-testimonial-quote::before {
-content: "\201C";
-display: block;
-height: 26px;
-margin-bottom: 10px;
-
-color: var(--green-700);
-font-family: Georgia, "Times New Roman", serif;
-font-size: 4.2rem;
-font-weight: 700;
-line-height: 0.72;
-opacity: 0.95;
-}
 
 /* =========================================================
 PERSON / AUTHOR
 ========================================================= */
 
 .home-testimonial-person {
-position: relative;
-display: flex;
-flex-direction: column;
-gap: 3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 
-margin-top: 22px;
-padding-top: 17px;
-border-top: 1px solid rgba(36, 89, 46, 0.1);
+  margin-top: 22px;
 }
 
-.home-testimonial-person::before {
-content: "";
-width: 38px;
-height: 3px;
-margin-bottom: 7px;
-border-radius: 999px;
-background: linear-gradient(
-90deg,
-var(--green-700),
-var(--green-200)
-);
-}
 
 .home-testimonial-person strong {
 color: var(--ink);
@@ -1303,6 +1263,32 @@ animation: none;
 
   .hero-float span {
     font-size: 0.68rem;
+  }
+}
+
+
+/* ==============================================
+   VIDEO AUTOPLAY STYLING
+============================================== */
+
+.home-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #071b30;
+}
+
+/* Maintain video aspect ratio */
+.home-video-placeholder {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+/* Mobile video */
+@media (max-width: 640px) {
+  .home-video-placeholder {
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -1979,38 +1965,6 @@ animation: none;
 
 .home-testimonial:hover {
   transform: translateY(-9px);
-}
-
-.home-testimonial::before {
-  transform: scaleX(0.45);
-  transform-origin: left;
-  transition:
-    transform 500ms var(--motion-ease);
-}
-
-.home-testimonial:hover::before {
-  transform: scaleX(1);
-}
-
-.home-testimonial-quote::before {
-  transition:
-    transform 350ms var(--motion-ease),
-    opacity 350ms ease;
-}
-
-.home-testimonial:hover .home-testimonial-quote::before {
-  transform: translateY(-3px) scale(1.05);
-  opacity: 1;
-}
-
-.home-testimonial-person::before {
-  width: 38px;
-  transition:
-    width 400ms var(--motion-ease);
-}
-
-.home-testimonial:hover .home-testimonial-person::before {
-  width: 60px;
 }
 
 

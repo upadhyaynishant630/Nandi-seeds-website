@@ -18,7 +18,10 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // =========================================
   // SCROLL EFFECT
+  // =========================================
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -35,7 +38,10 @@ function Navbar() {
     };
   }, []);
 
+  // =========================================
   // BODY SCROLL LOCK
+  // =========================================
+
   useEffect(() => {
     document.body.classList.toggle("menu-is-open", menuOpen);
 
@@ -44,7 +50,10 @@ function Navbar() {
     };
   }, [menuOpen]);
 
+  // =========================================
   // ESC KEY CLOSE
+  // =========================================
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -59,24 +68,28 @@ function Navbar() {
     };
   }, []);
 
+  // =========================================
   // CLOSE MENU
+  // =========================================
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
+  // =========================================
   // ACTIVE NAVIGATION LINK
+  // =========================================
+
   const navClass = ({ isActive }) =>
     isActive
       ? "nav-link nav-link-active"
       : "nav-link";
 
   return (
-    <header
-      className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
-    >
-
+    <>
       {/* =========================================
-          TOP UTILITY BAR
+          TOP UTILITY / ANNOUNCEMENT BAR
+          NOT STICKY - SCROLLS AWAY
       ========================================= */}
 
       <div className="navbar-utility">
@@ -111,161 +124,169 @@ function Navbar() {
 
       {/* =========================================
           MAIN NAVIGATION BAR
+          STICKY WHILE SCROLLING
       ========================================= */}
 
-      <div className="navbar-container">
+      <header
+        className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
+      >
 
-        <div className="container navbar-inner">
+        <div className="navbar-container">
 
-          {/* LEFT: NANDI SEEDS LOGO */}
+          <div className="container navbar-inner">
 
-          <Link
-            to="/"
-            className="navbar-logo"
-            onClick={closeMenu}
-            aria-label={`${SITE.name} home`}
-          >
-            <img
-              src="/images/logo/nandi-seeds-logo.png"
-              alt={SITE.name}
-              width="190"
-              height="46"
-            />
-          </Link>
+            {/* LEFT: NANDI SEEDS LOGO */}
 
-          {/* CENTER: DESKTOP NAVIGATION */}
+            <Link
+              to="/"
+              className="navbar-logo"
+              onClick={closeMenu}
+              aria-label={`${SITE.name} home`}
+            >
+              <img
+                src="/images/logo/nandi-seeds-logo.png"
+                alt={SITE.name}
+                width="190"
+                height="46"
+              />
+            </Link>
 
-          <nav
-            id="main-navigation"
-            className={`navbar-menu ${
-              menuOpen ? "menu-open" : ""
-            }`}
-            aria-label="Main navigation"
-          >
+            {/* CENTER: DESKTOP NAVIGATION */}
 
-            {/* MOBILE DRAWER HEADER */}
+            <nav
+              id="main-navigation"
+              className={`navbar-menu ${
+                menuOpen ? "menu-open" : ""
+              }`}
+              aria-label="Main navigation"
+            >
 
-            <div className="navbar-menu-head">
+              {/* MOBILE DRAWER HEADER */}
 
-              <span>{SITE.tagline}</span>
+              <div className="navbar-menu-head">
+
+                <span>{SITE.tagline}</span>
+
+                <button
+                  type="button"
+                  className="menu-close"
+                  onClick={closeMenu}
+                  aria-label="Close navigation menu"
+                >
+                  <FiX aria-hidden="true" />
+                </button>
+
+              </div>
+
+              {/* NAVIGATION LINKS */}
+
+              {NAV_LINKS.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={navClass}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+
+              {/* CONTACT BUTTON */}
+
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-contact nav-contact-active"
+                    : "nav-contact"
+                }
+                onClick={closeMenu}
+              >
+                <span>Get in Touch</span>
+              </NavLink>
+
+              {/* MOBILE DRAWER FOOTER */}
+
+              <div className="navbar-menu-foot">
+
+                <a href={`tel:${SITE.phone}`}>
+                  <FiPhone aria-hidden="true" />
+                  <span>{SITE.phone}</span>
+                </a>
+
+                <a href={`mailto:${SITE.email}`}>
+                  <FiMail aria-hidden="true" />
+                  <span>{SITE.email}</span>
+                </a>
+
+              </div>
+
+            </nav>
+
+            {/* =====================================
+                RIGHT SIDE: BIOSTADT + MENU BUTTON
+            ===================================== */}
+
+            <div className="navbar-actions">
+
+              {/* BIOSTADT LOGO */}
+
+              <div className="navbar-biostand">
+                <img
+                  src="/images/logo/Biostand-logo.png"
+                  alt="BIOSTADT"
+                  width="384"
+                  height="110"
+                />
+              </div>
+
+              {/* MOBILE MENU BUTTON */}
 
               <button
                 type="button"
-                className="menu-close"
-                onClick={closeMenu}
-                aria-label="Close navigation menu"
+                className={`mobile-menu-button ${
+                  menuOpen ? "menu-button-active" : ""
+                }`}
+                onClick={() =>
+                  setMenuOpen((previous) => !previous)
+                }
+                aria-label={
+                  menuOpen
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
+                }
+                aria-expanded={menuOpen}
+                aria-controls="main-navigation"
               >
-                <FiX aria-hidden="true" />
+                {menuOpen ? (
+                  <FiX aria-hidden="true" />
+                ) : (
+                  <FiMenu aria-hidden="true" />
+                )}
               </button>
 
             </div>
 
-            {/* NAVIGATION LINKS */}
-
-            {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={navClass}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-
-            {/* CONTACT BUTTON */}
-
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive
-                  ? "nav-contact nav-contact-active"
-                  : "nav-contact"
-              }
-              onClick={closeMenu}
-            >
-              <span>Get in Touch</span>
-            </NavLink>
-
-            {/* MOBILE DRAWER FOOTER */}
-
-            <div className="navbar-menu-foot">
-
-              <a href={`tel:${SITE.phone}`}>
-                <FiPhone aria-hidden="true" />
-                <span>{SITE.phone}</span>
-              </a>
-
-              <a href={`mailto:${SITE.email}`}>
-                <FiMail aria-hidden="true" />
-                <span>{SITE.email}</span>
-              </a>
-
-            </div>
-
-          </nav>
-
-          {/* =====================================
-              RIGHT SIDE: BIOSTADT + MENU BUTTON
-          ===================================== */}
-
-          <div className="navbar-actions">
-
-            {/* ORIGINAL BIOSTADT LOGO */}
-
-            <div className="navbar-biostand">
-              <img
-                src="/images/logo/Biostand-logo.png"
-                alt="BIOSTADT"
-                width="384"
-                height="110"
-              />
-            </div>
-
-            {/* MOBILE MENU BUTTON */}
-
-            <button
-              type="button"
-              className={`mobile-menu-button ${
-                menuOpen ? "menu-button-active" : ""
-              }`}
-              onClick={() => setMenuOpen((previous) => !previous)}
-              aria-label={
-                menuOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
-              }
-              aria-expanded={menuOpen}
-              aria-controls="main-navigation"
-            >
-              {menuOpen ? (
-                <FiX aria-hidden="true" />
-              ) : (
-                <FiMenu aria-hidden="true" />
-              )}
-            </button>
-
           </div>
-
         </div>
-      </div>
 
-      {/* =========================================
-          MOBILE BACKGROUND OVERLAY
-      ========================================= */}
+        {/* =========================================
+            MOBILE BACKGROUND OVERLAY
+        ========================================= */}
 
-      <button
-        type="button"
-        className={`navbar-overlay ${
-          menuOpen ? "overlay-visible" : ""
-        }`}
-        onClick={closeMenu}
-        aria-label="Close navigation menu"
-        tabIndex={menuOpen ? 0 : -1}
-        aria-hidden={!menuOpen}
-      />
+        <button
+          type="button"
+          className={`navbar-overlay ${
+            menuOpen ? "overlay-visible" : ""
+          }`}
+          onClick={closeMenu}
+          aria-label="Close navigation menu"
+          tabIndex={menuOpen ? 0 : -1}
+          aria-hidden={!menuOpen}
+        />
 
-    </header>
+      </header>
+    </>
   );
 }
 

@@ -65,15 +65,32 @@ export const SEED_CATEGORY_LINKS = [
   { label: "Fodder Seeds", to: "/products?category=Fodder" },
 ];
 
+
 /* =========================================================
    COMPANY HIGHLIGHTS
 ========================================================= */
 
 export const STATS = [
-  { value: "30+", label: "Years in seed production" },
-  { value: "120+", label: "Seed varieties developed" },
-  { value: "8 Lakh+", label: "Farmers served across India" },
-  { value: "1,400+", label: "Authorised dealer counters" },
+  {
+    value: 30,
+    suffix: "+",
+    label: "Years in seed production",
+  },
+  {
+    value: 120,
+    suffix: "+",
+    label: "Seed varieties developed",
+  },
+  {
+    value: 8,
+    suffix: " Lakh+",
+    label: "Farmers served across India",
+  },
+  {
+    value: 1400,
+    suffix: "+",
+    label: "Authorised dealer counters",
+  },
 ];
 
 /* =========================================================

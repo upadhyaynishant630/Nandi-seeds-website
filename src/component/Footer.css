@@ -976,6 +976,55 @@
   transform: translateY(-3px);
 }
 
+
+/* =========================================
+   VIRTUMEDIA FOOTER CREDIT
+========================================= */
+
+.footer-credit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  white-space: nowrap;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-credit-link img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.footer-credit-link strong {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.footer-credit-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.footer-credit-link::after {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .footer-credit-link {
+    font-size: 0.82rem;
+  }
+}
+
+
 /* =========================================================
    KEYFRAMES
 ========================================================= */

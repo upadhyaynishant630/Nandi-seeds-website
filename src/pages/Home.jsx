@@ -41,6 +41,111 @@ const HERO_SLIDES = [
   },
 ];
 
+
+/* =========================================================
+   ANIMATED STAT COUNTER
+   Counts up when the stat enters the viewport.
+========================================================= */
+
+function CountUp({ value, suffix = "", duration = 1800 }) {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const element = counterRef.current;
+
+    if (!element) return undefined;
+
+    let animationFrameId = null;
+    let observer;
+
+    const startCounting = () => {
+      const prefersReducedMotion =
+        window.matchMedia?.(
+          "(prefers-reduced-motion: reduce)"
+        )?.matches ?? false;
+
+      // Accessibility: show final value without animation.
+      if (prefersReducedMotion) {
+        setCount(value);
+        return;
+      }
+
+      const startTime = performance.now();
+
+      const updateCount = (currentTime) => {
+        const elapsed = currentTime - startTime;
+
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Smooth ease-out animation.
+        const easedProgress =
+          1 - Math.pow(1 - progress, 3);
+
+        const currentValue = Math.round(
+          value * easedProgress
+        );
+
+        setCount(currentValue);
+
+        if (progress < 1) {
+          animationFrameId =
+            requestAnimationFrame(updateCount);
+        } else {
+          setCount(value);
+        }
+      };
+
+      animationFrameId =
+        requestAnimationFrame(updateCount);
+    };
+
+    // Fallback for browsers without IntersectionObserver.
+    if (!("IntersectionObserver" in window)) {
+      startCounting();
+    } else {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            observer.disconnect();
+            startCounting();
+          }
+        },
+        {
+          threshold: 0.35,
+        }
+      );
+
+      observer.observe(element);
+    }
+
+    return () => {
+      observer?.disconnect();
+
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [value, duration]);
+
+  const formattedValue = new Intl.NumberFormat("en-IN")
+    .format(count);
+
+  const finalValue = new Intl.NumberFormat("en-IN")
+    .format(value);
+
+  return (
+    <strong
+      ref={counterRef}
+      aria-label={`${finalValue}${suffix}`}
+      aria-live="off"
+    >
+      {formattedValue}{suffix}
+    </strong>
+  );
+}
+
+
 /* =========================================================
    Home
 ========================================================= */
@@ -207,9 +312,8 @@ function Home() {
             <div className="media-frame hero-frame" aria-live="off">
               {HERO_SLIDES.map((slide, index) => (
                 <div
-                  className={`hero-slide ${
-                    index === activeSlide ? "hero-slide-active" : ""
-                  }`}
+                  className={`hero-slide ${index === activeSlide ? "hero-slide-active" : ""
+                    }`}
                   key={slide.src}
                   aria-hidden={index !== activeSlide}
                 >
@@ -282,16 +386,22 @@ function Home() {
         </div>
       </section>
 
+
       {/* =================================================
-          TRUST STATS
-      ================================================= */}
+    TRUST STATS - ANIMATED COUNTERS
+================================================= */}
 
       <section className="home-stats">
         <div className="container">
           <ul className="home-stats-grid">
             {STATS.map((stat) => (
               <li key={stat.label} className="home-stat">
-                <strong>{stat.value}</strong>
+                <CountUp
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  duration={1800}
+                />
+
                 <span>{stat.label}</span>
               </li>
             ))}
@@ -595,12 +705,16 @@ function Home() {
             className="home-video-placeholder"
             aria-label="Nandi Seeds field demonstration video"
           >
+
             <video
               ref={videoRef}
               className="home-video"
-              controls
+              autoPlay
+              muted
+              loop
               playsInline
-              preload="metadata"
+              controls
+              preload="auto"
             >
               <source
                 src="/videos/nandi-farmer-field.mp4"
@@ -610,7 +724,7 @@ function Home() {
               Your browser does not support the video tag.
             </video>
 
-            
+
           </div>
         </div>
       </section>
