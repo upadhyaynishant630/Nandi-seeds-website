@@ -8,17 +8,47 @@ import { PRODUCTS, SEED_CATEGORIES } from "../data/products";
 import "./Products.css";
 
 /* =========================================================
-   Products
-   Filterable seed catalogue. Category is stored in the URL
-   (?category=Cereals) so footer shortcuts and shared links
-   open the right tab.
+   PRODUCTS — PEARL MILLET CATALOGUE
+
+   - Search and category filtering are URL-aware.
+   - Product images use the image paths from products.js.
+   - Cards display only product information supplied in the
+     Pearl Millet Product-Wise USPs.
 ========================================================= */
+
+const FEATURE_SPEC_ORDER = [
+  ["plantHeight", "Plant height"],
+  ["panicleLength", "Panicle length"],
+  ["panicle", "Panicle"],
+  ["plantType", "Plant characteristics"],
+  ["tolerance", "Key trait"],
+  ["growthHabit", "Growth habit"],
+];
+
+function getCardSpecs(product) {
+  const specs = product.specs ?? {};
+  const rows = [
+    { label: "Maturity", value: specs.maturity },
+    { label: "Expected yield", value: specs.expectedYield },
+  ].filter((row) => Boolean(row.value));
+
+  const feature = FEATURE_SPEC_ORDER.find(([key]) => Boolean(specs[key]));
+
+  if (feature) {
+    rows.push({ label: feature[1], value: specs[feature[0]] });
+  }
+
+  return rows;
+}
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
 
-  const activeCategory = searchParams.get("category") || "All";
+  const requestedCategory = searchParams.get("category");
+  const activeCategory = SEED_CATEGORIES.includes(requestedCategory)
+    ? requestedCategory
+    : "All";
 
   const setCategory = (category) => {
     if (category === "All") {
@@ -35,8 +65,23 @@ function Products() {
       const matchesCategory =
         activeCategory === "All" || product.category === activeCategory;
 
-      const haystack =
-        `${product.name} ${product.crop} ${product.category} ${product.short}`.toLowerCase();
+      const searchableSpecs = Object.values(product.specs ?? {}).join(" ");
+      const searchableHighlights = Array.isArray(product.highlights)
+        ? product.highlights.join(" ")
+        : "";
+
+      const haystack = [
+        product.name,
+        product.crop,
+        product.category,
+        product.short,
+        product.description,
+        searchableSpecs,
+        searchableHighlights,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
 
       const matchesTerm = term === "" || haystack.includes(term);
 
@@ -44,20 +89,22 @@ function Products() {
     });
   }, [activeCategory, query]);
 
+  const clearFilters = () => {
+    setQuery("");
+    setCategory("All");
+  };
+
   return (
     <div className="products-page">
       <PageHero
-        eyebrow="Seed Catalogue"
-        title="Find the right variety for your field"
-        subtitle="Filter by crop group or search by variety name. Every listing carries verified germination, maturity and recommended spacing."
+        eyebrow="Pearl Millet Catalogue"
+        title="Explore our Pearl Millet varieties"
+        subtitle="Compare maturity periods, expected yields and variety-wise characteristics to find the information relevant to your field."
         breadcrumb="Products"
       />
 
-      {/* =================================================
-          FILTER BAR
-      ================================================= */}
-
-      <section className="products-filter">
+      {/* FILTER BAR */}
+      <section className="products-filter" aria-label="Product filters">
         <div className="container">
           <div className="products-filter-inner">
             <div className="products-search">
@@ -66,19 +113,19 @@ function Products() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search tomato, maize, okra..."
-                aria-label="Search seed varieties"
+                placeholder="Search Pearl Millet varieties..."
+                aria-label="Search Pearl Millet varieties"
               />
             </div>
 
-            <span className="products-count">
+            <span className="products-count" aria-live="polite">
               <FiSliders aria-hidden="true" />
               {filteredProducts.length}{" "}
               {filteredProducts.length === 1 ? "variety" : "varieties"}
             </span>
           </div>
 
-          <div className="products-chips">
+          <div className="products-chips" aria-label="Filter by category">
             {SEED_CATEGORIES.map((category) => (
               <button
                 key={category}
@@ -95,117 +142,117 @@ function Products() {
           </div>
         </div>
       </section>
-      {/* =================================================
-          PRODUCT GRID
-      ================================================= */}
 
+      {/* PRODUCT GRID */}
       <section className="section-tight products-list">
         <div className="container">
           {filteredProducts.length === 0 ? (
             <div className="products-empty">
               <h3>No varieties matched that search</h3>
               <p>
-                Try a different crop name, or clear the filters to see the
-                full catalogue.
+                Try another variety name or characteristic, or clear the
+                filters to view the full Pearl Millet catalogue.
               </p>
-
               <button
                 type="button"
                 className="btn btn-outline"
-                onClick={() => {
-                  setQuery("");
-                  setCategory("All");
-                }}
+                onClick={clearFilters}
               >
                 Clear Filters
               </button>
             </div>
           ) : (
             <ul className="grid grid-3 products-grid">
-              {filteredProducts.map((product) => (
-                <li
-                  key={product.slug}
-                  className="card card-hover products-card"
-                >
-                  <Link to={`/products/${product.slug}`}>
-                    <div className="products-card-media">
-                      <img
-                        src={`/images/products/${product.slug}.jpg`}
-                        alt={`${product.name} ${product.crop} seed pack`}
-                        loading="lazy"
-                        onError={(event) => {
-                          event.currentTarget.style.display = "none";
-                        }}
-                      />
+              {filteredProducts.map((product) => {
+                const cardSpecs = getCardSpecs(product);
 
-                      <span
-                        className="products-card-fallback"
-                        aria-hidden="true"
-                      >
-                        {product.crop}
-                      </span>
+                return (
+                  <li
+                    key={product.slug}
+                    className="card card-hover products-card"
+                  >
+                    <Link to={`/products/${product.slug}`}>
+                      <div className="products-card-media">
+                        {product.image ? (
+                          <img
+                            src={product.image}
+                            alt={
+                              product.imageAlt ||
+                              `${product.name} ${product.crop} seed packshot`
+                            }
+                            loading="lazy"
+                            onError={(event) => {
+                              event.currentTarget.style.display = "none";
+                              const fallback =
+                                event.currentTarget.nextElementSibling;
+                              if (fallback) fallback.style.display = "flex";
+                            }}
+                          />
+                        ) : null}
 
-                      {product.badge ? (
-                        <span className="badge badge-gold products-card-badge">
-                          {product.badge}
+                        <span
+                          className="products-card-fallback"
+                          aria-label={`${product.name} image unavailable`}
+                          style={{ display: product.image ? "none" : "flex" }}
+                        >
+                          {product.name}
+                          <small>Packshot unavailable</small>
                         </span>
-                      ) : null}
-                    </div>
 
-                    <div className="products-card-body">
-                      <span className="products-card-category">
-                        {product.category} &middot; {product.crop}
-                      </span>
+                        {product.badge ? (
+                          <span className="badge badge-gold products-card-badge">
+                            {product.badge}
+                          </span>
+                        ) : null}
+                      </div>
 
-                      <h3>{product.name}</h3>
+                      <div className="products-card-body">
+                        <span className="products-card-category">
+                          {product.category} &middot; {product.crop}
+                        </span>
 
-                      <p>{product.short}</p>
+                        <h3>{product.name}</h3>
+                        <p>{product.short}</p>
 
-                      <ul className="products-card-specs">
-                        <li>
-                          <span>Germination</span>
-                          <strong>{product.specs.germination}</strong>
-                        </li>
-                        <li>
-                          <span>Maturity</span>
-                          <strong>{product.specs.maturity}</strong>
-                        </li>
-                        <li>
-                          <span>Packs</span>
-                          <strong>{product.specs.packSizes}</strong>
-                        </li>
-                      </ul>
+                        {cardSpecs.length > 0 ? (
+                          <ul className="products-card-specs">
+                            {cardSpecs.map((spec) => (
+                              <li key={spec.label}>
+                                <span>{spec.label}</span>
+                                <strong>{spec.value}</strong>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
 
-                      <span className="products-card-link">
-                        View details
-                        <FiArrowRight aria-hidden="true" />
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
+                        <span className="products-card-link">
+                          View details
+                          <FiArrowRight aria-hidden="true" />
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
       </section>
-      {/* =================================================
-          CALL TO ACTION
-      ================================================= */}
 
+      {/* CALL TO ACTION */}
       <section className="cta-band">
         <div className="container cta-band-inner">
           <div>
-            <h2>Cannot find a variety you already grow?</h2>
+            <h2>Need help choosing a Pearl Millet variety?</h2>
             <p>
-              Tell us the crop and the trait you need. Our breeding team may
-              already have a line under trial, and we can arrange a sample
-              for the coming season.
+              Contact the Nandi Seeds team for more information about the
+              varieties in our Pearl Millet catalogue.
             </p>
           </div>
 
           <div className="cta-band-actions">
             <Link className="btn btn-gold" to="/contact">
-              Request a Sample
+              Contact Our Team
               <FiArrowRight aria-hidden="true" />
             </Link>
 

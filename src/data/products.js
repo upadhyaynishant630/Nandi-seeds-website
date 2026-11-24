@@ -1,345 +1,516 @@
-/* =========================================================
-   Nandi Seeds - SEED CATALOGUE
 
-   Each entry powers both the Products grid and the
-   /products/:slug detail page, so keep the slugs unique.
-   Product images live in: public/images/products/<slug>.jpg
+/* =========================================================
+   NANDI SEEDS — PEARL MILLET PRODUCT CATALOGUE
+
+   Product listing:
+   1. Nandi 75
+   2. Nandi 11
+   3. Nandi 31
+   4. Nandi 5 IMP
+   5. Nandi 52
+   6. Nandi 65
+   7. Hi Pearl 51
+   8. HHB 67 IMP
+   9. Nandi 99
+  10. Nandi 61
+  11. Nandi 64
+
+   Images location:
+   public/images/products/
 ========================================================= */
 
+
 /* =========================================================
-   CATEGORIES (used by the Products page filter)
+   PRODUCT CATEGORIES
 ========================================================= */
 
 export const SEED_CATEGORIES = [
   "All",
-  "Vegetables",
   "Cereals",
-  "Pulses",
-  "Oilseeds",
-  "Fodder",
 ];
 
+
 /* =========================================================
-   PRODUCTS
+   PRODUCT PACKSHOT IMAGES
+========================================================= */
+
+export const PEARL_MILLET_PACKSHOTS = {
+  hiPearl51: "/images/products/Hi-Pearl%2051%20Packshot.png",
+
+  nandi5: "/images/products/Nandi-5%20Packshot.png",
+
+  nandi11: "/images/products/Nandi-11%20Packshot.png",
+
+  nandi31: "/images/products/Nandi-31%20Packshot.png",
+
+  nandi52: "/images/products/Nandi-52%20Packshot.png",
+
+  nandi61: "/images/products/Nandi-61%20Packshot.png",
+
+  nandi64: "/images/products/Nandi-64%20Packshot.png",
+
+  nandi65: "/images/products/Nandi-65%20Packshot.png",
+
+  nandi75: "/images/products/Nandi-75%20Packshot.png",
+
+  nandi99: "/images/products/Nandi-99%20Packshot.png",
+  
+  hhb67: "/images/products/HHB67.png",
+};
+
+
+/* =========================================================
+   PEARL MILLET PRODUCTS
+
+   The 9 USP varieties are represented, plus the supplied Nandi 61 and
+   Nandi 64 packshot catalogue entries.
+   Every listed variety uses its supplied packshot.
 ========================================================= */
 
 export const PRODUCTS = [
+
+  /* =====================================================
+     01. NANDI 75
+  ===================================================== */
+
   {
-    slug: "tomato-hybrid-nandi-204",
-    name: "Nandi Gold 204",
-    crop: "Tomato",
-    category: "Vegetables",
-    badge: "Bestseller",
-    short:
-      "Firm, deep-red fruits with strong holding ability. Built for long-distance transport markets.",
-    description:
-      "Nandi Gold 204 is a determinate hybrid tomato developed for open-field cultivation across central and western India. Fruits are square-round, uniformly deep red at breaker stage and hold firmness for over a week after harvest, which makes the variety ideal for distant mandis and processing buyers.",
-    highlights: [
-      "Square-round fruits averaging 90-110 g",
-      "Firmness retained 7+ days after harvest",
-      "Good fruit set under high summer temperatures",
-      "Tolerant to early blight and bacterial wilt",
-    ],
-    specs: {
-      germination: "90% minimum",
-      maturity: "65 - 70 days",
-      season: "Kharif, Rabi & Summer",
-      spacing: "60 x 45 cm",
-      packSizes: "10 g, 50 g, 100 g",
-      treatment: "Thiram + Imidacloprid",
-    },
-  },
-  {
-    slug: "chilli-hybrid-nandi-tej",
-    name: "Nandi Tej",
-    crop: "Chilli",
-    category: "Vegetables",
-    badge: "High Yield",
-    short:
-      "Pendant, dark green to deep red pods with excellent pungency and colour retention.",
-    description:
-      "Nandi Tej is a semi-spreading chilli hybrid suited to rainfed and irrigated conditions. Pods are long, slender and pendent, turning attractive deep red on drying with strong oleoresin colour value, making it a preferred choice for dry chilli traders.",
-    highlights: [
-      "Pods 9-11 cm long with high pungency",
-      "Excellent red colour and capsaicin value",
-      "Multiple pickings over a long harvest window",
-      "Tolerant to thrips and powdery mildew",
-    ],
-    specs: {
-      germination: "85% minimum",
-      maturity: "70 - 75 days",
-      season: "Kharif & Rabi",
-      spacing: "60 x 45 cm",
-      packSizes: "10 g, 100 g",
-      treatment: "Captan + Imidacloprid",
-    },
-  },
-  {
-    slug: "okra-hybrid-nandi-shakti",
-    name: "Nandi Shakti",
-    crop: "Okra",
-    category: "Vegetables",
-    badge: "New",
-    short:
-      "Five-ridge, dark green pods with tender tips and a vigorous, YVMV-tolerant plant.",
-    description:
-      "Nandi Shakti is a high-yielding okra hybrid bred for continuous harvest. The plant is medium tall with good branching, and pods remain tender for longer, reducing the frequency of picking needed to keep grade quality.",
-    highlights: [
-      "Dark green, 5-ridged pods of 12-14 cm",
-      "Tolerant to Yellow Vein Mosaic Virus",
-      "Tender pods stay marketable longer",
-      "First harvest in about 45 days",
-    ],
-    specs: {
-      germination: "85% minimum",
-      maturity: "45 - 50 days",
-      season: "Kharif & Summer",
-      spacing: "45 x 30 cm",
-      packSizes: "100 g, 250 g, 500 g",
-      treatment: "Thiram + Imidacloprid",
-    },
-  },
-  {
-    slug: "cucumber-hybrid-nandi-green",
-    name: "Nandi Green",
-    crop: "Cucumber",
-    category: "Vegetables",
-    badge: null,
-    short:
-      "Smooth, straight, dark green fruits with a crisp core and good shipping strength.",
-    description:
-      "Nandi Green is a parthenocarpic-style hybrid cucumber for protected and open cultivation. Fruits develop uniformly with a minimal seed cavity, which keeps them crisp and attractive in premium retail packing.",
-    highlights: [
-      "Fruits 18-20 cm, uniformly straight",
-      "Thin skin with no bitterness",
-      "Strong vine vigour and early bearing",
-      "Tolerant to downy mildew",
-    ],
-    specs: {
-      germination: "90% minimum",
-      maturity: "40 - 45 days",
-      season: "All year (protected)",
-      spacing: "60 x 45 cm",
-      packSizes: "25 g, 50 g, 100 g",
-      treatment: "Thiram",
-    },
-  },
-  {
-    slug: "maize-hybrid-nandi-555",
-    name: "Nandi 555",
-    crop: "Maize",
-    category: "Cereals",
-    badge: "Farmer Choice",
-    short:
-      "Single-cross maize with bold orange flint grains and dependable standability.",
-    description:
-      "Nandi 555 is a medium-duration single-cross hybrid for rainfed and assured-irrigation maize belts. It delivers bold orange flint grains with strong test weight, and its sturdy stalk keeps the crop standing through late-season winds.",
-    highlights: [
-      "Bold orange flint grains, high test weight",
-      "Strong stalk and root lodging tolerance",
-      "Ideal for grain and fodder dual use",
-      "Consistent across rainfed and irrigated plots",
-    ],
-    specs: {
-      germination: "90% minimum",
-      maturity: "95 - 105 days",
-      season: "Kharif & Rabi",
-      spacing: "60 x 20 cm",
-      packSizes: "1 kg, 4 kg, 10 kg",
-      treatment: "Thiram + Carbendazim",
-    },
-  },
-  {
-    slug: "wheat-nandi-shresth",
-    name: "Nandi Shresth",
-    crop: "Wheat",
+    slug: "nandi-75",
+    name: "Nandi 75",
+    crop: "Pearl Millet",
     category: "Cereals",
     badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi75,
+    imageAlt: "Nandi 75 Pearl Millet seed packshot",
+
     short:
-      "High-protein, amber-grained wheat with strong chapati-quality gluten.",
+      "85–88 Days. Very tall and profusely tillering plant with a very compact cylindrical panicle. Expected yield: 28–42 q/ha.",
+
     description:
-      "Nandi Shresth is a timely-sown bread wheat suited to well-drained loams and clay loams. Grains are amber and lustrous with high protein content, giving good chapati volume and a bright flour colour for local mills.",
+      "Nandi 75 has an 85–88 Days maturity period. It features a very tall and profusely tillering plant, a very compact cylindrical panicle, and erect growth with a well-exerted panicle. Expected yield: 28–42 q/ha.",
+
     highlights: [
-      "High protein with strong gluten strength",
-      "Lustrous, well-filled amber grains",
-      "Tolerant to yellow rust and leaf blight",
-      "Responds well to balanced nitrogen splits",
+      "85–88 Days",
+      "Very tall and profusely tillering plant",
+      "Expected yield: 28–42 q/ha",
+      "Very compact cylindrical panicle",
+      "Erect growth with well-exerted panicle",
     ],
+
     specs: {
-      germination: "90% minimum",
-      maturity: "125 - 135 days",
-      season: "Rabi",
-      spacing: "20 cm rows",
-      packSizes: "5 kg, 10 kg, 40 kg",
-      treatment: "Vitavax + Imidacloprid",
+      maturity: "85–88 Days",
+      expectedYield: "28–42 q/ha",
+      plantType: "Very tall and profusely tillering plant",
+      panicle: "Very compact cylindrical panicle",
+      growthHabit: "Erect growth with well-exerted panicle",
     },
   },
+
+
+  /* =====================================================
+     02. NANDI 11
+  ===================================================== */
+
   {
-    slug: "paddy-hybrid-nandi-dhan",
-    name: "Nandi Dhan Plus",
-    crop: "Paddy",
+    slug: "nandi-11",
+    name: "Nandi 11",
+    crop: "Pearl Millet",
     category: "Cereals",
-    badge: "High Yield",
-    short:
-      "Semi-dwarf paddy hybrid with high tillering and fine, non-shattering grains.",
-    description:
-      "Nandi Dhan Plus is a medium-duration paddy hybrid for transplanted irrigated ecology. It tillers profusely, produces fine slender grains and resists shattering, so grain loss at combine harvest stays low.",
-    highlights: [
-      "Profuse tillering with 25+ effective panicles",
-      "Fine slender non-shattering grains",
-      "Tolerant to bacterial leaf blight",
-      "Good milling recovery",
-    ],
-    specs: {
-      germination: "85% minimum",
-      maturity: "125 - 135 days",
-      season: "Kharif",
-      spacing: "20 x 15 cm",
-      packSizes: "1 kg, 3 kg, 6 kg",
-      treatment: "Carbendazim + Streptocycline",
-    },
-  },
-  {
-    slug: "gram-nandi-veer",
-    name: "Nandi Veer",
-    crop: "Chickpea",
-    category: "Pulses",
     badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi11,
+    imageAlt: "Nandi 11 Pearl Millet seed packshot",
+
     short:
-      "Bold-seeded desi chickpea with strong wilt tolerance for rainfed Rabi sowing.",
+      "75–80 Days. Medium-tall plant (200–220 cm) with a long, compact cylindrical panicle. Expected yield: 26–34 q/ha.",
+
     description:
-      "Nandi Veer is a desi chickpea selected for rainfed Rabi conditions in black cotton soils. Seeds are bold and brown with good dhal recovery, and the variety shows dependable tolerance to fusarium wilt.",
+      "Nandi 11 has a 75–80 Days maturity period. It features a medium-tall plant (200–220 cm), a long, compact cylindrical panicle, and an erect plant with a fully exerted panicle. Expected yield: 26–34 q/ha.",
+
     highlights: [
-      "Bold brown seeds, good dhal recovery",
-      "Field tolerance to fusarium wilt",
-      "Suited to rainfed black soils",
-      "Semi-spreading canopy suppresses weeds",
+      "75–80 Days",
+      "Medium-tall plant (200–220 cm)",
+      "Expected yield: 26–34 q/ha",
+      "Long, compact cylindrical panicle",
+      "Erect plant with fully exerted panicle",
     ],
+
     specs: {
-      germination: "90% minimum",
-      maturity: "100 - 110 days",
-      season: "Rabi",
-      spacing: "30 x 10 cm",
-      packSizes: "2 kg, 4 kg, 10 kg",
-      treatment: "Thiram + Trichoderma",
+      maturity: "75–80 Days",
+      plantHeight: "200–220 cm",
+      expectedYield: "26–34 q/ha",
+      panicle: "Long, compact cylindrical panicle",
+      growthHabit: "Erect plant with fully exerted panicle",
     },
   },
+
+
+  /* =====================================================
+     03. NANDI 31
+  ===================================================== */
+
   {
-    slug: "soybean-nandi-sona",
-    name: "Nandi Sona",
-    crop: "Soybean",
-    category: "Oilseeds",
-    badge: "Bestseller",
-    short:
-      "Determinate soybean with high oil content and clean, uniform pod maturity.",
-    description:
-      "Nandi Sona is a determinate soybean suited to kharif cultivation in central India. It sets pods on the main stem and branches almost simultaneously, giving a uniform harvest window and lower green-seed content at threshing.",
-    highlights: [
-      "Oil content above 19%",
-      "Uniform pod maturity, low green seed",
-      "Good tolerance to soybean mosaic virus",
-      "Suited to medium to heavy soils",
-    ],
-    specs: {
-      germination: "85% minimum",
-      maturity: "95 - 100 days",
-      season: "Kharif",
-      spacing: "45 x 5 cm",
-      packSizes: "3 kg, 6 kg, 30 kg",
-      treatment: "Thiram + Rhizobium",
-    },
-  },
-  {
-    slug: "mustard-nandi-pili",
-    name: "Nandi Pili",
-    crop: "Mustard",
-    category: "Oilseeds",
+    slug: "nandi-31",
+    name: "Nandi 31",
+    crop: "Pearl Millet",
+    category: "Cereals",
     badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi31,
+    imageAlt: "Nandi 31 Pearl Millet seed packshot",
+
     short:
-      "Yellow-seeded mustard with high oil recovery and a compact, lodge-resistant habit.",
+      "80–82 Days. Medium-tall plant (200–220 cm) with a long, very compact cylindrical panicle. Expected yield: 28–42 q/ha.",
+
     description:
-      "Nandi Pili is a yellow-seeded mustard bred for timely Rabi sowing in the north and central belt. Its compact plant habit resists lodging, and the yellow seed coat means better oil recovery for millers.",
+      "Nandi 31 has an 80–82 Days maturity period. It features a medium-tall plant (200–220 cm), a long, very compact cylindrical panicle, and an erect and fully exerted panicle. Expected yield: 28–42 q/ha.",
+
     highlights: [
-      "Yellow seed coat, higher oil recovery",
-      "Compact habit resists lodging",
-      "Tolerant to white rust and alternaria",
-      "Early maturity fits double-crop rotations",
+      "80–82 Days",
+      "Expected yield: 28–42 q/ha",
+      "Medium-tall plant (200–220 cm)",
+      "Long, very compact cylindrical panicle",
+      "Erect and fully exerted panicle",
     ],
+
     specs: {
-      germination: "85% minimum",
-      maturity: "110 - 120 days",
-      season: "Rabi",
-      spacing: "30 x 10 cm",
-      packSizes: "1 kg, 2 kg, 5 kg",
-      treatment: "Thiram + Metalaxyl",
+      maturity: "80–82 Days",
+      expectedYield: "28–42 q/ha",
+      plantHeight: "200–220 cm",
+      panicle: "Long, very compact cylindrical panicle",
+      growthHabit: "Erect and fully exerted panicle",
     },
   },
+
+
+  /* =====================================================
+     04. NANDI 5 IMP
+  ===================================================== */
+
   {
-    slug: "maize-fodder-nandi-chara",
-    name: "Nandi Chara 9",
-    crop: "Fodder Maize",
-    category: "Fodder",
-    badge: "Dairy Favourite",
-    short:
-      "Multicut fodder maize with high green biomass and excellent palatability.",
-    description:
-      "Nandi Chara 9 is a multicut fodder maize that keeps tillering after each cut. Leaves are broad, soft and juicy with high protein, and the crop regrows quickly, giving dairy farms a dependable green fodder cycle.",
-    highlights: [
-      "Three to four cuts per season",
-      "Broad, soft, high-protein leaves",
-      "Fast regrowth after each harvest",
-      "Very high green biomass per acre",
-    ],
-    specs: {
-      germination: "90% minimum",
-      maturity: "55 - 60 days (first cut)",
-      season: "All year",
-      spacing: "30 x 15 cm",
-      packSizes: "1 kg, 4 kg, 10 kg",
-      treatment: "Thiram",
-    },
-  },
-  {
-    slug: "berseem-nandi-harit",
-    name: "Nandi Harit",
-    crop: "Berseem",
-    category: "Fodder",
+    slug: "nandi-5-imp",
+    name: "Nandi 5 IMP",
+    crop: "Pearl Millet",
+    category: "Cereals",
     badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi5,
+    imageAlt: "Nandi 5 IMP Pearl Millet seed packshot",
+
     short:
-      "Multicut berseem clover with soft stems and five to six quality cuts per season.",
+      "75–80 Days. Tall plant (200–220 cm) with a long, very compact cylindrical panicle. Expected yield: 26–30 q/ha.",
+
     description:
-      "Nandi Harit is a multicut berseem selected for high digestibility and a long cutting window. Stems stay soft and the crop recovers quickly after each cut, making it an economical green fodder for dairy herds.",
+      "Nandi 5 IMP has a 75–80 Days maturity period. It features a tall plant (200–220 cm), a long, very compact cylindrical panicle, and an erect plant with a fully exerted panicle. Expected yield: 26–30 q/ha.",
+
     highlights: [
-      "Five to six cuts per Rabi season",
-      "Soft, highly digestible stems",
-      "Strong nitrogen-fixing root nodules",
-      "Head starts in about 50 days",
+      "75–80 Days",
+      "Expected yield: 26–30 q/ha",
+      "Tall plant (200–220 cm)",
+      "Long, very compact cylindrical panicle",
+      "Erect plant with fully exerted panicle",
     ],
+
     specs: {
-      germination: "85% minimum",
-      maturity: "50 days (first cut)",
-      season: "Rabi",
-      spacing: "Broadcast",
-      packSizes: "1 kg, 5 kg, 10 kg",
-      treatment: "Rhizobium inoculation",
+      maturity: "75–80 Days",
+      expectedYield: "26–30 q/ha",
+      plantHeight: "200–220 cm",
+      panicle: "Long, very compact cylindrical panicle",
+      growthHabit: "Erect plant with fully exerted panicle",
     },
   },
+
+
+  /* =====================================================
+     05. NANDI 52
+  ===================================================== */
+
+  {
+    slug: "nandi-52",
+    name: "Nandi 52",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi52,
+    imageAlt: "Nandi 52 Pearl Millet seed packshot",
+
+    short:
+      "75–80 Days with early maturity. Medium plant height (200–210 cm), long, compact panicle, and expected yield of 26–32 q/ha.",
+
+    description:
+      "Nandi 52 has a 75–80 Days maturity period and is described as early maturity. It features a medium plant height (200–210 cm) and a long, compact panicle. Expected yield: 26–32 q/ha.",
+
+    highlights: [
+      "75–80 Days",
+      "Early maturity",
+      "Expected yield: 26–32 q/ha",
+      "Medium plant height (200–210 cm)",
+      "Long, compact panicle",
+    ],
+
+    specs: {
+      maturity: "75–80 Days",
+      maturityNote: "Early maturity",
+      expectedYield: "26–32 q/ha",
+      plantHeight: "200–210 cm",
+      panicle: "Long, compact panicle",
+    },
+  },
+
+
+  /* =====================================================
+     06. NANDI 65
+  ===================================================== */
+
+  {
+    slug: "nandi-65",
+    name: "Nandi 65",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi65,
+    imageAlt: "Nandi 65 Pearl Millet seed packshot",
+
+    short:
+      "80–82 Days. Medium-tall plant (180–210 cm) with a long, very compact conical panicle. Expected yield: 26–34 q/ha.",
+
+    description:
+      "Nandi 65 has an 80–82 Days maturity period. It features a medium-tall plant (180–210 cm), a long, very compact conical panicle, and an erect and fully exerted panicle. Expected yield: 26–34 q/ha.",
+
+    highlights: [
+      "80–82 Days",
+      "Expected yield: 26–34 q/ha",
+      "Medium-tall plant (180–210 cm)",
+      "Long, very compact conical panicle",
+      "Erect and fully exerted panicle",
+    ],
+
+    specs: {
+      maturity: "80–82 Days",
+      expectedYield: "26–34 q/ha",
+      plantHeight: "180–210 cm",
+      panicle: "Long, very compact conical panicle",
+      growthHabit: "Erect and fully exerted panicle",
+    },
+  },
+
+
+  /* =====================================================
+     07. HI PEARL 51
+  ===================================================== */
+
+  {
+    slug: "hi-pearl-51",
+    name: "Hi Pearl 51",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.hiPearl51,
+    imageAlt: "Hi Pearl 51 Pearl Millet seed packshot",
+
+    short:
+      "80–82 Days. Medium-tall plant (200–220 cm) with a long, very compact cylindrical panicle. Expected yield: 28–38 q/ha.",
+
+    description:
+      "Hi Pearl 51 has an 80–82 Days maturity period. It features a medium-tall plant (200–220 cm), a long, very compact cylindrical panicle, and an erect and fully exerted panicle. Expected yield: 28–38 q/ha.",
+
+    highlights: [
+      "80–82 Days",
+      "Expected yield: 28–38 q/ha",
+      "Medium-tall plant (200–220 cm)",
+      "Long, very compact cylindrical panicle",
+      "Erect and fully exerted panicle",
+    ],
+
+    specs: {
+      maturity: "80–82 Days",
+      expectedYield: "28–38 q/ha",
+      plantHeight: "200–220 cm",
+      panicle: "Long, very compact cylindrical panicle",
+      growthHabit: "Erect and fully exerted panicle",
+    },
+  },
+
+
+  /* =====================================================
+     08. HHB 67 IMP
+  ===================================================== */
+
+  {
+    slug: "hhb-67-imp",
+    name: "HHB 67 IMP",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.hhb67,
+    imageAlt: "HHB 67 IMP Pearl Millet seed packshot",
+
+    short:
+      "70–72 Days with early maturity, high tillering and drought resistance. Expected yield: 10–12 q/ha (Kharif only).",
+
+    description:
+      "HHB 67 IMP has a 70–72 Days maturity period and is described as early maturity. The supplied USPs highlight high tillering and drought resistance. Expected yield: 10–12 q/ha (Kharif only).",
+
+    highlights: [
+      "70–72 Days",
+      "Early maturity",
+      "High tillering",
+      "Drought resistance",
+      "Expected yield: 10–12 q/ha (Kharif only)",
+    ],
+
+    specs: {
+      maturity: "70–72 Days",
+      maturityNote: "Early maturity",
+      plantType: "High tillering",
+      tolerance: "Drought resistance",
+      expectedYield: "10–12 q/ha",
+      season: "Kharif only",
+    },
+  },
+
+
+  /* =====================================================
+     09. NANDI 99
+  ===================================================== */
+
+  {
+    slug: "nandi-99",
+    name: "Nandi 99",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi99,
+    imageAlt: "Nandi 99 Pearl Millet seed packshot",
+
+    short:
+      "72–75 Days with early maturity, high tillering and a very long 32–35 cm panicle. Expected yield: 13–15 q/ha (Kharif only).",
+
+    description:
+      "Nandi 99 has a 72–75 Days maturity period and is described as early maturity. It features a very long panicle (32–35 cm) and high tillering. Expected yield: 13–15 q/ha (Kharif only).",
+
+    highlights: [
+      "72–75 Days",
+      "Early maturity",
+      "Very long panicle (32–35 cm)",
+      "High tillering",
+      "Expected yield: 13–15 q/ha (Kharif only)",
+    ],
+
+    specs: {
+      maturity: "72–75 Days",
+      maturityNote: "Early maturity",
+      panicleLength: "32–35 cm",
+      plantType: "High tillering",
+      expectedYield: "13–15 q/ha",
+      season: "Kharif only",
+    },
+  },
+
+
+  /* =====================================================
+     10. NANDI 61
+  ===================================================== */
+
+  {
+    slug: "nandi-61",
+    name: "Nandi 61",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi61,
+    imageAlt: "Nandi 61 Pearl Millet seed packshot",
+
+    short:
+      "Pearl Millet variety with the supplied Nandi 61 packshot.",
+
+    description:
+      "Nandi 61 is included in the Pearl Millet product catalogue. The supplied official packshot is displayed in full without cropping.",
+
+    highlights: [
+      "Pearl Millet variety",
+      "Official Nandi 61 packshot",
+    ],
+
+     specs: {
+      maturity: "70–75 Days",
+      maturityNote: "Early maturity",
+      panicleLength: "30–35 cm",
+      plantType: "High tillering",
+      expectedYield: "10–15 q/ha",
+      season: "Kharif only",
+    },
+  },
+
+
+  /* =====================================================
+     11. NANDI 64
+  ===================================================== */
+
+  {
+    slug: "nandi-64",
+    name: "Nandi 64",
+    crop: "Pearl Millet",
+    category: "Cereals",
+    badge: null,
+
+    image: PEARL_MILLET_PACKSHOTS.nandi64,
+    imageAlt: "Nandi 64 Pearl Millet seed packshot",
+
+    short:
+      "Pearl Millet variety with the supplied Nandi 64 packshot.",
+
+    description:
+      "Nandi 64 is included in the Pearl Millet product catalogue. The supplied official packshot is displayed in full without cropping.",
+
+    highlights: [
+      "Pearl Millet variety",
+      "Official Nandi 64 packshot",
+    ],
+
+     specs: {
+      maturity: "80–82 Days",
+      expectedYield: "26–34 q/ha",
+      plantHeight: "180–210 cm",
+      panicle: "Long, very compact conical panicle",
+      growthHabit: "Erect and fully exerted panicle",
+    },
+  },
+
 ];
 
+
 /* =========================================================
-   HELPERS
+   PRODUCT HELPERS
 ========================================================= */
 
+/**
+ * Find a product using its unique slug.
+ */
 export function getProductBySlug(slug) {
-  return PRODUCTS.find((product) => product.slug === slug);
+  return PRODUCTS.find(
+    (product) => product.slug === slug
+  );
 }
 
+
+/**
+ * Return related products from the same category.
+ */
 export function getRelatedProducts(slug, limit = 3) {
   const current = getProductBySlug(slug);
 
-  return PRODUCTS.filter(
-    (product) =>
-      product.slug !== slug &&
-      (!current || product.category === current.category)
-  ).slice(0, limit);
+  return PRODUCTS
+    .filter(
+      (product) =>
+        product.slug !== slug &&
+        (!current || product.category === current.category)
+    )
+    .slice(0, limit);
 }

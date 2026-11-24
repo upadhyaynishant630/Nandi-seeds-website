@@ -13,10 +13,26 @@ import { SITE } from "../data/siteData";
 import "./ProductDetail.css";
 
 /* =========================================================
-   ProductDetail
-   Full specification page for one variety, driven by the
-   slug in the URL: /products/:slug
+   PRODUCT DETAIL — PEARL MILLET CATALOGUE
+
+   - Loads the product from its URL slug.
+   - Uses the image path stored in products.js.
+   - Builds the specification table from the supplied USP data.
+   - Does not display old germination, spacing or pack-size fields.
 ========================================================= */
+
+const SPEC_LABELS = {
+  maturity: "Maturity",
+  maturityNote: "Maturity characteristic",
+  expectedYield: "Expected yield",
+  plantHeight: "Plant height",
+  plantType: "Plant characteristics",
+  panicle: "Panicle",
+  panicleLength: "Panicle length",
+  growthHabit: "Growth habit",
+  tolerance: "Resistance",
+  season: "Season",
+};
 
 function ProductDetail() {
   const { slug } = useParams();
@@ -24,17 +40,13 @@ function ProductDetail() {
   const product = getProductBySlug(slug);
   const relatedProducts = getRelatedProducts(slug, 3);
 
-  /* =====================================================
-     UNKNOWN SLUG
-  ===================================================== */
-
   if (!product) {
     return (
       <div className="product-detail-page">
         <PageHero
           eyebrow="Not Found"
           title="This variety is not in our catalogue"
-          subtitle="The link may be outdated or the variety may have been renamed. Browse the current catalogue to find a replacement."
+          subtitle="The link may be outdated or the variety may no longer be listed. Browse the current catalogue to view available Pearl Millet varieties."
           breadcrumb="Products"
         />
 
@@ -50,14 +62,17 @@ function ProductDetail() {
     );
   }
 
-  const specRows = [
-    { label: "Germination", value: product.specs.germination },
-    { label: "Maturity", value: product.specs.maturity },
-    { label: "Season", value: product.specs.season },
-    { label: "Spacing", value: product.specs.spacing },
-    { label: "Pack Sizes", value: product.specs.packSizes },
-    { label: "Seed Treatment", value: product.specs.treatment },
-  ];
+  const specRows = Object.entries(product.specs ?? {})
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
+    .map(([key, value]) => ({
+      label: SPEC_LABELS[key] || key,
+      value,
+    }));
+
+  const phoneNumber = SITE?.phone;
+  const phoneHref = phoneNumber
+    ? `tel:${String(phoneNumber).replace(/[^\d+]/g, "")}`
+    : null;
 
   return (
     <div className="product-detail-page">
@@ -68,29 +83,37 @@ function ProductDetail() {
         breadcrumb={["Products", product.name]}
       />
 
-      {/* =================================================
-          OVERVIEW
-      ================================================= */}
-
+      {/* PRODUCT OVERVIEW */}
       <section className="section">
         <div className="container product-overview">
-          {/* MEDIA */}
+          {/* PRODUCT IMAGE */}
           <div className="product-media">
             <div className="media-frame product-frame">
-              <img
-                src={`/images/products/${product.slug}.jpg`}
-                alt={`${product.name} ${product.crop} seed pack`}
-                loading="eager"
-                fetchPriority="high"
-                onError={(event) => {
-                  event.currentTarget.hidden = true;
-                  event.currentTarget.nextElementSibling?.removeAttribute(
-                    "hidden"
-                  );
-                }}
-              />
-              <div className="product-placeholder" hidden>
-                {product.crop} seed variety
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={
+                    product.imageAlt ||
+                    `${product.name} ${product.crop} seed packshot`
+                  }
+                  loading="eager"
+                  fetchPriority="high"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                    const fallback = event.currentTarget.nextElementSibling;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
+              ) : null}
+
+              <div
+                className="product-placeholder"
+                role="img"
+                aria-label={`${product.name} product image unavailable`}
+                style={{ display: product.image ? "none" : "flex" }}
+              >
+                <span>{product.name}</span>
+                <small>Packshot unavailable</small>
               </div>
             </div>
 
@@ -101,7 +124,7 @@ function ProductDetail() {
             ) : null}
           </div>
 
-          {/* DETAILS */}
+          {/* PRODUCT INFORMATION */}
           <div className="product-info">
             <span className="product-crop">
               {product.crop} &middot; {product.category}
@@ -128,56 +151,56 @@ function ProductDetail() {
                 <FiArrowRight aria-hidden="true" />
               </Link>
 
-              <a className="btn btn-outline" href={`tel:${SITE.phone}`}>
-                <FiPhone aria-hidden="true" />
-                Call Sales
-              </a>
+              {phoneHref ? (
+                <a className="btn btn-outline" href={phoneHref}>
+                  <FiPhone aria-hidden="true" />
+                  Call Sales
+                </a>
+              ) : null}
             </div>
           </div>
         </div>
       </section>
-      {/* =================================================
-          SPECIFICATIONS
-      ================================================= */}
 
+      {/* SPECIFICATIONS */}
       <section className="section section-soft">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Technical Details</span>
-            <h2>Specification sheet</h2>
+            <span className="eyebrow">Product Information</span>
+            <h2>Variety characteristics</h2>
             <p>
-              Values below are the guaranteed minimums printed on the pack
-              label for this variety.
+              Product details and expected yield are presented as supplied in
+              the Pearl Millet Product-Wise USPs.
             </p>
           </div>
 
-          <table className="product-spec-table">
-            <caption className="product-spec-caption">
-              {product.name} &mdash; {product.crop}
-            </caption>
-
-            <tbody>
-              {specRows.map((row) => (
-                <tr key={row.label}>
-                  <th scope="row">{row.label}</th>
-                  <td>{row.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {specRows.length > 0 ? (
+            <table className="product-spec-table">
+              <caption className="product-spec-caption">
+                {product.name} &mdash; {product.crop}
+              </caption>
+              <tbody>
+                {specRows.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row">{row.label}</th>
+                    <td>{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No additional specifications are currently available.</p>
+          )}
         </div>
       </section>
 
-      {/* =================================================
-          RELATED VARIETIES
-      ================================================= */}
-
+      {/* RELATED VARIETIES */}
       {relatedProducts.length > 0 ? (
         <section className="section">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Also Consider</span>
-              <h2>Other varieties in {product.category}</h2>
+              <h2>Other Pearl Millet varieties</h2>
             </div>
 
             <ul className="grid grid-3 product-related">
@@ -210,23 +233,20 @@ function ProductDetail() {
         </section>
       ) : null}
 
-      {/* =================================================
-          CALL TO ACTION
-      ================================================= */}
-
+      {/* CALL TO ACTION */}
       <section className="cta-band">
         <div className="container cta-band-inner">
           <div>
-            <h2>Want a sample of {product.name}?</h2>
+            <h2>Interested in {product.name}?</h2>
             <p>
-              Mini packs are available so you can run a small plot trial
-              before ordering for the full season.
+              Contact the Nandi Seeds team for further information about this
+              Pearl Millet variety.
             </p>
           </div>
 
           <div className="cta-band-actions">
             <Link className="btn btn-gold" to="/contact">
-              Request a Sample
+              Enquire Now
               <FiArrowRight aria-hidden="true" />
             </Link>
 
