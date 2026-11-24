@@ -12,14 +12,7 @@ import { SITE } from "../data/siteData";
 
 import "./ProductDetail.css";
 
-/* =========================================================
-   PRODUCT DETAIL — PEARL MILLET CATALOGUE
 
-   - Loads the product from its URL slug.
-   - Uses the image path stored in products.js.
-   - Builds the specification table from the supplied USP data.
-   - Does not display old germination, spacing or pack-size fields.
-========================================================= */
 
 const SPEC_LABELS = {
   maturity: "Maturity",
@@ -126,9 +119,7 @@ function ProductDetail() {
 
           {/* PRODUCT INFORMATION */}
           <div className="product-info">
-            <span className="product-crop">
-              {product.crop} &middot; {product.category}
-            </span>
+           
 
             <h2 className="product-name">{product.name}</h2>
 
@@ -166,7 +157,7 @@ function ProductDetail() {
       <section className="section section-soft">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Product Information</span>
+            
             <h2>Variety characteristics</h2>
             <p>
               Product details and expected yield are presented as supplied in
@@ -199,7 +190,7 @@ function ProductDetail() {
         <section className="section">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Also Consider</span>
+              
               <h2>Other Pearl Millet varieties</h2>
             </div>
 
@@ -210,7 +201,7 @@ function ProductDetail() {
                   className="card card-hover product-related-card"
                 >
                   <Link to={`/products/${item.slug}`}>
-                    <span className="product-related-crop">{item.crop}</span>
+                    
                     <h3>{item.name}</h3>
                     <p>{item.short}</p>
 

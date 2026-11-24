@@ -142,7 +142,7 @@ function Dealers() {
   return (
     <div className="dealers-page">
       <PageHero
-        eyebrow="Dealership"
+      
         title="Sell seed with a brand that stands behind it"
         subtitle="We are expanding our authorised dealer network across India. If you already serve farmers in your district, we would like to work with you."
         breadcrumb="Dealers"
@@ -155,7 +155,7 @@ function Dealers() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Why Partner With Us</span>
+           
             <h2>What you get as an authorised dealer</h2>
             <p>
               Our network runs on trust both ways: you get protected

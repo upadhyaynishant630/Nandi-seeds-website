@@ -97,7 +97,7 @@ function Products() {
   return (
     <div className="products-page">
       <PageHero
-        eyebrow="Pearl Millet Catalogue"
+       
         title="Explore our Pearl Millet varieties"
         subtitle="Compare maturity periods, expected yields and variety-wise characteristics to find the information relevant to your field."
         breadcrumb="Products"
@@ -207,9 +207,7 @@ function Products() {
                       </div>
 
                       <div className="products-card-body">
-                        <span className="products-card-category">
-                          {product.category} &middot; {product.crop}
-                        </span>
+                       
 
                         <h3>{product.name}</h3>
                         <p>{product.short}</p>

@@ -17,7 +17,7 @@ function Services() {
   return (
     <div className="services-page">
       <PageHero
-        eyebrow="Our Services"
+       
         title="Support that runs the whole season"
         subtitle="Seed quality is where we start. Trials, lab testing, treatment and agronomy advisory are what keep the crop on track after sowing."
         breadcrumb="Services"
@@ -30,7 +30,7 @@ function Services() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">What We Offer</span>
+           
             <h2>Six services built for Indian farms</h2>
             <p>
               Each service can be used on its own or bundled with a seed
@@ -79,7 +79,6 @@ function Services() {
       <section className="section section-soft">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">How It Runs</span>
             <h2>From enquiry to harvest support</h2>
           </div>
 
@@ -101,7 +100,7 @@ function Services() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Common Questions</span>
+            
             <h2>Answers before you enquire</h2>
           </div>
 

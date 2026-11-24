@@ -1,23 +1,4 @@
 
-/* =========================================================
-   NANDI SEEDS — PEARL MILLET PRODUCT CATALOGUE
-
-   Product listing:
-   1. Nandi 75
-   2. Nandi 11
-   3. Nandi 31
-   4. Nandi 5 IMP
-   5. Nandi 52
-   6. Nandi 65
-   7. Hi Pearl 51
-   8. HHB 67 IMP
-   9. Nandi 99
-  10. Nandi 61
-  11. Nandi 64
-
-   Images location:
-   public/images/products/
-========================================================= */
 
 
 /* =========================================================

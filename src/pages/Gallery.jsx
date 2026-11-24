@@ -27,7 +27,7 @@ function Gallery() {
   return (
     <div className="gallery-page">
       <PageHero
-        eyebrow="Gallery"
+       
         title="Our fields, labs and grower meets"
         subtitle="A look at the demo plots, processing lines and farmer events that make up a Nandi Seeds season."
         breadcrumb="Gallery"

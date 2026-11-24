@@ -416,7 +416,7 @@ function Home() {
       <section className="section home-featured">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Our Seed Range</span>
+            
             <h2>Varieties farmers come back for</h2>
             <p>
               Every variety below is bred in-house, trialled across multiple
@@ -434,20 +434,18 @@ function Home() {
                 <Link to={`/products/${product.slug}`}>
                   <div className="home-product-media">
                     <img
-                      src={`/images/products/${product.slug}.jpg`}
-                      alt={`${product.name} ${product.crop} seeds`}
+                      src={product.image}
+                      alt={
+                        product.imageAlt ||
+                        `${product.name} ${product.crop} seed packshot`
+                      }
                       loading="lazy"
                       onError={(event) => {
                         event.currentTarget.style.display = "none";
                       }}
                     />
 
-                    <span
-                      className="home-product-fallback"
-                      aria-hidden="true"
-                    >
-                      {product.crop}
-                    </span>
+                    
 
                     {product.badge ? (
                       <span className="badge badge-gold home-product-badge">
@@ -491,7 +489,7 @@ function Home() {
         <div className="container">
           <div className="split">
             <div className="home-why-copy">
-              <span className="eyebrow">Why Nandi Seeds</span>
+            
 
               <h2 className="home-why-title">
                 Quality you can measure, not just promise
@@ -584,7 +582,7 @@ function Home() {
       <section className="section home-process">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">How We Work</span>
+            
             <h2>From breeder plot to your field</h2>
             <p>
               Four controlled stages stand between a promising parent line
@@ -617,9 +615,7 @@ function Home() {
       <section className="section section-green home-services">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow eyebrow-on-dark">
-              Support Beyond the Bag
-            </span>
+           
 
             <h2>Services that protect your investment</h2>
 
@@ -676,7 +672,7 @@ function Home() {
       <section className="section home-testimonials">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">Farmer Voices</span>
+           
             <h2>Results from the field</h2>
           </div>
 
