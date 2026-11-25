@@ -179,10 +179,6 @@ function HomeFeaturedProductCard({ product, isDuplicate = false }) {
         </div>
 
         <div className="home-product-body">
-          <span className="home-product-crop">
-            {product.category || product.crop || "Seeds"}
-          </span>
-
           <h3>{product.name}</h3>
 
           {cardSpecs.length > 0 && (

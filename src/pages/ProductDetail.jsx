@@ -70,7 +70,6 @@ function ProductDetail() {
   return (
     <div className="product-detail-page">
       <PageHero
-        eyebrow={`${product.category} Seeds`}
         title={product.name}
         subtitle={product.short}
         breadcrumb={["Products", product.name]}
