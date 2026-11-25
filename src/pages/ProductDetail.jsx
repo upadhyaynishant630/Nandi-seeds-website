@@ -201,14 +201,41 @@ function ProductDetail() {
                   className="card card-hover product-related-card"
                 >
                   <Link to={`/products/${item.slug}`}>
-                    
-                    <h3>{item.name}</h3>
-                    <p>{item.short}</p>
+                    <div className="product-related-media">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={
+                            item.imageAlt ||
+                            `${item.name} ${item.crop} seed packshot`
+                          }
+                          loading="lazy"
+                          decoding="async"
+                          onError={(event) => {
+                            event.currentTarget.style.display = "none";
+                            const fallback =
+                              event.currentTarget.nextElementSibling;
+                            if (fallback) fallback.style.display = "flex";
+                          }}
+                        />
+                      ) : null}
+                      <span
+                        className="product-related-image-fallback"
+                        style={{ display: item.image ? "none" : "flex" }}
+                      >
+                        {item.name}
+                      </span>
+                    </div>
 
-                    <span className="product-related-link">
-                      View details
-                      <FiArrowRight aria-hidden="true" />
-                    </span>
+                    <div className="product-related-content">
+                      <h3>{item.name}</h3>
+                      <p>{item.short}</p>
+
+                      <span className="product-related-link">
+                        View details
+                        <FiArrowRight aria-hidden="true" />
+                      </span>
+                    </div>
                   </Link>
                 </li>
               ))}

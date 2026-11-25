@@ -19,6 +19,7 @@ import {
 } from "../data/siteData";
 import { PRODUCTS } from "../data/products";
 import { resolveIcon } from "../data/icons";
+import { getProductCardSpecs } from "../utils/productCardSpecs";
 
 import "./Home.css";
 
@@ -412,74 +413,102 @@ function Home() {
       {/* =================================================
           FEATURED SEEDS
       ================================================= */}
+<section className="section home-featured">
+  <div className="container">
 
-      <section className="section home-featured">
-        <div className="container">
-          <div className="section-head">
-            
-            <h2>Varieties farmers come back for</h2>
-            <p>
-              Every variety below is bred in-house, trialled across multiple
-              locations and released only after it clears our germination
-              and purity standards.
-            </p>
-          </div>
+    {/* Section Heading */}
+    <div className="section-head">
+      <h2>Varieties farmers come back for</h2>
 
-          <ul className="grid grid-4 home-product-grid">
-            {featuredProducts.map((product) => (
-              <li
-                key={product.slug}
-                className="card card-hover home-product"
-              >
-                <Link to={`/products/${product.slug}`}>
-                  <div className="home-product-media">
+      <p>
+        Every variety below is bred in-house, trialled across multiple
+        locations and released only after it clears our germination
+        and purity standards.
+      </p>
+    </div>
+
+    {/* Featured Products */}
+    <ul className="grid grid-4 home-product-grid">
+      {Array.isArray(featuredProducts) &&
+        featuredProducts.map((product) => {
+          const cardSpecs = getProductCardSpecs(product);
+
+          return (
+            <li
+              key={product.slug}
+              className="card card-hover home-product"
+            >
+              <Link to={`/products/${product.slug}`}>
+
+                {/* Product Image */}
+                <div className="home-product-media">
+                  {product.image && (
                     <img
                       src={product.image}
                       alt={
                         product.imageAlt ||
-                        `${product.name} ${product.crop} seed packshot`
+                        `${product.name} ${product.crop || "seed"} packshot`
                       }
                       loading="lazy"
+                      decoding="async"
                       onError={(event) => {
                         event.currentTarget.style.display = "none";
                       }}
                     />
+                  )}
 
-                    
-
-                    {product.badge ? (
-                      <span className="badge badge-gold home-product-badge">
-                        {product.badge}
-                      </span>
-                    ) : null}
-                  </div>
-
-                  <div className="home-product-body">
-                    <span className="home-product-crop">
-                      {product.category}
+                  {/* Product Badge */}
+                  {product.badge && (
+                    <span className="badge badge-gold home-product-badge">
+                      {product.badge}
                     </span>
+                  )}
+                </div>
 
-                    <h3>{product.name}</h3>
-                    <p>{product.short}</p>
+                {/* Product Details */}
+                <div className="home-product-body">
 
-                    <span className="home-product-link">
-                      View details
-                      <FiArrowRight aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <span className="home-product-crop">
+                    {product.category || product.crop || "Seeds"}
+                  </span>
 
-          <div className="home-featured-more">
-            <Link className="btn btn-outline" to="/products">
-              Browse the full catalogue
-              <FiArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
+                  <h3>{product.name}</h3>
+
+                  {/* Product Specifications */}
+                  {cardSpecs.length > 0 && (
+                    <ul className="home-product-specs">
+                      {cardSpecs.map((spec) => (
+                        <li key={spec.label}>
+                          <span>{spec.label}</span>
+                          <strong>{spec.value}</strong>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {/* View Details */}
+                  <span className="home-product-link">
+                    View details
+                    <FiArrowRight aria-hidden="true" />
+                  </span>
+
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+    </ul>
+
+    {/* Browse Full Catalogue */}
+    <div className="home-featured-more">
+      <Link className="btn btn-outline" to="/products">
+        Browse the full catalogue
+        <FiArrowRight aria-hidden="true" />
+      </Link>
+    </div>
+
+  </div>
+</section>
 
       {/* =================================================
           WHY CHOOSE US

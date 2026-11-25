@@ -346,6 +346,36 @@
   font-size: 1.16rem;
 }
 
+.home-product-specs {
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+.home-product-specs li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.home-product-specs li + li {
+  margin-top: 8px;
+}
+
+.home-product-specs span {
+  color: var(--muted);
+}
+
+.home-product-specs strong {
+  color: var(--ink);
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
 .home-product-body p {
   font-size: 0.92rem;
 }

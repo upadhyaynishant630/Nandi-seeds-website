@@ -36,7 +36,7 @@ const ABOUT_SECTIONS = [
     icon: FiShield,
     title: "Quality You Can Trust",
     text: "Every Nandi Seeds lot is handled with care and tested before it reaches a farmer. From genetic purity and germination to moisture and physical purity, our quality team checks the details that protect your crop investment.",
-    image: "/images/about/seed-facility.jpg",
+    image: "/images/gallery/agri-expo.jpg",
     alt: "Seed quality testing and processing facility",
     points: [
       "Lot-wise germination and purity testing",

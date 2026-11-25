@@ -187,7 +187,7 @@ function Footer() {
               aria-label="Developed by VirtuMedia"
             >
               <img
-                src="/images/virtumedia-favicon.png"
+                src="/images/logo/virtumedia-logo.png"
                 alt=""
                 width="20"
                 height="20"

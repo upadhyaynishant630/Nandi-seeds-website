@@ -87,40 +87,7 @@ function Navbar() {
 
   return (
     <>
-      {/* =========================================
-          TOP UTILITY / ANNOUNCEMENT BAR
-          NOT STICKY - SCROLLS AWAY
-      ========================================= */}
-
-      <div className="navbar-utility">
-        <div className="container navbar-utility-inner">
-
-          <span className="utility-item utility-address">
-            <FiMapPin aria-hidden="true" />
-            <span>{SITE.addressLine3}</span>
-          </span>
-
-          <div className="utility-right">
-
-            <a
-              className="utility-item"
-              href={`tel:${SITE.phone}`}
-            >
-              <FiPhone aria-hidden="true" />
-              <span>{SITE.phone}</span>
-            </a>
-
-            <a
-              className="utility-item"
-              href={`mailto:${SITE.email}`}
-            >
-              <FiMail aria-hidden="true" />
-              <span>{SITE.email}</span>
-            </a>
-
-          </div>
-        </div>
-      </div>
+      
 
       {/* =========================================
           MAIN NAVIGATION BAR

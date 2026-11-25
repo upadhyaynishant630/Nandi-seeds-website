@@ -105,7 +105,7 @@
 
 .navbar-container {
   position: relative;
-  width: 100%;
+  width: 20%;
 
   background: var(--surface, #fff);
   border-bottom: 1px solid transparent;

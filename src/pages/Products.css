@@ -170,11 +170,6 @@
   font-size: 1.2rem;
 }
 
-.products-card-body > p {
-  margin-top: 10px;
-  font-size: 0.92rem;
-}
-
 /* SPEC TABLE */
 
 .products-card-specs {
@@ -664,20 +659,6 @@ transform 300ms var(--products-motion-ease);
 .products-card:hover .products-card-body h3 {
 color: var(--green-700);
 transform: translateX(3px);
-}
-
-/* =========================================================
-13. PRODUCT DESCRIPTION
-========================================================= */
-
-.products-card-body > p {
-transition:
-color 280ms ease,
-transform 300ms var(--products-motion-ease);
-}
-
-.products-card:hover .products-card-body > p {
-transform: translateX(2px);
 }
 
 /* =========================================================

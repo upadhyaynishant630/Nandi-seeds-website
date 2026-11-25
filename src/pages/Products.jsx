@@ -4,6 +4,7 @@ import { FiSearch, FiArrowRight, FiSliders } from "react-icons/fi";
 
 import PageHero from "../component/PageHero";
 import { PRODUCTS, SEED_CATEGORIES } from "../data/products";
+import { getProductCardSpecs } from "../utils/productCardSpecs";
 
 import "./Products.css";
 
@@ -15,31 +16,6 @@ import "./Products.css";
    - Cards display only product information supplied in the
      Pearl Millet Product-Wise USPs.
 ========================================================= */
-
-const FEATURE_SPEC_ORDER = [
-  ["plantHeight", "Plant height"],
-  ["panicleLength", "Panicle length"],
-  ["panicle", "Panicle"],
-  ["plantType", "Plant characteristics"],
-  ["tolerance", "Key trait"],
-  ["growthHabit", "Growth habit"],
-];
-
-function getCardSpecs(product) {
-  const specs = product.specs ?? {};
-  const rows = [
-    { label: "Maturity", value: specs.maturity },
-    { label: "Expected yield", value: specs.expectedYield },
-  ].filter((row) => Boolean(row.value));
-
-  const feature = FEATURE_SPEC_ORDER.find(([key]) => Boolean(specs[key]));
-
-  if (feature) {
-    rows.push({ label: feature[1], value: specs[feature[0]] });
-  }
-
-  return rows;
-}
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -164,7 +140,7 @@ function Products() {
           ) : (
             <ul className="grid grid-3 products-grid">
               {filteredProducts.map((product) => {
-                const cardSpecs = getCardSpecs(product);
+                const cardSpecs = getProductCardSpecs(product);
 
                 return (
                   <li
@@ -210,7 +186,6 @@ function Products() {
                        
 
                         <h3>{product.name}</h3>
-                        <p>{product.short}</p>
 
                         {cardSpecs.length > 0 ? (
                           <ul className="products-card-specs">
