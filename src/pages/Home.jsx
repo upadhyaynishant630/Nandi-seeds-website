@@ -146,6 +146,66 @@ function CountUp({ value, suffix = "", duration = 1800 }) {
   );
 }
 
+function HomeFeaturedProductCard({ product, isDuplicate = false }) {
+  const cardSpecs = getProductCardSpecs(product);
+
+  return (
+    <li className="card card-hover home-product">
+      <Link
+        to={`/products/${product.slug}`}
+        tabIndex={isDuplicate ? -1 : undefined}
+      >
+        <div className="home-product-media">
+          {product.image && (
+            <img
+              src={product.image}
+              alt={
+                product.imageAlt ||
+                `${product.name} ${product.crop || "seed"} packshot`
+              }
+              loading="lazy"
+              decoding="async"
+              onError={(event) => {
+                event.currentTarget.style.display = "none";
+              }}
+            />
+          )}
+
+          {product.badge && (
+            <span className="badge badge-gold home-product-badge">
+              {product.badge}
+            </span>
+          )}
+        </div>
+
+        <div className="home-product-body">
+          <span className="home-product-crop">
+            {product.category || product.crop || "Seeds"}
+          </span>
+
+          <h3>{product.name}</h3>
+
+          {cardSpecs.length > 0 && (
+            <ul className="home-product-specs">
+              {cardSpecs.map((spec) => (
+                <li key={spec.label}>
+                  <span>{spec.label}</span>
+                  <strong>{spec.value}</strong>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <span className="home-product-link">
+            View details
+            <FiArrowRight aria-hidden="true" />
+          </span>
+        </div>
+      </Link>
+    </li>
+  );
+}
+
 
 /* =========================================================
    Home
@@ -428,76 +488,30 @@ function Home() {
     </div>
 
     {/* Featured Products */}
-    <ul className="grid grid-4 home-product-grid">
-      {Array.isArray(featuredProducts) &&
-        featuredProducts.map((product) => {
-          const cardSpecs = getProductCardSpecs(product);
-
-          return (
-            <li
-              key={product.slug}
-              className="card card-hover home-product"
-            >
-              <Link to={`/products/${product.slug}`}>
-
-                {/* Product Image */}
-                <div className="home-product-media">
-                  {product.image && (
-                    <img
-                      src={product.image}
-                      alt={
-                        product.imageAlt ||
-                        `${product.name} ${product.crop || "seed"} packshot`
-                      }
-                      loading="lazy"
-                      decoding="async"
-                      onError={(event) => {
-                        event.currentTarget.style.display = "none";
-                      }}
-                    />
-                  )}
-
-                  {/* Product Badge */}
-                  {product.badge && (
-                    <span className="badge badge-gold home-product-badge">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-
-                {/* Product Details */}
-                <div className="home-product-body">
-
-                  <span className="home-product-crop">
-                    {product.category || product.crop || "Seeds"}
-                  </span>
-
-                  <h3>{product.name}</h3>
-
-                  {/* Product Specifications */}
-                  {cardSpecs.length > 0 && (
-                    <ul className="home-product-specs">
-                      {cardSpecs.map((spec) => (
-                        <li key={spec.label}>
-                          <span>{spec.label}</span>
-                          <strong>{spec.value}</strong>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* View Details */}
-                  <span className="home-product-link">
-                    View details
-                    <FiArrowRight aria-hidden="true" />
-                  </span>
-
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-    </ul>
+    <div
+      className="home-featured-marquee"
+      role="region"
+      aria-label="Featured Pearl Millet varieties"
+    >
+      <div className="home-featured-marquee-track">
+        {[false, true].map((isDuplicate) => (
+          <ul
+            key={isDuplicate ? "duplicate" : "featured"}
+            className="home-product-grid home-featured-marquee-group"
+            aria-hidden={isDuplicate || undefined}
+          >
+            {Array.isArray(featuredProducts) &&
+              featuredProducts.map((product) => (
+                <HomeFeaturedProductCard
+                  key={`${isDuplicate ? "duplicate-" : ""}${product.slug}`}
+                  product={product}
+                  isDuplicate={isDuplicate}
+                />
+              ))}
+          </ul>
+        ))}
+      </div>
+    </div>
 
     {/* Browse Full Catalogue */}
     <div className="home-featured-more">
