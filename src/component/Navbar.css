@@ -1,11 +1,60 @@
-
 /* =========================================================
    NANDI SEEDS + BIOSTADT
-   PROFESSIONAL RESPONSIVE NAVBAR
-   Desktop | Tablet | Mobile
+   FLOATING PILL NAVBAR  (Desktop | Tablet | Mobile)
+
+   Design reference : dark floating pill, logo + divider,
+                      pill links, white active pill,
+                      glowing call-to-action button.
+   Brand colours    : Nandi green #1f7a3d (site theme colour)
+   All existing class names are kept - no HTML changes.
 ========================================================= */
 
-/* ---------------- GLOBAL NAVBAR ---------------- */
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+
+.navbar {
+  /* floating pill */
+--nv-pill-bg: rgb(54 161 105 / 86%);
+  --nv-pill-bg-scrolled: rgb(54 161 105 / 86%);
+  --nv-pill-border: rgba(255, 255, 255, 0.1);
+  --nv-divider: rgba(255, 255, 255, 0.16);
+
+  /* links */
+  --nv-text: rgba(255, 255, 255, 0.78);
+  --nv-hover-bg: rgba(255, 255, 255, 0.1);
+  --nv-active-bg: #f2faf4;
+  --nv-active-text: #14472b;
+
+  /* call-to-action */
+  --nv-cta-1: #35b873;
+  --nv-cta-2: #1f7a3d;
+  --nv-cta-3: #15602f;
+  --nv-glow: rgba(53, 184, 115, 0.45);
+
+  /* utility bar */
+  --nv-utility-bg: #123b27;
+
+  /* mobile drawer (light surface so colour logos stay visible) */
+  --nv-drawer-bg: #ffffff;
+  --nv-ink: #1c281f;
+  --nv-ink-soft: #4d5b50;
+  --nv-line: #e3e9e4;
+  --nv-soft: #f3f6f3;
+  --nv-green-50: #eef8f0;
+  --nv-green-100: #dff1e3;
+  --nv-green-700: #1f7a3d;
+  --nv-green-800: #14472b;
+
+  /* spacing */
+  --nv-logo-gap: clamp(10px, 1.4vw, 20px);
+}
+
+
+/* =========================================================
+   GLOBAL NAVBAR
+========================================================= */
 
 .navbar,
 .navbar *,
@@ -14,15 +63,17 @@
   box-sizing: border-box;
 }
 
+header.navbar,
 .navbar {
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 1200;
 
   width: 100%;
   max-width: 100%;
 
-  background: var(--surface, #fff);
+  background: transparent;
   isolation: isolate;
 }
 
@@ -33,12 +84,15 @@
 
 
 /* =========================================================
-   UTILITY BAR
+   UTILITY / ANNOUNCEMENT BAR
 ========================================================= */
 
 .navbar-utility {
+  position: relative;
+  z-index: 1;
+
   width: 100%;
-  background: var(--green-900, #16452d);
+  background: var(--nv-utility-bg);
   color: rgba(255, 255, 255, 0.92);
 
   font-size: 0.78rem;
@@ -100,75 +154,132 @@
 
 
 /* =========================================================
-   MAIN NAVBAR CONTAINER
+   MAIN NAVBAR WRAPPER  (transparent - the pill floats)
 ========================================================= */
 
 .navbar-container {
   position: relative;
-  width: 20%;
 
-  background: var(--surface, #fff);
-  border-bottom: 1px solid transparent;
+  width: 100%;
+  padding: 12px clamp(10px, 2.2vw, 28px) 8px;
 
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.navbar-scrolled .navbar-container {
-  border-bottom-color: var(--line, #e7eae7);
-  box-shadow:
-    var(--shadow-sm, 0 4px 18px rgba(0, 0, 0, 0.06));
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 
 /* =========================================================
-   NAVBAR INNER
+   THE FLOATING PILL
 ========================================================= */
 
 .navbar-inner {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: clamp(12px, 1.5vw, 24px);
+  gap: clamp(8px, 1.2vw, 18px);
 
   width: 100%;
+  max-width: 1280px;
   min-width: 0;
-  min-height: 80px;
+  min-height: 66px;
 
-  padding-inline: clamp(14px, 3vw, 42px);
+  margin-inline: auto;
+  padding: 8px 10px 8px 12px;
+
+  border: 1px solid var(--nv-pill-border);
+  border-radius:5px;
+
+  background-color: var(--nv-pill-bg);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  box-shadow:
+    0 12px 32px -12px rgba(5, 22, 13, 0.55),
+    0 2px 6px rgba(5, 22, 13, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Glass blur lives on a pseudo-element on purpose.
+   backdrop-filter on .navbar-inner itself would trap the
+   fixed-position mobile drawer inside the pill. */
+.navbar-inner::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  border-radius: inherit;
+  pointer-events: none;
+
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+}
+
+.navbar-scrolled .navbar-inner {
+  background-color: var(--nv-pill-bg-scrolled);
+  border-color: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 16px 38px -12px rgba(5, 22, 13, 0.6),
+    0 2px 8px rgba(5, 22, 13, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 
 /* =========================================================
-   NANDI SEEDS LOGO
+   NANDI SEEDS LOGO  (white chip, works with any logo colour)
 ========================================================= */
 
 .navbar-logo {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   flex: 0 1 auto;
   min-width: 0;
   max-width: 100%;
 
+  margin-right: var(--nv-logo-gap);
+  padding: 6px 16px;
+
+  border-radius: 999px;
+  background: #fff;
+
   text-decoration: none;
   line-height: 0;
+
+  transition: transform 0.25s ease;
+}
+
+.navbar-logo:hover {
+  transform: translateY(-1px);
 }
 
 .navbar-logo img {
   display: block;
 
-  width: clamp(100px, 10vw, 140px);
+  width: clamp(88px, 8.2vw, 120px);
   max-width: 100%;
-  max-height: 58px;
-
   height: auto;
+  max-height: 38px;
 
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
 }
 
 
@@ -179,12 +290,12 @@
 .navbar-menu {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
   flex: 1 1 auto;
   min-width: 0;
 
-  gap: clamp(2px, 0.35vw, 7px);
+  gap: clamp(0px, 0.2vw, 3px);
 }
 
 .navbar-menu-head,
@@ -202,13 +313,13 @@
   flex: 0 1 auto;
   min-width: 0;
 
-  padding: 11px clamp(7px, 0.8vw, 13px);
+  padding: 9px clamp(9px, 1vw, 16px);
 
-  border-radius: var(--radius-pill, 50px);
+  border-radius: 999px;
 
-  color: var(--ink-soft, #536052);
+  color: var(--nv-text);
 
-  font-size: clamp(0.78rem, 0.85vw, 0.94rem);
+  font-size: clamp(0.8rem, 0.55vw + 0.45rem, 0.92rem);
   font-weight: 600;
   line-height: 1.3;
 
@@ -217,36 +328,27 @@
 
   transition:
     color 0.25s ease,
-    background-color 0.25s ease;
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .nav-link::after {
-  content: "";
-
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 3px;
-
-  height: 2px;
-
-  border-radius: 4px;
-  background: var(--green-600, #27975c);
-
-  transform: scaleX(0);
-  transform-origin: left center;
-
-  transition: transform 0.25s ease;
+  display: none;
 }
 
-.nav-link:hover,
-.nav-link-active {
-  color: var(--green-800, #17643d);
+.nav-link:hover {
+  background: var(--nv-hover-bg);
+  color: #fff;
 }
 
-.nav-link:hover::after,
-.nav-link-active::after {
-  transform: scaleX(1);
+.nav-link-active,
+.nav-link-active:hover {
+  background: var(--nv-active-bg);
+  color: var(--nv-active-text);
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 0 rgba(20, 71, 43, 0.08);
 }
 
 
@@ -262,14 +364,12 @@
   flex: 0 0 auto;
   min-width: 0;
 
-  gap: clamp(8px, 1vw, 14px);
-  margin-left: 5px;
+  gap: clamp(8px, 1vw, 12px);
 }
 
 
 /* =========================================================
-   BIOSTADT LOGO
-   ORIGINAL IMAGE - NO DISTORTION
+   BIOSTADT LOGO  (white chip, original image - no distortion)
 ========================================================= */
 
 .navbar-biostand {
@@ -279,19 +379,19 @@
 
   flex: 0 1 auto;
 
-  width: clamp(118px, 11.5vw, 160px);
+  width: clamp(112px, 10vw, 150px);
   min-width: 0;
   max-width: 100%;
-
   height: auto;
-  min-height: 0;
 
   margin: 0;
-  padding: 0;
+  padding: 5px 12px;
+  
 
   overflow: hidden;
 
-  background: transparent;
+  border-radius: 999px;
+ 
 
   line-height: 0;
   text-decoration: none;
@@ -304,10 +404,9 @@
 
   width: 100%;
   max-width: 100%;
-
   height: auto;
-  max-height: 48px;
-
+  max-height: 34px;
+ 
   margin: 0;
   padding: 0;
 
@@ -316,7 +415,6 @@
 
   border: 0;
   border-radius: 0;
-
   background: transparent;
 }
 
@@ -326,7 +424,7 @@
 
 
 /* =========================================================
-   CONTACT BUTTON
+   CONTACT / CTA BUTTON  (glowing green pill)
 ========================================================= */
 
 .nav-contact {
@@ -335,16 +433,20 @@
   justify-content: center;
 
   flex: 0 0 auto;
-
   min-width: max-content;
 
   margin-left: clamp(4px, 0.7vw, 12px);
-  padding: 11px clamp(14px, 1.3vw, 22px);
+  padding: 10px clamp(16px, 1.5vw, 24px);
 
   border: 0;
-  border-radius: var(--radius-pill, 50px);
+  border-radius: 999px;
 
-  background: var(--green-700, #21834e);
+  background: linear-gradient(
+    135deg,
+    var(--nv-cta-1) 0%,
+    var(--nv-cta-2) 58%,
+    var(--nv-cta-3) 100%
+  );
   color: #fff;
 
   font-size: 0.88rem;
@@ -356,24 +458,37 @@
   text-decoration: none;
 
   box-shadow:
-    var(--shadow-xs, 0 3px 8px rgba(0, 0, 0, 0.08));
+    0 6px 20px -4px var(--nv-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 
   transition:
-    background-color 0.25s ease,
     transform 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 
 .nav-contact:hover {
-  background: var(--green-800, #17643d);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  filter: brightness(1.08);
 
   box-shadow:
-    var(--shadow-sm, 0 5px 14px rgba(0, 0, 0, 0.1));
+    0 10px 26px -4px rgba(53, 184, 115, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.nav-contact:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .nav-contact-active {
-  background: var(--green-900, #16452d);
+  background: linear-gradient(135deg, var(--nv-cta-2) 0%, var(--nv-cta-3) 100%);
+
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.4),
+    0 6px 20px -4px var(--nv-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 
@@ -386,20 +501,20 @@
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 44px;
+  flex: 0 0 42px;
 
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
 
   padding: 0;
 
-  border: 1px solid var(--line, #e4e9e4);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
 
-  background: var(--surface, #fff);
-  color: var(--green-800, #17643d);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   line-height: 1;
 
   cursor: pointer;
@@ -412,18 +527,19 @@
 }
 
 .mobile-menu-button:hover {
-  border-color: var(--green-500, #43a66d);
-  background: var(--green-50, #eef8f0);
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .mobile-menu-button:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
-.menu-button-active {
-  border-color: var(--green-700, #21834e);
-  background: var(--green-700, #21834e);
-  color: #fff;
+.menu-button-active,
+.menu-button-active:hover {
+  border-color: #fff;
+  background: #fff;
+  color: var(--nv-green-800);
 }
 
 
@@ -445,7 +561,7 @@
 
   border: 0;
 
-  background: rgba(11, 47, 25, 0.5);
+  background: rgba(8, 30, 18, 0.55);
 
   opacity: 0;
   visibility: hidden;
@@ -469,14 +585,63 @@
 
 
 /* =========================================================
+   DESKTOP ONLY  (1101px and above)
+========================================================= */
+
+@media (min-width: 1101px) {
+
+  /* Divider between logo and links */
+  .navbar-logo::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    right: calc(var(--nv-logo-gap) / -2);
+
+    width: 1px;
+    height: 24px;
+
+    background: var(--nv-divider);
+    transform: translateY(-50%);
+  }
+
+  /* Links centred between logo and CTA, CTA pushed right */
+  .navbar-menu > .nav-link:first-of-type {
+    margin-left: auto;
+  }
+
+  .navbar-menu > .nav-contact {
+    margin-left: auto;
+  }
+}
+
+
+/* =========================================================
    TABLET + MOBILE DRAWER
    1100px AND BELOW
 ========================================================= */
 
 @media (max-width: 1100px) {
 
+  .navbar-container {
+    padding-top: 10px;
+    padding-bottom: 6px;
+  }
+
   .navbar-inner {
-    min-height: 72px;
+    min-height: 62px;
+  }
+
+  .navbar-logo {
+    margin-right: 0;
+  }
+
+  .navbar-logo img {
+    width: 112px;
+  }
+
+  .navbar-actions {
+    margin-left: auto;
   }
 
   /* Hamburger */
@@ -497,7 +662,7 @@
     gap: clamp(12px, 3vw, 24px);
   }
 
-  /* Mobile drawer */
+  /* Drawer */
 
   .navbar-menu {
     position: fixed;
@@ -530,10 +695,9 @@
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
 
-    background: var(--surface, #fff);
+    background: var(--nv-drawer-bg);
 
-    box-shadow:
-      var(--shadow-lg, -8px 0 35px rgba(0, 0, 0, 0.12));
+    box-shadow: -8px 0 35px rgba(0, 0, 0, 0.18);
 
     transform: translate3d(105%, 0, 0);
     visibility: hidden;
@@ -569,13 +733,13 @@
     padding-bottom: 17px;
     margin-bottom: 8px;
 
-    border-bottom: 1px solid var(--line, #e5e9e5);
+    border-bottom: 1px solid var(--nv-line);
   }
 
   .navbar-menu-head span {
     min-width: 0;
 
-    color: var(--green-700, #21834e);
+    color: var(--nv-green-700);
 
     font-size: 0.8rem;
     font-weight: 800;
@@ -612,10 +776,10 @@
     padding: 0;
 
     border: 0;
-    border-radius: 9px;
+    border-radius: 50%;
 
-    background: var(--surface-soft, #f3f6f3);
-    color: var(--ink, #1c281f);
+    background: var(--nv-soft);
+    color: var(--nv-ink);
 
     font-size: 1.25rem;
 
@@ -627,8 +791,8 @@
   }
 
   .menu-close:hover {
-    background: var(--green-50, #eef8f0);
-    color: var(--green-800, #17643d);
+    background: var(--nv-green-50);
+    color: var(--nv-green-800);
   }
 
   /* Drawer links */
@@ -638,14 +802,17 @@
     align-items: center;
     justify-content: flex-start;
 
+    flex: 0 0 auto;
+
     width: 100%;
     min-height: 48px;
 
     padding: 13px 14px;
 
-    border-radius: var(--radius-sm, 9px);
+    border-radius: 12px;
 
-    color: var(--ink-soft, #536052);
+    background: transparent;
+    color: var(--nv-ink-soft);
 
     font-size: 1rem;
     font-weight: 600;
@@ -655,21 +822,19 @@
     text-align: left;
   }
 
-  .navbar-menu .nav-link::after {
-    display: none;
-  }
-
   .navbar-menu .nav-link:hover {
-    background: var(--green-50, #eef8f0);
-    color: var(--green-800, #17643d);
+    background: var(--nv-green-50);
+    color: var(--nv-green-800);
   }
 
-  .navbar-menu .nav-link-active {
-    background: var(--green-100, #dff1e3);
-    color: var(--green-800, #17643d);
+  .navbar-menu .nav-link-active,
+  .navbar-menu .nav-link-active:hover {
+    background: var(--nv-green-100);
+    color: var(--nv-green-800);
+    box-shadow: none;
   }
 
-  /* Drawer contact */
+  /* Drawer contact button */
 
   .navbar-menu .nav-contact {
     display: flex;
@@ -695,7 +860,7 @@
     margin-top: auto;
     padding-top: 20px;
 
-    border-top: 1px solid var(--line, #e5e9e5);
+    border-top: 1px solid var(--nv-line);
   }
 
   .navbar-menu-foot a {
@@ -707,7 +872,7 @@
     width: 100%;
     max-width: 100%;
 
-    color: var(--green-800, #17643d);
+    color: var(--nv-green-800);
 
     font-size: clamp(0.76rem, 3.2vw, 0.9rem);
     font-weight: 600;
@@ -730,16 +895,8 @@
 
 @media (min-width: 769px) and (max-width: 1100px) {
 
-  .navbar-logo img {
-    width: 125px;
-  }
-
   .navbar-biostand {
     width: 145px;
-  }
-
-  .navbar-biostand img {
-    max-height: 46px;
   }
 
   .navbar-actions {
@@ -784,46 +941,46 @@
     white-space: nowrap;
   }
 
+  .navbar-container {
+    padding: 8px 10px 6px;
+  }
+
   .navbar-inner {
-    min-height: 68px;
-    gap: 9px;
-    padding-inline: 14px;
+    min-height: 58px;
+    gap: 8px;
+    padding: 6px 8px 6px 8px;
+  }
+
+  .navbar-logo {
+    padding: 5px 14px;
   }
 
   .navbar-logo img {
-    width: 100px;
-    max-height: 50px;
+    width: 96px;
+    max-height: 34px;
   }
 
   .navbar-actions {
     gap: 8px;
-    margin-left: auto;
   }
 
-  /* BIOSTADT LOGO */
-
   .navbar-biostand {
-    width: clamp(100px, 15vw, 120px);
-    margin: 0;
+    width: 118px;
+    padding: 5px 11px;
   }
 
   .navbar-biostand img {
-    width: 100%;
-    max-height: 38px;
-    height: auto;
-
-    object-fit: contain;
-    object-position: center;
+    max-height: 30px;
   }
 
   .mobile-menu-button {
-    width: 43px;
-    height: 43px;
-    flex-basis: 43px;
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
   }
 
   .navbar-menu {
-    width: min(360px, 60vw);
+    width: min(360px, 84vw);
     padding: 22px 19px 26px;
   }
 
@@ -836,7 +993,7 @@
 
 /* =========================================================
    SMALL MOBILE
-   401px - 560px
+   381px - 560px
 ========================================================= */
 
 @media (max-width: 560px) {
@@ -851,43 +1008,47 @@
     font-size: 0.68rem;
   }
 
+  .navbar-container {
+    padding: 8px 8px 6px;
+  }
+
   .navbar-inner {
-    min-height: 64px;
+    min-height: 56px;
     gap: 6px;
-    padding-inline: 11px;
+    padding: 6px 7px;
+  }
+
+  .navbar-logo {
+    padding: 5px 12px;
   }
 
   .navbar-logo img {
-    width: 91px;
-    max-height: 46px;
+    width: 84px;
+    max-height: 32px;
   }
 
   .navbar-actions {
     gap: 6px;
   }
 
-  /* BIOSTADT LOGO */
-
   .navbar-biostand {
-    width: 105px;
-    margin: 0;
+    width: 104px;
+    padding: 4px 10px;
   }
 
   .navbar-biostand img {
-    max-height: 35px;
-    width: 100%;
-    height: auto;
+    max-height: 28px;
   }
 
   .mobile-menu-button {
-    width: 41px;
-    height: 41px;
-    flex-basis: 41px;
-    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+    font-size: 1.15rem;
   }
 
   .navbar-menu {
-    width: min(350px, 60vw);
+    width: min(350px, 86vw);
     padding: 20px 17px 24px;
   }
 
@@ -915,48 +1076,52 @@
 
 /* =========================================================
    VERY SMALL MOBILE
-   360px AND BELOW
+   380px AND BELOW
 ========================================================= */
 
 @media (max-width: 380px) {
 
+  .navbar-container {
+    padding: 7px 6px 5px;
+  }
+
   .navbar-inner {
-    min-height: 61px;
+    min-height: 54px;
     gap: 5px;
-    padding-inline: 9px;
+    padding: 5px 6px;
+  }
+
+  .navbar-logo {
+    padding: 4px 10px;
   }
 
   .navbar-logo img {
-    width: 79px;
-    max-height: 43px;
+    width: 72px;
+    max-height: 30px;
   }
 
   .navbar-actions {
     gap: 5px;
   }
 
-  /* BIOSTADT LOGO */
-
   .navbar-biostand {
-    width: 90px;
-    margin: 0;
+    width: 92px;
+    padding: 4px 9px;
   }
 
   .navbar-biostand img {
-    max-height: 32px;
-    width: 100%;
-    height: auto;
+    max-height: 26px;
   }
 
   .mobile-menu-button {
-    width: 39px;
-    height: 39px;
-    flex-basis: 39px;
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
     font-size: 1.1rem;
   }
 
   .navbar-menu {
-    width: 60vw;
+    width: 88vw;
     max-width: 360px;
     padding: 19px 15px 22px;
   }
@@ -975,26 +1140,32 @@
 
 @media (max-width: 320px) {
 
+  .navbar-container {
+    padding: 6px 5px 4px;
+  }
+
   .navbar-inner {
-    min-height: 57px;
-    padding-inline: 7px;
+    min-height: 50px;
     gap: 4px;
+    padding: 4px 5px;
+  }
+
+  .navbar-logo {
+    padding: 4px 8px;
   }
 
   .navbar-logo img {
-    width: 68px;
-    max-height: 39px;
+    width: 62px;
+    max-height: 28px;
   }
 
   .navbar-biostand {
-    width: 78px;
-    margin: 0;
+    width: 80px;
+    padding: 3px 8px;
   }
 
   .navbar-biostand img {
-    max-height: 28px;
-    width: 100%;
-    height: auto;
+    max-height: 24px;
   }
 
   .navbar-actions {
@@ -1002,14 +1173,14 @@
   }
 
   .mobile-menu-button {
-    width: 36px;
-    height: 36px;
-    flex-basis: 36px;
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
     font-size: 1rem;
   }
 
   .navbar-menu {
-    width: 60vw;
+    width: 90vw;
     padding-inline: 12px;
   }
 }
@@ -1050,41 +1221,59 @@
 
 
 /* =========================================================
-   TOUCH DEVICES
+   TOUCH DEVICES  (no sticky hover states)
 ========================================================= */
 
 @media (hover: none) and (pointer: coarse) {
 
-  .nav-link:hover {
+  .nav-link:not(.nav-link-active):hover {
     background: transparent;
+    color: var(--nv-text);
   }
 
   .nav-contact:hover {
     transform: none;
+    filter: none;
   }
 
+  .navbar-logo:hover,
   .navbar-biostand:hover {
     transform: none;
   }
 
-  .mobile-menu-button:hover {
-    background: var(--surface, #fff);
+  .mobile-menu-button:not(.menu-button-active):hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
   .menu-close:hover {
-    background: var(--surface-soft, #f3f6f3);
+    background: var(--nv-soft);
+    color: var(--nv-ink);
+  }
+}
+
+@media (max-width: 1100px) and (hover: none) and (pointer: coarse) {
+
+  .navbar-menu .nav-link:not(.nav-link-active):hover {
+    background: transparent;
+    color: var(--nv-ink-soft);
   }
 }
 
 
 /* =========================================================
-   ACCESSIBILITY — KEYBOARD FOCUS
+   ACCESSIBILITY - KEYBOARD FOCUS
 ========================================================= */
 
 .navbar a:focus-visible,
 .navbar button:focus-visible {
-  outline: 3px solid rgba(32, 100, 255, 0.3);
+  outline: 2px solid #35b873;
   outline-offset: 3px;
+}
+
+.navbar-inner a:focus-visible,
+.navbar-inner button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(53, 184, 115, 0.28);
 }
 
 
@@ -1123,80 +1312,28 @@ body.menu-is-open {
 .navbar-inner,
 .navbar-utility,
 .navbar-utility-inner,
-.navbar-logo,
 .navbar-actions {
   max-width: 100%;
 }
 
+.navbar-inner {
+  max-width: min(1280px, 100%);
+}
+
 
 /* =========================================================
-   SAFE AREA SUPPORT
+   SAFE AREA SUPPORT  (notched phones)
 ========================================================= */
 
 @supports (padding: env(safe-area-inset-left)) {
 
-  .navbar-inner {
-    padding-left: max(9px, env(safe-area-inset-left));
-    padding-right: max(9px, env(safe-area-inset-right));
+  .navbar-container {
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
   }
 
   .navbar-menu {
     padding-left: max(17px, env(safe-area-inset-left));
     padding-right: max(17px, env(safe-area-inset-right));
-  }
-}
-
-
-/* ==========================================
-   ANNOUNCEMENT BAR - NON STICKY
-========================================== */
-
-.navbar-utility {
-  position: relative !important;
-  top: auto !important;
-  z-index: 1;
-  width: 100%;
-}
-
-/* ==========================================
-   MAIN NAVBAR - STICKY
-========================================== */
-
-header.navbar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1200;
-}
-
-/* Keep main navigation background intact */
-
-header.navbar .navbar-container {
-  position: relative;
-  width: 100%;
-}
-
-/* ==========================================
-   SCROLLED NAVBAR
-========================================== */
-
-header.navbar.navbar-scrolled {
-  z-index: 1200;
-}
-
-/* ==========================================
-   MOBILE RESPONSIVENESS
-========================================== */
-
-@media (max-width: 768px) {
-  .navbar-utility {
-    position: relative !important;
-    top: auto !important;
-  }
-
-  header.navbar {
-    position: sticky;
-    top: 0;
   }
 }

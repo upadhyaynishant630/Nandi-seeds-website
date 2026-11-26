@@ -180,7 +180,7 @@ function Footer() {
             <Link to="/dealers">Become a Dealer</Link>
 
             <a
-              href="https://YOUR-VIRTUMEDIA-WEBSITE.com"
+              href="https://virtumedia.in/"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-credit-link"
