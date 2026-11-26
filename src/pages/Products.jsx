@@ -1,21 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { FiSearch, FiArrowRight, FiSliders } from "react-icons/fi";
+import { FiArrowRight, FiSearch, FiSliders } from "react-icons/fi";
 
 import PageHero from "../component/PageHero";
 import { PRODUCTS, SEED_CATEGORIES } from "../data/products";
 import { getProductCardSpecs } from "../utils/productCardSpecs";
 
 import "./Products.css";
-
-/* =========================================================
-   PRODUCTS — PEARL MILLET CATALOGUE
-
-   - Search and category filtering are URL-aware.
-   - Product images use the image paths from products.js.
-   - Cards display only product information supplied in the
-     Pearl Millet Product-Wise USPs.
-========================================================= */
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,9 +20,10 @@ function Products() {
   const setCategory = (category) => {
     if (category === "All") {
       setSearchParams({});
-    } else {
-      setSearchParams({ category });
+      return;
     }
+
+    setSearchParams({ category });
   };
 
   const filteredProducts = useMemo(() => {
@@ -46,7 +38,7 @@ function Products() {
         ? product.highlights.join(" ")
         : "";
 
-      const haystack = [
+      const searchableText = [
         product.name,
         product.crop,
         product.category,
@@ -59,9 +51,7 @@ function Products() {
         .join(" ")
         .toLowerCase();
 
-      const matchesTerm = term === "" || haystack.includes(term);
-
-      return matchesCategory && matchesTerm;
+      return matchesCategory && (!term || searchableText.includes(term));
     });
   }, [activeCategory, query]);
 
@@ -73,67 +63,68 @@ function Products() {
   return (
     <div className="products-page">
       <PageHero
-       
-        title="Explore our Pearl Millet varieties"
-        subtitle="Compare maturity periods, expected yields and variety-wise characteristics to find the information relevant to your field."
+        title="Explore our seed varieties"
+        subtitle="Browse the Nandi Seeds catalogue and compare the variety-wise characteristics supplied for each product."
         breadcrumb="Products"
       />
 
-      {/* FILTER BAR */}
+      {/* SEARCH + CATEGORY FILTER */}
       <section className="products-filter" aria-label="Product filters">
         <div className="container">
           <div className="products-filter-inner">
-            <div className="products-search">
+            <label className="products-search">
               <FiSearch aria-hidden="true" />
               <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search Pearl Millet varieties..."
-                aria-label="Search Pearl Millet varieties"
+                placeholder="Search products or characteristics..."
+                aria-label="Search products or characteristics"
               />
-            </div>
+            </label>
+
+            <label className="products-category-filter" htmlFor="products-category">
+              <span>Category</span>
+              <select
+                id="products-category"
+                value={activeCategory}
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                {SEED_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category === "All" ? "All products" : category}
+                  </option>
+                ))}
+              </select>
+            </label>
 
             <span className="products-count" aria-live="polite">
               <FiSliders aria-hidden="true" />
-              {filteredProducts.length}{" "}
-              {filteredProducts.length === 1 ? "variety" : "varieties"}
+              {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
             </span>
-          </div>
-
-          <div className="products-chips" aria-label="Filter by category">
-            {SEED_CATEGORIES.map((category) => (
-              <button
-                key={category}
-                type="button"
-                className={`chip ${
-                  activeCategory === category ? "chip-active" : ""
-                }`}
-                onClick={() => setCategory(category)}
-                aria-pressed={activeCategory === category}
-              >
-                {category}
-              </button>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* PRODUCT GRID */}
+      {/* COMPLETE PRODUCT CATALOGUE */}
       <section className="section-tight products-list">
         <div className="container">
+          <div className="products-results-heading">
+            <div>
+              <span className="products-eyebrow">NANDI SEEDS CATALOGUE</span>
+              <h2>{activeCategory === "All" ? "All available products" : `${activeCategory} varieties`}</h2>
+            </div>
+            <p>Showing {filteredProducts.length} of {PRODUCTS.length} products</p>
+          </div>
+
           {filteredProducts.length === 0 ? (
             <div className="products-empty">
-              <h3>No varieties matched that search</h3>
+              <h3>No products matched your search</h3>
               <p>
-                Try another variety name or characteristic, or clear the
-                filters to view the full Pearl Millet catalogue.
+                Try a different product name or characteristic, or clear the
+                filters to view the complete available catalogue.
               </p>
-              <button
-                type="button"
-                className="btn btn-outline"
-                onClick={clearFilters}
-              >
+              <button type="button" className="btn btn-outline" onClick={clearFilters}>
                 Clear Filters
               </button>
             </div>
@@ -143,32 +134,24 @@ function Products() {
                 const cardSpecs = getProductCardSpecs(product);
 
                 return (
-                  <li
-                    key={product.slug}
-                    className="card card-hover products-card"
-                  >
+                  <li key={product.slug} className="card card-hover products-card">
                     <Link to={`/products/${product.slug}`}>
                       <div className="products-card-media">
                         {product.image ? (
                           <img
                             src={product.image}
-                            alt={
-                              product.imageAlt ||
-                              `${product.name} ${product.crop} seed packshot`
-                            }
+                            alt={product.imageAlt || `${product.name} ${product.crop} seed packshot`}
                             loading="lazy"
+                            decoding="async"
                             onError={(event) => {
                               event.currentTarget.style.display = "none";
-                              const fallback =
-                                event.currentTarget.nextElementSibling;
+                              const fallback = event.currentTarget.nextElementSibling;
                               if (fallback) fallback.style.display = "flex";
                             }}
                           />
                         ) : null}
-
                         <span
                           className="products-card-fallback"
-                          aria-label={`${product.name} image unavailable`}
                           style={{ display: product.image ? "none" : "flex" }}
                         >
                           {product.name}
@@ -183,10 +166,10 @@ function Products() {
                       </div>
 
                       <div className="products-card-body">
-                       
-
+                        <span className="products-card-category">
+                          {product.category} · {product.crop}
+                        </span>
                         <h3>{product.name}</h3>
-
                         {cardSpecs.length > 0 ? (
                           <ul className="products-card-specs">
                             {cardSpecs.map((spec) => (
@@ -197,9 +180,8 @@ function Products() {
                             ))}
                           </ul>
                         ) : null}
-
                         <span className="products-card-link">
-                          View details
+                          View product details
                           <FiArrowRight aria-hidden="true" />
                         </span>
                       </div>
@@ -216,19 +198,17 @@ function Products() {
       <section className="cta-band">
         <div className="container cta-band-inner">
           <div>
-            <h2>Need help choosing a Pearl Millet variety?</h2>
+            <h2>Need help choosing a variety?</h2>
             <p>
               Contact the Nandi Seeds team for more information about the
-              varieties in our Pearl Millet catalogue.
+              varieties in the current catalogue.
             </p>
           </div>
-
           <div className="cta-band-actions">
             <Link className="btn btn-gold" to="/contact">
               Contact Our Team
               <FiArrowRight aria-hidden="true" />
             </Link>
-
             <Link className="btn btn-ghost-light" to="/services">
               Explore Services
             </Link>

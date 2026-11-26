@@ -1,15 +1,8 @@
 
-
-
 /* =========================================================
-   PRODUCT CATEGORIES
+   NANDI SEEDS - PRODUCT CATEGORIES
+   Categories are generated automatically from PRODUCTS.
 ========================================================= */
-
-export const SEED_CATEGORIES = [
-  "All",
-  "Cereals",
-];
-
 
 /* =========================================================
    PRODUCT PACKSHOT IMAGES
@@ -19,7 +12,6 @@ export const PEARL_MILLET_PACKSHOTS = {
   hiPearl51: "/images/products/Hi-Pearl%2051%20Packshot.png",
 
   nandi5: "/images/products/Nandi-5%20Packshot.png",
-
   nandi11: "/images/products/Nandi-11%20Packshot.png",
 
   nandi31: "/images/products/Nandi-31%20Packshot.png",
@@ -35,17 +27,13 @@ export const PEARL_MILLET_PACKSHOTS = {
   nandi75: "/images/products/Nandi-75%20Packshot.png",
 
   nandi99: "/images/products/Nandi-99%20Packshot.png",
-  
+
   hhb67: "/images/products/HHB67.png",
 };
 
 
 /* =========================================================
    PEARL MILLET PRODUCTS
-
-   The 9 USP varieties are represented, plus the supplied Nandi 61 and
-   Nandi 64 packshot catalogue entries.
-   Every listed variety uses its supplied packshot.
 ========================================================= */
 
 export const PRODUCTS = [
@@ -419,7 +407,7 @@ export const PRODUCTS = [
       "Official Nandi 61 packshot",
     ],
 
-     specs: {
+    specs: {
       maturity: "70–75 Days",
       maturityNote: "Early maturity",
       panicleLength: "30–35 cm",
@@ -455,7 +443,7 @@ export const PRODUCTS = [
       "Official Nandi 64 packshot",
     ],
 
-     specs: {
+    specs: {
       maturity: "80–82 Days",
       expectedYield: "26–34 q/ha",
       plantHeight: "180–210 cm",
@@ -468,13 +456,56 @@ export const PRODUCTS = [
 
 
 /* =========================================================
+   AUTOMATIC PRODUCT CATEGORY GENERATION
+
+   - Reads categories directly from PRODUCTS.
+   - Removes empty categories.
+   - Prevents duplicate categories.
+   - Keeps "All" as the first option.
+   - Automatically supports future product categories.
+========================================================= */
+
+const PRODUCT_CATEGORIES = Array.from(
+  new Set(
+    PRODUCTS
+      .map((product) => {
+        if (typeof product.category !== "string") {
+          return "";
+        }
+
+        return product.category.trim();
+      })
+      .filter(
+        (category) =>
+          category &&
+          category.toLowerCase() !== "all"
+      )
+  )
+).sort((first, second) =>
+  first.localeCompare(second)
+);
+
+export const SEED_CATEGORIES = [
+  "All",
+  ...PRODUCT_CATEGORIES,
+];
+
+
+/* =========================================================
    PRODUCT HELPERS
 ========================================================= */
 
 /**
  * Find a product using its unique slug.
+ *
+ * @param {string} slug
+ * @returns {object|undefined}
  */
 export function getProductBySlug(slug) {
+  if (typeof slug !== "string" || !slug.trim()) {
+    return undefined;
+  }
+
   return PRODUCTS.find(
     (product) => product.slug === slug
   );
@@ -483,15 +514,51 @@ export function getProductBySlug(slug) {
 
 /**
  * Return related products from the same category.
+ *
+ * @param {string} slug
+ * @param {number} limit
+ * @returns {Array}
  */
 export function getRelatedProducts(slug, limit = 3) {
   const current = getProductBySlug(slug);
+
+  if (!current) {
+    return [];
+  }
+
+  const safeLimit = Number.isFinite(Number(limit))
+    ? Math.max(0, Math.floor(Number(limit)))
+    : 3;
 
   return PRODUCTS
     .filter(
       (product) =>
         product.slug !== slug &&
-        (!current || product.category === current.category)
+        product.category === current.category
     )
-    .slice(0, limit);
+    .slice(0, safeLimit);
+}
+
+
+/**
+ * Return products filtered by category.
+ *
+ * @param {string} category
+ * @returns {Array}
+ */
+export function getProductsByCategory(category = "All") {
+  if (
+    typeof category !== "string" ||
+    category.trim().toLowerCase() === "all"
+  ) {
+    return PRODUCTS;
+  }
+
+  const selectedCategory = category.trim().toLowerCase();
+
+  return PRODUCTS.filter(
+    (product) =>
+      typeof product.category === "string" &&
+      product.category.trim().toLowerCase() === selectedCategory
+  );
 }
