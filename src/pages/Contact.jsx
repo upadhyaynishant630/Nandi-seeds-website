@@ -157,7 +157,7 @@ function Contact() {
                     name="phone"
                     value={formValues.phone}
                     onChange={updateField}
-                    placeholder="+91 90000 00000"
+                    placeholder="+91 9833358337"
                     autoComplete="tel"
                   />
                   {errors.phone ? (

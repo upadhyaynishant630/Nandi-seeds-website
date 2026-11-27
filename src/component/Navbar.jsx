@@ -72,7 +72,7 @@ function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
-        <div className="container navbar-inner">
+        <div className="navbar-inner">
           {/* LEFT: NANDI SEEDS LOGO */}
           <Link
             to="/"

@@ -46,7 +46,7 @@ export const PRODUCTS = [
     slug: "nandi-75",
     name: "Nandi 75",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi75,
@@ -84,7 +84,7 @@ export const PRODUCTS = [
     slug: "nandi-11",
     name: "Nandi 11",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi11,
@@ -122,7 +122,7 @@ export const PRODUCTS = [
     slug: "nandi-31",
     name: "Nandi 31",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi31,
@@ -160,7 +160,7 @@ export const PRODUCTS = [
     slug: "nandi-5-imp",
     name: "Nandi 5 IMP",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi5,
@@ -198,7 +198,7 @@ export const PRODUCTS = [
     slug: "nandi-52",
     name: "Nandi 52",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi52,
@@ -236,7 +236,7 @@ export const PRODUCTS = [
     slug: "nandi-65",
     name: "Nandi 65",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi65,
@@ -274,7 +274,7 @@ export const PRODUCTS = [
     slug: "hi-pearl-51",
     name: "Hi Pearl 51",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.hiPearl51,
@@ -312,7 +312,7 @@ export const PRODUCTS = [
     slug: "hhb-67-imp",
     name: "HHB 67 IMP",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.hhb67,
@@ -351,7 +351,7 @@ export const PRODUCTS = [
     slug: "nandi-99",
     name: "Nandi 99",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi99,
@@ -390,7 +390,7 @@ export const PRODUCTS = [
     slug: "nandi-61",
     name: "Nandi 61",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi61,
@@ -426,7 +426,7 @@ export const PRODUCTS = [
     slug: "nandi-64",
     name: "Nandi 64",
     crop: "Pearl Millet",
-    category: "Cereals",
+    category: "Cereals & Grains",
     badge: null,
 
     image: PEARL_MILLET_PACKSHOTS.nandi64,
@@ -456,16 +456,24 @@ export const PRODUCTS = [
 
 
 /* =========================================================
-   AUTOMATIC PRODUCT CATEGORY GENERATION
+   PRODUCT CATEGORIES
 
-   - Reads categories directly from PRODUCTS.
-   - Removes empty categories.
-   - Prevents duplicate categories.
+   - Preserves the core Nandi Seeds category order.
+   - Automatically appends any additional categories found
+     in PRODUCTS without duplicates.
    - Keeps "All" as the first option.
-   - Automatically supports future product categories.
 ========================================================= */
 
-const PRODUCT_CATEGORIES = Array.from(
+const DEFAULT_PRODUCT_CATEGORIES = [
+  "Cereals & Grains",
+  "Oilseeds",
+  "Spices",
+  "Forage & Fodder",
+  "Vegetables & Pulses",
+  "Crop Protection",
+];
+
+const EXTRA_PRODUCT_CATEGORIES = Array.from(
   new Set(
     PRODUCTS
       .map((product) => {
@@ -478,7 +486,8 @@ const PRODUCT_CATEGORIES = Array.from(
       .filter(
         (category) =>
           category &&
-          category.toLowerCase() !== "all"
+          category.toLowerCase() !== "all" &&
+          !DEFAULT_PRODUCT_CATEGORIES.includes(category)
       )
   )
 ).sort((first, second) =>
@@ -487,7 +496,8 @@ const PRODUCT_CATEGORIES = Array.from(
 
 export const SEED_CATEGORIES = [
   "All",
-  ...PRODUCT_CATEGORIES,
+  ...DEFAULT_PRODUCT_CATEGORIES,
+  ...EXTRA_PRODUCT_CATEGORIES,
 ];
 
 

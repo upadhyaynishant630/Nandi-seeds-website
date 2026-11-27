@@ -11,6 +11,8 @@
 
 :root {
   /* Brand greens */
+  --logo-green: #028045;
+  --logo-green-dark: #016335;
   --green-900: #0b2f19;
   --green-800: #14562b;
   --green-700: #1f7a3d;
@@ -383,7 +385,7 @@ p {
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--logo-green);
   border-radius: var(--radius);
   box-shadow: var(--shadow-xs);
   transition: transform var(--transition), box-shadow var(--transition),
@@ -392,7 +394,7 @@ p {
 
 .card-hover:hover {
   transform: translateY(-6px);
-  border-color: var(--green-200);
+  border-color: var(--logo-green-dark);
   box-shadow: var(--shadow-md);
 }
 

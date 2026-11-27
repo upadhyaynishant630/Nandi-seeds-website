@@ -1060,7 +1060,7 @@ transform: translateY(-2px);
   width: 100%;
   min-height: 46px;
   padding: 10px 38px 10px 14px;
-  border: 1px solid var(--green-300, #a7d8b5);
+  border: 1.5px solid var(--logo-green, #028045);
   border-radius: 12px;
   background-color: #fff;
   color: var(--ink, #183425);
@@ -1071,24 +1071,24 @@ transform: translateY(-2px);
 }
 
 .products-category-filter select:focus-visible {
-  border-color: var(--green-600, #278447);
+  border-color: var(--logo-green-dark, #016335);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(47, 145, 76, 0.13);
+  box-shadow: 0 0 0 4px rgba(2, 128, 69, 0.16);
 }
 
-/* Permanent green border on every product card. */
+/* Permanent Nandi logo-green border on every product card. */
 .products-page .products-card {
   overflow: hidden;
-  border: 1.5px solid var(--green-500, #329653);
+  border: 2.5px solid var(--logo-green, #028045);
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 8px 24px rgba(25, 77, 39, 0.055);
+  box-shadow: 0 8px 24px rgba(2, 128, 69, 0.07);
   transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
 }
 
 .products-page .products-card:hover {
-  border-color: var(--green-800, #176b3a);
-  box-shadow: 0 17px 36px rgba(25, 77, 39, 0.12);
+  border-color: var(--logo-green-dark, #016335);
+  box-shadow: 0 17px 36px rgba(2, 128, 69, 0.15);
   transform: translateY(-5px);
 }
 

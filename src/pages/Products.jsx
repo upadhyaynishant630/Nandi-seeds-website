@@ -119,13 +119,18 @@ function Products() {
 
           {filteredProducts.length === 0 ? (
             <div className="products-empty">
-              <h3>No products matched your search</h3>
+              <h3>
+                {query.trim()
+                  ? "No products matched your search"
+                  : `No products listed in ${activeCategory} yet`}
+              </h3>
               <p>
-                Try a different product name or characteristic, or clear the
-                filters to view the complete available catalogue.
+                {query.trim()
+                  ? "Try a different product name or characteristic, or clear the filters to view the complete available catalogue."
+                  : "Products for this category will be added soon. View the complete available catalogue or contact our team for details."}
               </p>
               <button type="button" className="btn btn-outline" onClick={clearFilters}>
-                Clear Filters
+                {query.trim() ? "Clear Filters" : "View All Products"}
               </button>
             </div>
           ) : (

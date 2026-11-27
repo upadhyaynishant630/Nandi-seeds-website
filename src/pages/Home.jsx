@@ -5,6 +5,8 @@ import {
   FiArrowLeft,
   FiArrowRight,
   FiCheck,
+  FiChevronLeft,
+  FiChevronRight,
   FiPhone,
   FiShield,
 } from "react-icons/fi";
@@ -19,7 +21,6 @@ import {
 } from "../data/siteData";
 import { PRODUCTS } from "../data/products";
 import { resolveIcon } from "../data/icons";
-import { getProductCardSpecs } from "../utils/productCardSpecs";
 
 import "./Home.css";
 
@@ -147,8 +148,6 @@ function CountUp({ value, suffix = "", duration = 1800 }) {
 }
 
 function HomeFeaturedProductCard({ product, isDuplicate = false }) {
-  const cardSpecs = getProductCardSpecs(product);
-
   return (
     <li className="card card-hover home-product">
       <Link
@@ -170,32 +169,10 @@ function HomeFeaturedProductCard({ product, isDuplicate = false }) {
               }}
             />
           )}
-
-          {product.badge && (
-            <span className="badge badge-gold home-product-badge">
-              {product.badge}
-            </span>
-          )}
         </div>
 
         <div className="home-product-body">
           <h3>{product.name}</h3>
-
-          {cardSpecs.length > 0 && (
-            <ul className="home-product-specs">
-              {cardSpecs.map((spec) => (
-                <li key={spec.label}>
-                  <span>{spec.label}</span>
-                  <strong>{spec.value}</strong>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <span className="home-product-link">
-            View details
-            <FiArrowRight aria-hidden="true" />
-          </span>
         </div>
       </Link>
     </li>
@@ -208,7 +185,7 @@ function HomeFeaturedProductCard({ product, isDuplicate = false }) {
 ========================================================= */
 
 function Home() {
-  const featuredProducts = PRODUCTS.slice(0, 4);
+  const featuredProducts = PRODUCTS;
   const previewServices = SERVICES.slice(0, 3);
   const [activeSlide, setActiveSlide] = useState(0);
   const [carouselHovered, setCarouselHovered] = useState(false);
@@ -217,6 +194,35 @@ function Home() {
   const pointerStart = useRef(null);
   const carouselPaused = carouselHovered || carouselFocused;
   const videoRef = useRef(null);
+  const featuredTrackRef = useRef(null);
+  const [canScrollFeaturedPrev, setCanScrollFeaturedPrev] = useState(false);
+  const [canScrollFeaturedNext, setCanScrollFeaturedNext] = useState(true);
+
+  const updateFeaturedCarouselButtons = useCallback(() => {
+    const track = featuredTrackRef.current;
+    if (!track) return;
+    setCanScrollFeaturedPrev(track.scrollLeft > 4);
+    setCanScrollFeaturedNext(
+      track.scrollLeft + track.clientWidth < track.scrollWidth - 4,
+    );
+  }, []);
+
+  useEffect(() => {
+    updateFeaturedCarouselButtons();
+    window.addEventListener("resize", updateFeaturedCarouselButtons);
+    return () =>
+      window.removeEventListener("resize", updateFeaturedCarouselButtons);
+  }, [updateFeaturedCarouselButtons]);
+
+  const scrollFeaturedCarousel = (direction) => {
+    const track = featuredTrackRef.current;
+    if (!track) return;
+    const firstCard = track.querySelector(".home-product");
+    const step = firstCard
+      ? firstCard.getBoundingClientRect().width + 20
+      : track.clientWidth * 0.75;
+    track.scrollBy({ left: direction * step, behavior: "smooth" });
+  };
 
   const showSlide = useCallback(
     (index) => {
@@ -469,56 +475,71 @@ function Home() {
       {/* =================================================
           FEATURED SEEDS
       ================================================= */}
-<section className="section home-featured">
-  <div className="container">
+      <section className="section home-featured">
+        <div className="container">
+          {/* Section Heading */}
+          <div className="section-head">
+            <h2>Varieties farmers come back for</h2>
 
-    {/* Section Heading */}
-    <div className="section-head">
-      <h2>Varieties farmers come back for</h2>
+            <p>
+              Every variety below is bred in-house, trialled across multiple
+              locations and released only after it clears our germination
+              and purity standards.
+            </p>
+          </div>
+        </div>
 
-      <p>
-        Every variety below is bred in-house, trialled across multiple
-        locations and released only after it clears our germination
-        and purity standards.
-      </p>
-    </div>
+        {/* Full-Width Manual Carousel */}
+        <div
+          className="home-featured-carousel"
+          role="region"
+          aria-label="Featured Pearl Millet varieties"
+        >
+          <button
+            type="button"
+            className="home-featured-nav home-featured-nav-prev"
+            onClick={() => scrollFeaturedCarousel(-1)}
+            disabled={!canScrollFeaturedPrev}
+            aria-label="Previous varieties"
+          >
+            <FiChevronLeft aria-hidden="true" />
+          </button>
 
-    {/* Featured Products */}
-    <div
-      className="home-featured-marquee"
-      role="region"
-      aria-label="Featured Pearl Millet varieties"
-    >
-      <div className="home-featured-marquee-track">
-        {[false, true].map((isDuplicate) => (
           <ul
-            key={isDuplicate ? "duplicate" : "featured"}
-            className="home-product-grid home-featured-marquee-group"
-            aria-hidden={isDuplicate || undefined}
+            ref={featuredTrackRef}
+            className="home-product-grid home-featured-track"
+            onScroll={updateFeaturedCarouselButtons}
           >
             {Array.isArray(featuredProducts) &&
               featuredProducts.map((product) => (
                 <HomeFeaturedProductCard
-                  key={`${isDuplicate ? "duplicate-" : ""}${product.slug}`}
+                  key={product.slug}
                   product={product}
-                  isDuplicate={isDuplicate}
                 />
               ))}
           </ul>
-        ))}
-      </div>
-    </div>
 
-    {/* Browse Full Catalogue */}
-    <div className="home-featured-more">
-      <Link className="btn btn-outline" to="/products">
-        Browse the full catalogue
-        <FiArrowRight aria-hidden="true" />
-      </Link>
-    </div>
+          <button
+            type="button"
+            className="home-featured-nav home-featured-nav-next"
+            onClick={() => scrollFeaturedCarousel(1)}
+            disabled={!canScrollFeaturedNext}
+            aria-label="Next varieties"
+          >
+            <FiChevronRight aria-hidden="true" />
+          </button>
+        </div>
 
-  </div>
-</section>
+        <div className="container">
+          {/* Browse Full Catalogue */}
+          <div className="home-featured-more">
+            <Link className="btn btn-outline" to="/products">
+              Browse the full catalogue
+              <FiArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* =================================================
           WHY CHOOSE US

@@ -86,7 +86,8 @@
 .footer-main {
   position: relative;
 
-  padding-block: clamp(36px, 5vw, 60px);
+  padding-top: clamp(36px, 5vw, 60px);
+  padding-bottom: clamp(16px, 2.2vw, 24px);
 }
 
 .footer-main::before {
@@ -735,35 +736,6 @@
 
 .footer-bottom {
   position: relative;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.footer-bottom::before {
-  content: "";
-
-  position: absolute;
-
-  top: -1px;
-  left: 0;
-
-  width: 100%;
-  height: 1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(95, 215, 126, 0) 20%,
-      rgba(95, 215, 126, 0.55) 50%,
-      rgba(95, 215, 126, 0) 80%,
-      transparent 100%
-    );
-
-  background-size: 220% 100%;
-
-  animation:
-    footerBottomSweep 7s linear infinite;
 }
 
 .footer-bottom-inner {
@@ -776,9 +748,10 @@
 
   gap: 14px;
 
-  min-height: 66px;
+  min-height: 44px;
 
-  padding-block: 12px;
+  padding-top: 4px;
+  padding-bottom: 16px;
 }
 
 .footer-bottom-inner p {
@@ -801,7 +774,7 @@
 
 .footer-bottom-links {
   display: flex;
-  margin-top: 25px;
+  margin-top: 0;
   margin-left: 20px;
 
   align-items: center;

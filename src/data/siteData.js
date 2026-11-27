@@ -14,9 +14,9 @@ export const SITE = {
   subTagline: "Trusted Yield",
   established: "1994",
 
-  phone: "+91 90000 00000",
-  phoneAlt: "+91 90000 00001",
-  whatsapp: "919000000000",
+  phone: "+91 9833358337",
+  phoneAlt: "+91 9833358337",
+  whatsapp: "91 9833358337",
   email: "info@nandiseeds.com",
   salesEmail: "sales@nandiseeds.com",
 
@@ -58,11 +58,12 @@ export const SOCIAL_LINKS = [
 ========================================================= */
 
 export const SEED_CATEGORY_LINKS = [
-  { label: "Vegetable Seeds", to: "/products?category=Vegetables" },
-  { label: "Cereals & Millets", to: "/products?category=Cereals" },
-  { label: "Pulses", to: "/products?category=Pulses" },
+  { label: "Cereals & Grains", to: "/products?category=Cereals%20%26%20Grains" },
   { label: "Oilseeds", to: "/products?category=Oilseeds" },
-  { label: "Fodder Seeds", to: "/products?category=Fodder" },
+  { label: "Spices", to: "/products?category=Spices" },
+  { label: "Forage & Fodder", to: "/products?category=Forage%20%26%20Fodder" },
+  { label: "Vegetables & Pulses", to: "/products?category=Vegetables%20%26%20Pulses" },
+  { label: "Crop Protection", to: "/products?category=Crop%20Protection" },
 ];
 
 
